@@ -63,15 +63,14 @@
     
 @layer nav{
     .navBarContainer{
-        
-        border: solid 2px black;
+        display: block;
     }
 
     .navBar{
         background-color: #D9D9D99E;
         height: 4.625rem;
         width: 23rem;
-        margin: 0.7rem auto;
+        margin: 0.9rem auto;
         border-radius: 5rem;
         display: flex;
 
@@ -128,7 +127,7 @@
       }
       
       .signupButton {
-        background-color: #007bff;
+        background-color: var(--hunter-green-primary);
         color: white;
         border: none;
         border-radius: 5px;
@@ -136,11 +135,14 @@
         font-size: 16px;
         cursor: pointer;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 5rem;
+        text-decoration: none;
         transition: transform 0.3s ease, background-color 0.3s ease;
       }
       
       .signupButton:hover {
-        background-color: #0056b3;
+        background-color: var(--xanthous-accent);
         transform: scale(1.1);
+
       }
 }
