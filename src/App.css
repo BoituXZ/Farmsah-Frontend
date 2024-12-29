@@ -2,6 +2,12 @@
   max-width: 100%;
   margin: 0;
 }
+
+@fontsource/roboto/300.css;
+@fontsource/roboto/400.css;
+@fontsource/roboto/500.css;
+@fontsource/roboto/700.css;
+
 body{
   background-image: url("/assets/background.jpg");
   background-size:  cover;
