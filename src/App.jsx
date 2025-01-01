@@ -8,7 +8,7 @@ import Layout from "./Pages/Layout/Layout";
 import LandingPage from './Pages/Landing/LandingPage/LandingPage'
 import AboutUs from "./Pages/Landing/About Us/AboutUs"
 import ContactUs from "./Pages/Landing/About Us/AboutUs"
-import Signup from "./Pages/Landing/SignupPage/Signup"
+import Signup from "./Pages/Landing/AuthPage/AuthPage"
 
 function App() {
 
