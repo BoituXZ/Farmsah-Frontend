@@ -9,23 +9,24 @@ export const SignupForm = () => {
 
     return(
         <form className={styles.form}>
-                    <label htmlFor="name">Name
+                    <h4 className={styles.signupHeader}>Sign Up</h4>
+                    <label className={styles.signuplabel}  htmlFor="name">Name<br/>
                       <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
                     </label>
         
-                    <label htmlFor="email">Email
+                    <label className={styles.signuplabel} htmlFor="email">Email<br/>
                       <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                       </label>
                     
-                    <label htmlFor="password">Enter Password
+                    <label className={styles.signuplabel} htmlFor="password">Enter Password<br/>
                         <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         
                     </label>
         
-                    <label htmlFor="confirmPassword">Confirm Password
+                    <label className={styles.signuplabel} htmlFor="confirmPassword">Confirm Password<br/>
                         <input type="password" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                     </label>
-                    <button type="submit" className={styles.button}>Sign Up</button>
+                    <button type="submit" className={styles.signupButton}>Sign Up</button>
                   </form>
     )
 }
@@ -36,14 +37,15 @@ export const LoginForm = () => {
 
     return(
         <form className={styles.form}>
-                    <label htmlFor="email">Email
+          <h4>Login</h4>
+                    <label htmlFor="email">Email<br/>
                       <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                       </label>
                     
-                    <label htmlFor="password">Enter Password
+                    <label htmlFor="password">Enter Password<br/>
                         <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         
-                    </label>
+                    </label><br/><br/>
                     <button type="submit" className={styles.button}>Log In</button>
                   </form>
     )

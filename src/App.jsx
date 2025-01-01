@@ -7,7 +7,7 @@ import './App.css'
 import Layout from "./Pages/Layout/Layout";
 import LandingPage from './Pages/Landing/LandingPage/LandingPage'
 import AboutUs from "./Pages/Landing/About Us/AboutUs"
-import ContactUs from "./Pages/Landing/About Us/AboutUs"
+import ContactUs from "./Pages/Landing/Contact Us/ContactUs"
 import Signup from "./Pages/Landing/AuthPage/AuthPage"
 
 function App() {

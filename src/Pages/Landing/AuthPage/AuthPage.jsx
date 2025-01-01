@@ -13,7 +13,6 @@ const AuthPage = () => {
 
   return (
     <div className={styles.authContainer}>
-      <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
       {isLogin ? (
         <LoginForm />
       ) : (
@@ -21,7 +20,7 @@ const AuthPage = () => {
       )}
       <p>
         {isLogin ? "Don't have an account?" : 'Already have an account?'}
-        <button onClick={toggleForm} className="toggle-button">
+        <button onClick={toggleForm} className={styles.toggleButton}>
           {isLogin ? 'Sign Up' : 'Login'}
         </button>
       </p>

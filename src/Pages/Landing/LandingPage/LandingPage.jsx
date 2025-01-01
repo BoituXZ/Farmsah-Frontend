@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 
 const LandingPage = () => {
   return (
+    
     <div className={styles.LPContainer}>
       <section className={styles.heroSection}>
         <div className={styles.headlineText}>

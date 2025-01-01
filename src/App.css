@@ -9,8 +9,5 @@
 @fontsource/roboto/700.css;
 
 body{
-  background-image: url("/assets/background.jpg");
-  background-size:  cover;
-  background-position: 50% 0%;
+  background: white;
 }
-

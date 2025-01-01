@@ -51,6 +51,7 @@
         padding: 0;
         
         
+        
     }
     
     section{
@@ -93,12 +94,18 @@
     
 
 
+body{
+    background-image: url("/public/assets/background.jpg");
+    background-size:  cover;
+    background-position: 50% 0%;
+}
 @layer entireContainer{
     .LPContainer{
         display: flex;
         flex-direction: column;
         /* border: solid 1px steelblue; */
         max-height: 4096px;
+        
     }
 }
 

@@ -64,6 +64,7 @@
 @layer nav{
     .navBarContainer{
         display: block;
+       /* background-color: white; */
     }
 
     .navBar{
