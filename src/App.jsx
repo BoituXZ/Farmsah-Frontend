@@ -9,12 +9,14 @@ import LandingPage from './Pages/Landing/LandingPage/LandingPage'
 import AboutUs from "./Pages/Landing/About Us/AboutUs"
 import ContactUs from "./Pages/Landing/Contact Us/ContactUs"
 import Signup from "./Pages/Landing/AuthPage/AuthPage"
+import Dashboard from './Pages/Dashboard/Dashboard';
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
+      <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<LandingPage />} />
           <Route path="about" element={<AboutUs />} />
