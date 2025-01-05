@@ -1,42 +1,106 @@
 import styles from './Forms.module.css';
 import { useState } from 'react';
 
-export const SignupForm = () => {
-        const [name, setName] = useState("");
-        const [email, setEmail] = useState("");
-        const [password, setPassword] = useState("");
-        const [confirmPassword, setConfirmPassword] = useState("")
+import styles from './Forms.module.css';
+import { useState } from 'react';
 
-    return(
-        <form className={styles.form}>
-                    <h4 className={styles.signupHeader}>Sign Up</h4>
-                    <label className={styles.signuplabel}  htmlFor="name">Name<br/>
-                      <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
-                    </label>
-        
-                    <label className={styles.signuplabel} htmlFor="email">Email<br/>
-                      <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                      </label>
-                    
-                    <label className={styles.signuplabel} htmlFor="password">Enter Password<br/>
-                        <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        
-                    </label>
-        
-                    <label className={styles.signuplabel} htmlFor="confirmPassword">Confirm Password<br/>
-                        <input type="password" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-                    </label>
-                    <button type="submit" className={styles.signupButton}>Sign Up</button>
-                  </form>
-    )
-}
+export const SignupForm = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState(""); // Add this state for messages
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setMessage("Passwords do not match");
+      return;
+    }
+
+    try {
+      // Sending data to the backend
+      const res = await fetch("https://localhost:3000/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      // Getting the response from the API
+      const data = await res.json();
+
+      if (res.ok) {
+        setMessage(data.message); // Update message on success
+      } else {
+        setMessage(data.message); // Update message on error
+      }
+    } catch (error) {
+      setMessage("An error occurred. Please try again"); // Handle network errors
+    }
+  };
+
+  return (
+    <form onSubmit={handleSignup} className={styles.form}>
+      <h4 className={styles.signupHeader}>Sign Up</h4>
+      <label className={styles.signuplabel} htmlFor="name">
+        Name<br />
+        <input
+          type="text"
+          id="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </label>
+
+      <label className={styles.signuplabel} htmlFor="email">
+        Email<br />
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </label>
+
+      <label className={styles.signuplabel} htmlFor="password">
+        Enter Password<br />
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </label>
+
+      <label className={styles.signuplabel} htmlFor="confirmPassword">
+        Confirm Password<br />
+        <input
+          type="password"
+          id="confirmPassword"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+      </label>
+
+      <button type="submit" className={styles.signupButton}>
+        Sign Up
+      </button>
+
+      {/* Display the message */}
+      {message && <p className={styles.message}>{message}</p>}
+    </form>
+  );
+};
 
 export const LoginForm = () => {
         const [email, setEmail] = useState("");
         const [password, setPassword] = useState("");
 
     return(
-        <form className={styles.form}>
+        <form  className={styles.form}>
           <h4>Login</h4>
                     <label htmlFor="email">Email<br/>
                       <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
