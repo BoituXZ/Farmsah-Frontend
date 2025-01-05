@@ -34,7 +34,7 @@ export const SignupForm = () => {
       } else {
         setMessage(data.message); // Update message on error
       }
-    } catch (error) {
+    } catch {
       setMessage("An error occurred. Please try again"); // Handle network errors
     }
   };
