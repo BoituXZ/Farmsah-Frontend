@@ -1,9 +1,6 @@
 import styles from './Forms.module.css';
 import { useState } from 'react';
 
-import styles from './Forms.module.css';
-import { useState } from 'react';
-
 export const SignupForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
