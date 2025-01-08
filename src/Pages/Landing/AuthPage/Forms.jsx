@@ -18,7 +18,7 @@ export const SignupForm = () => {
 
     try {
       // Sending data to the backend
-      const res = await fetch("https://localhost:3000/", {
+      const res = await fetch("http://localhost:3010/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -96,8 +96,35 @@ export const LoginForm = () => {
         const [email, setEmail] = useState("");
         const [password, setPassword] = useState("");
 
+        const handleLogin = async (e) => {
+          e.preventDefault();
+      
+          try {
+            // Sending login data to the backend
+            const res = await fetch("http://localhost:3010/login", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ email, password }),
+            });
+      
+            // Getting the response from the API
+            const data = await res.json();
+      
+            if (res.ok) {
+              console.log("Login successful", data);
+              // Perform actions upon successful login, e.g., storing token, redirecting
+            } else {
+              console.log("Login failed:", data.message || "Unknown error");
+            }
+          } catch (error) {
+            console.error("An error occurred. Please try again", error);
+          }
+        };
+
     return(
-        <form  className={styles.form}>
+        <form  className={styles.form} onSubmit={handleLogin}>
           <h4>Login</h4>
                     <label htmlFor="email">Email<br/>
                       <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
