@@ -1,5 +1,8 @@
 import styles from './Forms.module.css';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+
 
 export const SignupForm = () => {
   const [name, setName] = useState("");
@@ -95,6 +98,11 @@ export const SignupForm = () => {
 export const LoginForm = () => {
         const [email, setEmail] = useState("");
         const [password, setPassword] = useState("");
+        const [message, setMessage] = useState("")
+
+
+        const navigate = useNavigate();
+
 
         const handleLogin = async (e) => {
           e.preventDefault();
@@ -113,12 +121,15 @@ export const LoginForm = () => {
             const data = await res.json();
       
             if (res.ok) {
-              console.log("Login successful", data);
+              setMessage(data.message, "Redirecting"); // Update message on success
+              navigate('/dashboard');
               // Perform actions upon successful login, e.g., storing token, redirecting
             } else {
+              setMessage(data.message); // Update message on error
               console.log("Login failed:", data.message || "Unknown error");
             }
           } catch (error) {
+            setMessage("An error occurred. Please try again"); // Handle network errors
             console.error("An error occurred. Please try again", error);
           }
         };
@@ -135,6 +146,8 @@ export const LoginForm = () => {
         
                     </label><br/><br/>
                     <button type="submit" className={styles.button}>Log In</button>
+                    {/* Display the message */}
+                    {message && <p className={styles.message}>{message}</p>}
                   </form>
     )
 }

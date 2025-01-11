@@ -39,7 +39,7 @@ const Layout = () => {
         </nav>
       </section>
       <div className={styles.signupButtonContainer}>
-      <Link to="/signup" className={styles.signupButton}>Sign Up</Link>
+      <Link to="/authentication" className={styles.signupButton}>Sign Up</Link>
       </div>
       <Outlet />
     </>

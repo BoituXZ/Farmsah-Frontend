@@ -8,7 +8,7 @@ import Layout from "./Pages/Layout/Layout";
 import LandingPage from './Pages/Landing/LandingPage/LandingPage'
 import AboutUs from "./Pages/Landing/About Us/AboutUs"
 import ContactUs from "./Pages/Landing/Contact Us/ContactUs"
-import Signup from "./Pages/Landing/AuthPage/AuthPage"
+import Authentication from "./Pages/Landing/AuthPage/AuthPage"
 import Dashboard from './Pages/Dashboard/Dashboard';
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
           <Route index element={<LandingPage />} />
           <Route path="about" element={<AboutUs />} />
           <Route path="contact" element={<ContactUs />} />
-          <Route path="signup" element={<Signup />} />
+          <Route path="authentication" element={<Authentication/>} />
         </Route>
       </Routes>
     </BrowserRouter>
