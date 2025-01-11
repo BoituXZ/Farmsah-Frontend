@@ -10,13 +10,14 @@ import AboutUs from "./Pages/Landing/About Us/AboutUs"
 import ContactUs from "./Pages/Landing/Contact Us/ContactUs"
 import Authentication from "./Pages/Landing/AuthPage/AuthPage"
 import Dashboard from './Pages/Dashboard/Dashboard';
+import Sidebar from "./Pages/Layout/Sidebar/Sidebar";
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/dashboard" element={<Sidebar />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<LandingPage />} />
           <Route path="about" element={<AboutUs />} />
