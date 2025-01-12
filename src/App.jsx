@@ -9,7 +9,6 @@ import LandingPage from './Pages/Landing/LandingPage/LandingPage'
 import AboutUs from "./Pages/Landing/About Us/AboutUs"
 import ContactUs from "./Pages/Landing/Contact Us/ContactUs"
 import Authentication from "./Pages/Landing/AuthPage/AuthPage"
-import Dashboard from './Pages/Dashboard/Dashboard';
 import Sidebar from "./Pages/Layout/Sidebar/Sidebar";
 
 function App() {
@@ -17,13 +16,23 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/dashboard" element={<Sidebar />} />
-        <Route path="/" element={<Layout />}>
+      <Route path="/user" element={<Sidebar />}>
+        <Route path="home" element={<Layout />} />
+        <Route path="farms" element={<Layout />} />
+        <Route path="crops" element={<Layout />} />
+        <Route path="insights" element={<Layout />} />
+        <Route path="weather" element={<Layout />} />
+        <Route path="market" element={<Layout />} />
+        <Route path="resources" element={<Layout />} />
+        <Route path="settings" element={<Layout />} />
+
+      </Route>
+      <Route path="/" element={<Layout />}>
           <Route index element={<LandingPage />} />
           <Route path="about" element={<AboutUs />} />
           <Route path="contact" element={<ContactUs />} />
           <Route path="authentication" element={<Authentication/>} />
-        </Route>
+      </Route>
       </Routes>
     </BrowserRouter>
   )
