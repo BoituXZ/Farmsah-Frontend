@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Box, Typography, List, ListItem, ListItemText, ListItemIcon } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
@@ -8,12 +9,15 @@ import StorefrontIcon from '@mui/icons-material/Storefront';
 import BookIcon from '@mui/icons-material/Book';
 import SettingsIcon from '@mui/icons-material/Settings';
 
+// Colors
+// --hunter-green-primary: #2c5f2dff; --almond-secondary: #ede0d4ff; --xanthous-accent: #f3b61fff; --blue-gray-accent: #5a9bd5ff; --jet-text: #333333ff;
 
-// --hunter-green-primary: #2c5f2dff; --almond-secondary: #ede0d4ff; --xanthous-accent: #f3b61fff; --blue-gray-accent: #5a9bd5ff; -jet-text: #333333ff;
 const Sidebar = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
   const styles = {
     sidebar: {
-      width: '200px',
+      width: isCollapsed ? '60px' : '200px', // Dynamic width
       height: '100vh',
       backgroundColor: 'rgba(44, 95, 45, 0.1)', // Blue Gray with transparency
       backdropFilter: 'blur(110px)', // Glass effect
@@ -21,6 +25,25 @@ const Sidebar = () => {
       display: 'flex',
       flexDirection: 'column',
       borderRight: '2px solid rgba(255, 255, 255, 0.2)', // Subtle border for the glass effect
+      transition: 'width 0.3s ease-in-out',
+      overflow: 'hidden',
+    },
+    toggleButton: {
+      cursor: 'pointer',
+      position: 'absolute',
+      top: '10px',
+      right: isCollapsed ? '-10px' : '-11px',
+      background: '#5a9bd5ff',
+      borderRadius: '50%',
+      padding: '5px',
+      color: '#fff',
+      width: '30px',
+      height: '30px',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      transition: 'transform 0.3s ease-in-out',
+      zIndex: 1,
     },
     list: {
       height: '100%',
@@ -30,19 +53,20 @@ const Sidebar = () => {
     heading: {
       fontFamily: 'Montserrat, sans-serif',
       fontWeight: '500',
-      fontSize: '27px',
+      fontSize: isCollapsed ? '0px' : '27px', // Hide when collapsed
       textAlign: 'center',
       padding: '10px 10px',
       marginBottom: '16px',
-      borderBottom: "1px solid #5a9bd5ff", // Subtle border for the glass
+      borderBottom: '1px solid #5a9bd5ff', // Subtle border for the glass
       color: '#5a9bd5ff', // Blue Gray accent
+      transition: 'font-size 0.3s ease-in-out',
     },
     listItem: {
       fontFamily: 'Merriweather Sans, sans-serif',
-      fontSize: '16px',
+      fontSize: isCollapsed ? '0px' : '16px', // Hide text when collapsed
       padding: '8px 0',
       color: '#ede0d4ff', // Almond for list items
-      transition: 'color 0.3s, transform 0.3s', // Smooth transitions
+      transition: 'font-size 0.3s, transform 0.3s', // Smooth transitions
       cursor: 'pointer',
       '&:hover': {
         color: '#5a9bd5ff', // Xanthous accent on hover
@@ -54,12 +78,21 @@ const Sidebar = () => {
       color: '#ede0d4ff', // Match text color
       minWidth: '35px', // Adjust spacing for icon
       '&:hover': {
-        color: '#5a9bd5ff',},
+        color: '#5a9bd5ff',
+      },
     },
   };
 
   return (
     <Box sx={styles.sidebar}>
+      {/* Toggle Button */}
+      <Box
+        sx={styles.toggleButton}
+        onClick={() => setIsCollapsed(!isCollapsed)}
+      >
+        {isCollapsed ? '>' : '<'}
+      </Box>
+
       {/* Main Heading */}
       <Typography sx={styles.heading}>Farmsah</Typography>
 
@@ -69,49 +102,49 @@ const Sidebar = () => {
           <ListItemIcon sx={styles.listItemIcon}>
             <HomeIcon />
           </ListItemIcon>
-          <ListItemText primary="Home" />
+          {!isCollapsed && <ListItemText primary="Home" />}
         </ListItem>
         <ListItem sx={styles.listItem}>
           <ListItemIcon sx={styles.listItemIcon}>
             <MapIcon />
           </ListItemIcon>
-          <ListItemText primary="Farms" />
+          {!isCollapsed && <ListItemText primary="Farms" />}
         </ListItem>
         <ListItem sx={styles.listItem}>
           <ListItemIcon sx={styles.listItemIcon}>
             <AgricultureIcon />
           </ListItemIcon>
-          <ListItemText primary="Crops" />
+          {!isCollapsed && <ListItemText primary="Crops" />}
         </ListItem>
         <ListItem sx={styles.listItem}>
           <ListItemIcon sx={styles.listItemIcon}>
             <InsightsIcon />
           </ListItemIcon>
-          <ListItemText primary="AI Insights" />
+          {!isCollapsed && <ListItemText primary="AI Insights" />}
         </ListItem>
         <ListItem sx={styles.listItem}>
           <ListItemIcon sx={styles.listItemIcon}>
             <CloudIcon />
           </ListItemIcon>
-          <ListItemText primary="Weather" />
+          {!isCollapsed && <ListItemText primary="Weather" />}
         </ListItem>
         <ListItem sx={styles.listItem}>
           <ListItemIcon sx={styles.listItemIcon}>
             <StorefrontIcon />
           </ListItemIcon>
-          <ListItemText primary="Market" />
+          {!isCollapsed && <ListItemText primary="Market" />}
         </ListItem>
         <ListItem sx={styles.listItem}>
           <ListItemIcon sx={styles.listItemIcon}>
             <BookIcon />
           </ListItemIcon>
-          <ListItemText primary="Resources" />
+          {!isCollapsed && <ListItemText primary="Resources" />}
         </ListItem>
         <ListItem sx={styles.listItem}>
           <ListItemIcon sx={styles.listItemIcon}>
             <SettingsIcon />
           </ListItemIcon>
-          <ListItemText primary="Settings" />
+          {!isCollapsed && <ListItemText primary="Settings" />}
         </ListItem>
       </List>
     </Box>
