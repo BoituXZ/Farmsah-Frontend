@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Box, Typography, List, ListItem, ListItemText, ListItemIcon } from '@mui/material';
+import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
 import MapIcon from '@mui/icons-material/Map';
@@ -8,7 +9,6 @@ import CloudIcon from '@mui/icons-material/Cloud';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import BookIcon from '@mui/icons-material/Book';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { Link } from 'react-router-dom';
 
 // Colors
 // --hunter-green-primary: #2c5f2dff; --almond-secondary: #ede0d4ff; --xanthous-accent: #f3b61fff; --blue-gray-accent: #5a9bd5ff; --jet-text: #333333ff;
@@ -82,6 +82,10 @@ const Sidebar = () => {
         color: '#5a9bd5ff',
       },
     },
+    link: {
+      textDecoration: 'none', // Remove underline
+      color: 'inherit', // Inherit color from parent styles
+    },
   };
 
   return (
@@ -99,56 +103,77 @@ const Sidebar = () => {
 
       {/* Subheadings */}
       <List sx={styles.list}>
-        <Link to="/user/home">
-        <ListItem sx={styles.listItem}>
-          <ListItemIcon sx={styles.listItemIcon}>
-            <HomeIcon />
-          </ListItemIcon>
-          {!isCollapsed && <ListItemText primary="Home" />}
-        </ListItem>
+        <Link to="/user/home" style={styles.link}>
+          <ListItem sx={styles.listItem}>
+            <ListItemIcon sx={styles.listItemIcon}>
+              <HomeIcon />
+            </ListItemIcon>
+            {!isCollapsed && <ListItemText primary="Home" />}
+          </ListItem>
         </Link>
-        <ListItem sx={styles.listItem}>
-          <ListItemIcon sx={styles.listItemIcon}>
-            <MapIcon />
-          </ListItemIcon>
-          {!isCollapsed && <ListItemText primary="Farms" />}
-        </ListItem>
-        <ListItem sx={styles.listItem}>
-          <ListItemIcon sx={styles.listItemIcon}>
-            <AgricultureIcon />
-          </ListItemIcon>
-          {!isCollapsed && <ListItemText primary="Crops" />}
-        </ListItem>
-        <ListItem sx={styles.listItem}>
-          <ListItemIcon sx={styles.listItemIcon}>
-            <InsightsIcon />
-          </ListItemIcon>
-          {!isCollapsed && <ListItemText primary="AI Insights" />}
-        </ListItem>
-        <ListItem sx={styles.listItem}>
-          <ListItemIcon sx={styles.listItemIcon}>
-            <CloudIcon />
-          </ListItemIcon>
-          {!isCollapsed && <ListItemText primary="Weather" />}
-        </ListItem>
-        <ListItem sx={styles.listItem}>
-          <ListItemIcon sx={styles.listItemIcon}>
-            <StorefrontIcon />
-          </ListItemIcon>
-          {!isCollapsed && <ListItemText primary="Market" />}
-        </ListItem>
-        <ListItem sx={styles.listItem}>
-          <ListItemIcon sx={styles.listItemIcon}>
-            <BookIcon />
-          </ListItemIcon>
-          {!isCollapsed && <ListItemText primary="Resources" />}
-        </ListItem>
-        <ListItem sx={styles.listItem}>
-          <ListItemIcon sx={styles.listItemIcon}>
-            <SettingsIcon />
-          </ListItemIcon>
-          {!isCollapsed && <ListItemText primary="Settings" />}
-        </ListItem>
+
+        <Link to="/user/farms" style={styles.link}>
+          <ListItem sx={styles.listItem}>
+            <ListItemIcon sx={styles.listItemIcon}>
+              <MapIcon />
+            </ListItemIcon>
+            {!isCollapsed && <ListItemText primary="Farms" />}
+          </ListItem>
+        </Link>
+
+        <Link to="/user/crops" style={styles.link}>
+          <ListItem sx={styles.listItem}>
+            <ListItemIcon sx={styles.listItemIcon}>
+              <AgricultureIcon />
+            </ListItemIcon>
+            {!isCollapsed && <ListItemText primary="Crops" />}
+          </ListItem>
+        </Link>
+
+        <Link to="/user/ai-insights" style={styles.link}>
+          <ListItem sx={styles.listItem}>
+            <ListItemIcon sx={styles.listItemIcon}>
+              <InsightsIcon />
+            </ListItemIcon>
+            {!isCollapsed && <ListItemText primary="AI Insights" />}
+          </ListItem>
+        </Link>
+
+        <Link to="/user/weather" style={styles.link}>
+          <ListItem sx={styles.listItem}>
+            <ListItemIcon sx={styles.listItemIcon}>
+              <CloudIcon />
+            </ListItemIcon>
+            {!isCollapsed && <ListItemText primary="Weather" />}
+          </ListItem>
+        </Link>
+
+        <Link to="/user/market" style={styles.link}>
+          <ListItem sx={styles.listItem}>
+            <ListItemIcon sx={styles.listItemIcon}>
+              <StorefrontIcon />
+            </ListItemIcon>
+            {!isCollapsed && <ListItemText primary="Market" />}
+          </ListItem>
+        </Link>
+
+        <Link to="/user/resources" style={styles.link}>
+          <ListItem sx={styles.listItem}>
+            <ListItemIcon sx={styles.listItemIcon}>
+              <BookIcon />
+            </ListItemIcon>
+            {!isCollapsed && <ListItemText primary="Resources" />}
+          </ListItem>
+        </Link>
+
+        <Link to="/user/settings" style={styles.link}>
+          <ListItem sx={styles.listItem}>
+            <ListItemIcon sx={styles.listItemIcon}>
+              <SettingsIcon />
+            </ListItemIcon>
+            {!isCollapsed && <ListItemText primary="Settings" />}
+          </ListItem>
+        </Link>
       </List>
     </Box>
   );
