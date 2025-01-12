@@ -5,21 +5,22 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css'
 import Layout from "./Pages/Layout/Layout";
+import { PagesLayout } from "./Pages/Layout/Layout";
 import LandingPage from './Pages/Landing/LandingPage/LandingPage'
 import AboutUs from "./Pages/Landing/About Us/AboutUs"
 import ContactUs from "./Pages/Landing/Contact Us/ContactUs"
 import Authentication from "./Pages/Landing/AuthPage/AuthPage"
 import Home from "./Pages/Home/Home";
-import Sidebar from "./Pages/Layout/Sidebar/Sidebar";
+
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/user" element={<Sidebar />}>
+      <Route path="/user" element={<PagesLayout />}>
         <Route path="home" element={<Home />} />
-        <Route path="farms" element={<Layout />} />
+        <Route path="farms" element={<Home />} />
         <Route path="crops" element={<Layout />} />
         <Route path="insights" element={<Layout />} />
         <Route path="weather" element={<Layout />} />

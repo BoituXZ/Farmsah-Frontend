@@ -22,8 +22,10 @@ const Home = () => {
   const styles = {
     container: {
       padding: '20px',
-      backgroundColor: '#f5f5f5',
+      backgroundColor: 'grey',
+      // backgroundImage: 'url("/public/assets/background3.jpg")',
       minHeight: '100vh',
+      backdropFilter: 'blur(10px)',
     },
     header: {
       marginBottom: '20px',

@@ -149,3 +149,19 @@
 
       }
 }
+
+
+@layer sideBar{
+    .pagesContainer{
+        display: flex;
+        flex-direction: row;
+    }
+    .sidebarContainer{
+        max-width: 200px;
+        /* border: solid red 2px; */
+    }
+    .restOfPage{
+        flex: 4;
+        /* border: solid blue 2px; */
+    }
+}

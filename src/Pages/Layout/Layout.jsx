@@ -1,5 +1,6 @@
 import { Outlet, NavLink, Link } from "react-router-dom";
 import styles from './Layout.module.css'
+import Sidebar from "./Sidebar/Sidebar";
 const Layout = () => {
 
     const linkStyle = ({ isActive }) => ({
@@ -47,3 +48,22 @@ const Layout = () => {
 };
 
 export default Layout;
+
+
+
+export const PagesLayout = () => {
+  return(
+    <>
+    <div className={styles.pagesContainer}>
+      <div className={styles.sidebarContainer}>
+        <Sidebar />
+      </div>
+      <div className={styles.restOfPage}>
+      <Outlet />
+      </div>
+      
+    </div>
+    
+    </>
+  )
+}
