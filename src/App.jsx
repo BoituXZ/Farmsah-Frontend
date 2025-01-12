@@ -9,6 +9,7 @@ import LandingPage from './Pages/Landing/LandingPage/LandingPage'
 import AboutUs from "./Pages/Landing/About Us/AboutUs"
 import ContactUs from "./Pages/Landing/Contact Us/ContactUs"
 import Authentication from "./Pages/Landing/AuthPage/AuthPage"
+import Home from "./Pages/Home/Home";
 import Sidebar from "./Pages/Layout/Sidebar/Sidebar";
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
     <BrowserRouter>
       <Routes>
       <Route path="/user" element={<Sidebar />}>
-        <Route path="home" element={<Layout />} />
+        <Route path="home" element={<Home />} />
         <Route path="farms" element={<Layout />} />
         <Route path="crops" element={<Layout />} />
         <Route path="insights" element={<Layout />} />

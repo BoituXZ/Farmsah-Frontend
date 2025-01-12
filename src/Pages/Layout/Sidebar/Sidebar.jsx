@@ -8,6 +8,7 @@ import CloudIcon from '@mui/icons-material/Cloud';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import BookIcon from '@mui/icons-material/Book';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { Link } from 'react-router-dom';
 
 // Colors
 // --hunter-green-primary: #2c5f2dff; --almond-secondary: #ede0d4ff; --xanthous-accent: #f3b61fff; --blue-gray-accent: #5a9bd5ff; --jet-text: #333333ff;
@@ -98,12 +99,14 @@ const Sidebar = () => {
 
       {/* Subheadings */}
       <List sx={styles.list}>
+        <Link to="/user/home">
         <ListItem sx={styles.listItem}>
           <ListItemIcon sx={styles.listItemIcon}>
             <HomeIcon />
           </ListItemIcon>
           {!isCollapsed && <ListItemText primary="Home" />}
         </ListItem>
+        </Link>
         <ListItem sx={styles.listItem}>
           <ListItemIcon sx={styles.listItemIcon}>
             <MapIcon />
