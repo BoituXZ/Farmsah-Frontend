@@ -130,7 +130,7 @@ const Sidebar = () => {
           </ListItem>
         </Link>
 
-        <Link to="/user/ai-insights" style={styles.link}>
+        <Link to="/user/insights" style={styles.link}>
           <ListItem sx={styles.listItem}>
             <ListItemIcon sx={styles.listItemIcon}>
               <InsightsIcon />
