@@ -11,6 +11,7 @@ import AboutUs from "./Pages/Landing/About Us/AboutUs"
 import ContactUs from "./Pages/Landing/Contact Us/ContactUs"
 import Authentication from "./Pages/Landing/AuthPage/AuthPage"
 import Home from "./Pages/Home/Home";
+import Farms from "./Pages/Farms";
 import Crops from "./Pages/Crops";
 import Insights from "./Pages/Insights";
 import Weather from "./Pages/Weather";
@@ -27,7 +28,7 @@ function App() {
       <Route path="/user" element={<PagesLayout />}>
         <Route index patrh="home" element={<Home />} />
         <Route path="home" element={<Home />} />
-        <Route path="farms" element={<Home />} />
+        <Route path="farms" element={<Farms />} />
         <Route path="crops" element={<Crops />} />
         <Route path="insights" element={<Insights />} />
         <Route path="weather" element={<Weather />} />
