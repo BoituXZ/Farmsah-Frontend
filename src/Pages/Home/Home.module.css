@@ -1,3 +1,122 @@
-.button{
-    background-color: red;
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@layer base{
+    :root{
+        --hunter-green-primary: #2c5f2dff;
+        --almond-secondary: #ede0d4ff;
+        --xanthous-accent: #f3b61fff;
+        --blue-gray-accent: #5a9bd5ff;
+        --jet-text: #333333ff;
+        --trans: #ffffffd0;
+    
+    
+    
+        /* Fonts */
+    
+        --heading: "Montserrat", serif;
+        --heading2: "Lato", serif;
+        --text: "Merriweather Sans", serif;;
+        --text2: "Playfair Display", serif;;
+    
+        /* Typeface */
+    
+        --base-size: 1rem;
+        --scale: 1.2;
+        --h1: calc(var(--h2) * var(--scale));
+        --h2: calc(var(--h3) * var(--scale));
+        --h3: calc(var(--h4) * var(--scale));
+        --h4: calc(var(--h5) * var(--scale));
+        --h5: calc(var(--h6) * var(--scale));
+        --h6: var(--base-size);
+    }
+    
+    *{
+        box-sizing: border-box;
+        user-select: none;
+        transition: all 0.3s ease-in-out;
+        scrollbar-width: thin;
+        scrollbar-color: var(--jet-text);
+        scroll-behavior: smooth;
+        
+        
+        
+    }
+    html{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        font-family: "Merriweather Sans", "Playfair Display", sans-serif;
+        font-size: var(--base-size);
+        margin: 0;
+        padding: 0;
+        
+        
+        
+    }
+    
+    section{
+        display: block;
+        margin: 0;
+        padding: 0;
+        /* border: solid 2px red; */
+    }
+    div{
+        margin: 0;
+        padding: 0;
+    }
+    h1{
+        font-size: var(--h1);
+        font-family: var(--heading);
+        
+    }
+    h2{
+        font-size: var(--h2);
+        font-family: var(--heading);
+        
+    }
+    h3{
+        font-size: var(--h3);
+        font-family: var(--heading);
+        
+    }
+    h4{
+        font-size: var(--h4);
+        font-family: var(--heading);
+        margin: 0;
+    }
+    h5{
+        font-size: var(--h5);
+        font-family: var(--heading);
+    }
+    h6{
+        font-size: var(--h6);
+        font-family: var(--heading);
+    }
+
+    
+    }
+ 
+    
+@layer page{
+    .homePageContainer{
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+
+    }
+}
+
+@layer Header{
+
+    .headerContainer{
+        flex: 1;
+        border: solid 1px red;
+    }
+}
+
+@layer Body{
+    .bodyContainer{
+        flex: 4;
+        border: solid 1px white;
+    }
 }

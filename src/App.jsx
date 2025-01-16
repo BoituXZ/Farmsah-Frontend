@@ -25,8 +25,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/user" element={<PagesLayout />}>
-        <Route index patrh="home" element={<Home />} />
+      <Route path="/user" >
+        <Route index path="home" element={<Home />} />
         <Route path="home" element={<Home />} />
         <Route path="farms" element={<Farms />} />
         <Route path="crops" element={<Crops />} />
