@@ -25,7 +25,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/user" >
+      <Route path="/user" element={<PagesLayout />}>
         <Route index path="home" element={<Home />} />
         <Route path="home" element={<Home />} />
         <Route path="farms" element={<Farms />} />
