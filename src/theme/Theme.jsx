@@ -1,39 +1,73 @@
 import { createTheme } from "@mui/material";
 
-export const homeTheme = createTheme({
-  palette: {
-    background: {
-      black: '#000000',    // Black background
-      blue: '#8fc9e5',     // Soft sky blue
-      green: '#5a9367',    // Calming forest green
-      white: '#f9f9f9',    // Glossy white
-      yellow: '#f7d17b',   // Warm, soft yellow
-      beige: '#ede0cf',    // Neutral, earthy beige
+export const homeTheme = (mode) =>
+  createTheme({
+    palette: {
+      mode, // Dynamic mode: 'light' or 'dark'
+      ...(mode === "light"
+        ? {
+            // Light Mode Palette
+            background: {
+              black: "#000000",
+              blue: "#8fc9e5",
+              green: "#5a9367",
+              white: "#f9f9f9",
+              yellow: "#f7d17b",
+              beige: "#ede0cf",
+              default: "#f9f9f9", // Background for light mode
+              paper: "#ffffff",
+            },
+            text: {
+              primary: "#000000", // Black text for light mode
+              secondary: "#5a9367", // Green for secondary text
+            },
+            accent: {
+              lightBlue: "#cce8f5",
+              softBrown: "#a7846c",
+              darkGreen: "#355e3b",
+            },
+          }
+        : {
+            // Dark Mode Palette
+            background: {
+              black: "#000000",
+              blue: "#2d5177", // Darker blue for dark mode
+              green: "#355e3b", // Deep green
+              white: "#1f1f1f", // Dark gray for dark mode background
+              yellow: "#a68c4a", // Muted yellow for dark mode
+              beige: "#3d3a32", // Muted beige
+              default: "#121212", // Background for dark mode
+              paper: "#1f1f1f",
+            },
+            text: {
+              primary: "#ffffff", // White text for dark mode
+              secondary: "#8fc9e5", // Light blue for secondary text
+            },
+            accent: {
+              lightBlue: "#8fc9e5",
+              softBrown: "#5c4b3b",
+              darkGreen: "#1d2e23",
+            },
+          }),
     },
-    accent: {
-      lightBlue: '#cce8f5', // Subtle, light blue accent
-      softBrown: '#a7846c', // Complementary brown
-      darkGreen: '#355e3b', // Deep green for strong contrast
+    typography: {
+      fontFamily: {
+        primary: "'Merriweather Sans', 'serif'",
+        secondary: "'Playfair Display', 'serif'",
+        heading: "'Montserrat', 'serif'",
+        heading2: "'Lato', 'serif'",
+      },
+      h1: {
+        fontFamily: "'Montserrat', 'serif'",
+      },
+      h2: {
+        fontFamily: "'Lato', 'serif'",
+      },
+      body1: {
+        fontFamily: "'Merriweather Sans', 'serif'",
+      },
+      body2: {
+        fontFamily: "'Playfair Display', 'serif'",
+      },
     },
-  },
-  typography: {
-    fontFamily: {
-      primary: "'Merriweather Sans', 'serif'",
-      secondary: "'Playfair Display', 'serif'",
-      heading: "'Montserrat', 'serif'",
-      heading2: "'Lato', 'serif'",
-    },
-    h1: {
-      fontFamily: "'Montserrat', 'serif'",
-    },
-    h2: {
-      fontFamily: "'Lato', 'serif'",
-    },
-    body1: {
-      fontFamily: "'Merriweather Sans', 'serif'",
-    },
-    body2: {
-      fontFamily: "'Playfair Display', 'serif'",
-    },
-  },
-});
+  });

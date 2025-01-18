@@ -8,7 +8,7 @@ const StatCard = ({title, value}) => {
   
     return(
 
-            <Card  variant="outlined"  sx={{flex:"1", flexBasis:"300px",  width: "300px", height: "170px", maxHeight:"170px", maxWidth:"380px", padding: "0.4rem", margin: "auto", border: "solid 1px gray", borderRadius: "0.5rem"}}>
+            <Card  variant="outlined"  sx={{flex:"1", flexBasis:"300px",  width: "300px", height: "170px", maxHeight:"170px", maxWidth:"350px", padding: "0.4rem", margin: "auto", border: "solid 1px gray", borderRadius: "0.5rem"}}>
                 <CardContent sx={{padding: "0.1rem", margin: "0rem"}}>{title}
                 <Typography variant="h2" sx={{fontSize:"0.9rem", fontWeight:"600", padding: "0.4rem", margin: "0rem"}}>
                   
