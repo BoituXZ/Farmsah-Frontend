@@ -1,13 +1,48 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { ThemeProvider, CssBaseline, Box, Typography, IconButton } from "@mui/material";
 import { homeTheme } from "../../theme/Theme";
-import StatCard from "../../components/Card";
+import StatCard from "../../components/StatCard";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 const Home = () => {
-  const [mode, setMode] = useState("light"); // Light mode by default
+ // Chart data for each card
+const cropsData = {
+  data: [1, 2, 4, 5, 9, 10, 12, 14, 26, 28, 45],
 
+}
+
+const weatherData = {
+  data: [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
+}
+
+const waterData = {
+  data: [3, 1, 4, 3, 5, 1],
+}
+
+const profitsData = {
+  data: [1000, 1242,  170, 1890, 1901, 2456, 300, 2789, 2890, 5601],
+
+}
+
+const trendType = ({ data }) => {
+  if (data.length < 2) return "neutral"; // Not enough data to determine trend
+
+  const lastValue = data[data.length - 1];
+  const maxValue = Math.max(...data.slice(0, -1));
+  const minValue = Math.min(...data.slice(0, -1));
+
+  if (lastValue > maxValue) {
+    return "up";
+  } else if (lastValue < minValue) {
+    return "down";
+  } else {
+    return "neutral";
+  }
+};
+
+  // Theme mode state
+  const [mode, setMode] = useState("light"); // Light mode by default
   const toggleMode = () => {
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
@@ -78,10 +113,13 @@ const Home = () => {
                 padding: "0.2rem",
               }}
             >
-              <StatCard title="Crops" value="1203Kg" />
-              <StatCard title="Weather" value="48°F" />
-              <StatCard title="Water" value="129,000L" />
-              <StatCard title="Profits" value="$2,033" />
+              <StatCard title="Crops" value="1203Kg" chartType="line" chartData={cropsData} trendType={trendType(cropsData)}  />
+              <StatCard title="Weather" value="48°F"   chartType="line" chartData={weatherData} trendType={trendType(weatherData)}/>
+              <StatCard title="Water" value="129,000L"  chartType="line" chartData={waterData} trendType={trendType(waterData)}/>
+              <StatCard title="Profits" value="$2,033"  chartType="line" chartData={profitsData} trendType={trendType(profitsData)}/>
+
+
+
             </Box>
           </Box>
         </Box>
