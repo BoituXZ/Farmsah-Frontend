@@ -78,7 +78,7 @@ const trendType = ({ data }) => {
             sx={{
               fontSize: "2rem",
               fontWeight: "400",
-              border: "solid 1px blue",
+              // border: "solid 1px blue",
             }}
           >
             Dashboard
