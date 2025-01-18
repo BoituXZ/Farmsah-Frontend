@@ -1,7 +1,7 @@
 import { homeTheme } from "../../theme/Theme";
 import { ThemeProvider } from "@mui/material";
 import { Box, Typography } from "@mui/material";
-import Card from "../../components/Card";
+import StatCard from "../../components/Card";
 
 // TODO: Fix card props
 const Home = () => {
@@ -16,14 +16,14 @@ const Home = () => {
         </Box>
         <Box id="bodyContent">
           <Box id="bodyOveriew">
-            <Typography variant="h1" sx={{fontSize:"0.9rem", fontWeight:"500", padding: "0.4rem", margin: "0rem"}}>
+            <Typography variant="h1" sx={{fontSize:"1rem", fontWeight:"600", padding: "1rem", margin: "0rem"}}>
               Overview
             </Typography>
-            <Box id="overviewContent" sx={{display: "flex", flexDirection: "row", justifyContent:"space-evenly"}}>
-              <Card/>
-              <Card/>
-              <Card/>
-              <Card/>
+            <Box id="overviewContent" sx={{display: "flex", flexWrap: "wrap", gap:"15px", width: "100%", margin: "0rem", padding: "0.2rem"}}>
+              <StatCard title="Crops" value="1203Kg"/>
+              <StatCard title="Weather" value="48F"/>
+              <StatCard title="Water" value="129000"/>
+              <StatCard title="Profits" value="$2033"/>
             </Box>
           </Box>
         </Box>
