@@ -80,7 +80,7 @@ const styles = {
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false); // For desktop sidebar minimization
   const [isDrawerOpen, setIsDrawerOpen] = useState(false); // For mobile hamburger menu
-  const isSmallScreen = useMediaQuery('(max-width: 600px)'); // Media query for small screens
+  const isSmallScreen = useMediaQuery('(max-width: 900px)'); // Media query for small screens
 
   const handleToggleSidebar = () => setIsCollapsed((prev) => !prev); // Toggle minimization
   const handleToggleDrawer = () => setIsDrawerOpen((prev) => !prev); // Toggle drawer
