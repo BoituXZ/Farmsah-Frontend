@@ -1,9 +1,11 @@
 import  { useState } from "react";
-import { ThemeProvider, CssBaseline, Box, Typography, IconButton } from "@mui/material";
+import { ThemeProvider, CssBaseline, Box, Typography, IconButton, Card } from "@mui/material";
 import { homeTheme } from "../../theme/Theme";
 import StatCard from "../../components/StatCard";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import StatChart from "../../components/StatChart";
+import StatBar from "../../components/StatBar";
 
 const Home = () => {
  // Chart data for each card
@@ -116,10 +118,44 @@ const trendType = ({ data }) => {
               <StatCard title="Crops" value="1203Kg" chartType="line" chartData={cropsData} trendType={trendType(cropsData)}  />
               <StatCard title="Weather" value="48°F"   chartType="line" chartData={weatherData} trendType={trendType(weatherData)}/>
               <StatCard title="Water" value="129,000L"  chartType="line" chartData={waterData} trendType={trendType(waterData)}/>
-              <StatCard title="Profits" value="$2,033"  chartType="line" chartData={profitsData} trendType={trendType(profitsData)}/>
-
-
-
+              <StatCard title="Profits" value="$12,000" chartType="line" chartData={profitsData} trendType={trendType(profitsData)}/>
+            </Box>
+          </Box>
+          <Box id="bodyCharts"  sx={{display:"flex",flexDirection:"row", width:"100%", flexWrap:"wrap", height:"453px", padding:"1rem", gap:"1rem"}}> 
+              <Box  id="yieldGraph" sx={{flex:"1", borderRadius:"0.5rem"}}>
+                <Card variant="outlined">
+                  <StatBar/>
+                </Card>
+                
+              </Box>
+              <Box id="profitGraph" sx={{flex:"1", borderRadius:"0.5rem"}}>
+                <Card variant="outlined">
+                  <StatChart/>
+                </Card>
+                
+              </Box>
+          </Box>
+          <Box id="bodyDetails" sx={{border:"solid 1px green"}}>
+            <Typography
+              variant="h1"
+              sx={{
+                fontSize: "1rem",
+                fontWeight: "600",
+                padding: "1rem",
+              }}
+            >
+              Details
+            </Typography>
+            <Box
+              id="detailsContent"
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "15px",
+                width: "100%",
+                padding: "0.2rem",
+              }}
+            >
             </Box>
           </Box>
         </Box>

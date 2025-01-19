@@ -51,23 +51,30 @@ export const homeTheme = (mode) =>
           }),
     },
     typography: {
-      fontFamily: {
-        primary: "'Merriweather Sans', 'serif'",
-        secondary: "'Playfair Display', 'serif'",
-        heading: "'Montserrat', 'serif'",
-        heading2: "'Lato', 'serif'",
-      },
+      fontFamily: "'Merriweather Sans', 'serif'", // Default font family
       h1: {
         fontFamily: "'Montserrat', 'serif'",
+        fontSize: "2rem", // Define sizes explicitly
+        fontWeight: 700,
       },
       h2: {
         fontFamily: "'Lato', 'serif'",
+        fontSize: "1.5rem",
+        fontWeight: 600,
+      },
+      subtitle1: {
+        fontFamily: "'Merriweather Sans', 'serif'",
+        fontSize: "1rem",
+        fontWeight: 400,
       },
       body1: {
         fontFamily: "'Merriweather Sans', 'serif'",
+        fontSize: "1rem",
       },
       body2: {
         fontFamily: "'Playfair Display', 'serif'",
+        fontSize: "0.875rem",
       },
     },
+    
   });

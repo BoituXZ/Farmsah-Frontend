@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Card, CardContent, Typography, Box } from "@mui/material";
 import { BarChart, SparkLineChart, PieChart } from "@mui/x-charts";
-import { XAxis } from "recharts";
+
 
 const StatCard = ({ title, value, chartType, chartData, trendType }) => {
   console.log("ChartType is:", chartType);
@@ -9,7 +9,7 @@ const StatCard = ({ title, value, chartType, chartData, trendType }) => {
   console.log("TrendType is:", trendType);
 
   const chartColors = {
-    up: "rgb(142, 203, 142)",
+    up: "rgb(171, 226, 171)",
     down: "rgba(255, 143, 143, 0.22)",
     neutral: "rgba(151, 150, 150, 0.22)",
   };
@@ -36,7 +36,7 @@ const StatCard = ({ title, value, chartType, chartData, trendType }) => {
           <SparkLineChart
             plotType="line"
             data={data}
-            height={100}
+            height={60}
             area
             colors={[chartColor]} // Use the determined color for the line chart
           />
@@ -57,7 +57,7 @@ const StatCard = ({ title, value, chartType, chartData, trendType }) => {
         width: "300px",
         height: "200px",
         maxHeight: "270px",
-        maxWidth: "380px",
+        maxWidth: "350px",
         padding: "0.4rem",
         margin: "auto",
         borderRadius: "0.5rem",
@@ -69,22 +69,28 @@ const StatCard = ({ title, value, chartType, chartData, trendType }) => {
           sx={{
             fontSize: "1rem",
             fontWeight: "400",
-            marginBottom: "0.2rem",
+            marginBottom: "0.5rem",
           }}
         >
           {title}
         </Typography>
         <Typography
           variant="h1"
-          sx={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "0.3rem" }}
+          sx={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "0.5rem" }}
         >
           {value}
         </Typography>
+        <Typography variant="subtitle1"
+          sx={{fontWeight:"200", fontSize:"0.8rem", marginBottom: "0.7rem"}}
+        >
+          Last 30 days
+        </Typography>
         <Box
           sx={{
+            // border: "1px solid rgb(0, 0, 0)",
             width: "100%",
-            height: "120px",
-            padding: "0.1rem",
+            // height: "120px",
+            padding: "0.3rem",
           }}
         >
           {renderChart()}
