@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Box, Typography, List, ListItem, ListItemText, ListItemIcon, IconButton, Drawer } from '@mui/material';
-import { Menu as MenuIcon, Close as CloseIcon } from '@mui/icons-material';
-import { useMediaQuery } from '@mui/material';
+import { Box, Typography, List, ListItem, ListItemText, ListItemIcon, IconButton, Drawer, Divider, Avatar, Button } from '@mui/material';
+import { Menu as MenuIcon, Close as CloseIcon} from '@mui/icons-material';
+import { useMediaQuery, useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
@@ -11,20 +11,40 @@ import CloudIcon from '@mui/icons-material/Cloud';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import BookIcon from '@mui/icons-material/Book';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { InfoRounded, QuestionAnswerOutlined } from '@mui/icons-material';
+
+
 
 // Colors
 const styles = {
   sidebar: {
     width: '200px',
     height: '100vh',
-    backgroundColor: 'rgba(44, 95, 45, 0.1)', // Blue Gray with transparency
-    backdropFilter: 'blur(110px)', // Glass effect
-    color: '#333333ff', // Jet text color
     display: 'flex',
     flexDirection: 'column',
-    borderRight: '2px solid rgba(255, 255, 255, 0.2)', // Subtle border
-    overflow: 'hidden',
-    transition: 'width 0.3s ease-in-out',
+    background: 'linear-gradient(to bottom,rgba(175, 206, 210, 0.75), #f0f0f0)',
+    backDropFilter: 'blur(45px)', // Glassmorphism effect
+
+    border: 'solid 1px lightBlue',
+    // backgroundColor: "grey", // Background color for the sidebar f9f9f9
+
+  },
+  sidebarTitle: {
+    flex: 1,
+    maxHeight: '8%',
+
+  },
+  
+  sidebarContent: {
+    flex: 4,
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    // border: 'solid 1px black'
+  },
+  sidebarFooter: {
+    flex: 1,
+    
   },
   minimizedSidebar: {
     width: '60px',
@@ -33,29 +53,41 @@ const styles = {
     height: '100%',
     padding: '1px 12px',
     justifyContent: 'center',
+    color: "black",
+    // border: 'solid 1px black',
+  },
+  list2:{
+    height: '100%',
+    padding: '1px 12px',
+    marginTop: '20%',
+    color: "black",
+    // border: 'solid 1px red',
   },
   heading: {
     fontFamily: 'Montserrat, sans-serif',
-    fontWeight: '500',
+    fontWeight: '400',
     fontSize: '27px',
+    height: '100%',
+    width: '100%',
     textAlign: 'center',
-    padding: '10px 10px',
+    padding: '9px 10px',
     marginBottom: '16px',
-    borderBottom: '1px solid #5a9bd5ff', // Subtle border for the glass
-    color: '#5a9bd5ff',
+    borderBottom: '1px solid #f7d17b', // Subtle border for the glass
+    color: '#5a9367', // Green color for the heading
   },
   listItem: {
-    fontFamily: 'Merriweather Sans, sans-serif',
+    fontFamily: "Playfair Display, serif",
     fontSize: '16px',
     padding: '8px 0',
-    color: '#ede0d4ff',
+    fontWeight: '200',
+    color: '#000000',
     cursor: 'pointer',
     '&:hover': {
       color: '#5a9bd5ff',
     },
   },
   listItemIcon: {
-    color: '#ede0d4ff',
+    color:'rgba(0, 0, 0, 0.56)',
     minWidth: '35px',
     '&:hover': {
       color: '#5a9bd5ff',
@@ -84,80 +116,162 @@ const Sidebar = () => {
 
   const handleToggleSidebar = () => setIsCollapsed((prev) => !prev); // Toggle minimization
   const handleToggleDrawer = () => setIsDrawerOpen((prev) => !prev); // Toggle drawer
-
+  const theme = useTheme();
   const SidebarContent = (
+    
     <>
-      <Typography
-        sx={{ ...styles.heading, fontSize: isCollapsed && !isSmallScreen ? '0px' : '27px' }}
+      <Box sx={styles.sidebar}>
+        <Box id='sidebarTitle' sx={styles.sidebarTitle}>
+          <Typography sx={styles.heading}>Farmsah</Typography>
+        </Box>
+        <Box id='sidebarContent' sx={styles.sidebarContent}>
+          <List sx={styles.list}>
+            <Link to="/user/home" style={styles.link}>
+              <ListItem sx={styles.listItem}>
+                <ListItemIcon sx={styles.listItemIcon}>
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText>Home</ListItemText>
+              </ListItem>
+            </Link>
+            <Link to="/user/farms" style={styles.link}>
+              <ListItem sx={styles.listItem}>
+                <ListItemIcon sx={styles.listItemIcon}>
+                  <AgricultureIcon />
+                </ListItemIcon>
+                <ListItemText>Farms</ListItemText>
+              </ListItem>
+            </Link>
+            <Link to="/user/crops" style={styles.link}>
+              <ListItem sx={styles.listItem}>
+                <ListItemIcon sx={styles.listItemIcon}>
+                  <MapIcon />
+                </ListItemIcon>
+                <ListItemText>Crops</ListItemText>
+              </ListItem>
+            </Link>
+            <Link to="/user/insights" style={styles.link}>
+              <ListItem sx={styles.listItem}>
+                <ListItemIcon sx={styles.listItemIcon}>
+                  <InsightsIcon />
+                </ListItemIcon>
+                <ListItemText>Insights</ListItemText>
+              </ListItem>
+            </Link>
+            <Link to="/user/weather" style={styles.link}>
+              <ListItem sx={styles.listItem}>
+                <ListItemIcon sx={styles.listItemIcon}>
+                  <CloudIcon />
+                </ListItemIcon>
+                <ListItemText>Weather</ListItemText>
+              </ListItem>
+            </Link>
+            <Link to="/user/market" style={styles.link}>
+              <ListItem sx={styles.listItem}>
+                <ListItemIcon sx={styles.listItemIcon}>
+                  <StorefrontIcon />
+                </ListItemIcon>
+                <ListItemText>Market</ListItemText>
+              </ListItem>
+            </Link>
+            <Link to="/user/resources" style={styles.link}>
+              <ListItem sx={styles.listItem}>
+                <ListItemIcon sx={styles.listItemIcon}>
+                  <BookIcon />
+                </ListItemIcon>
+                <ListItemText>Resources</ListItemText>
+              </ListItem>
+            </Link>
+            
+
+            </List>
+
+          <List sx={styles.list2}>
+            <Link to="/user/settings" style={styles.link}>
+                <ListItem sx={styles.listItem}>
+                  <ListItemIcon sx={styles.listItemIcon}>
+                    <SettingsIcon />
+                  </ListItemIcon>
+                  <ListItemText>Settings</ListItemText>
+                </ListItem>
+              </Link>
+            <Link to="/user/Contact" style={styles.link}>
+              <ListItem sx={styles.listItem}>
+                <ListItemIcon sx={styles.listItemIcon}>
+                  <InfoRounded />
+                </ListItemIcon>
+                <ListItemText>About</ListItemText>
+              </ListItem>
+            </Link>
+            <Link to="/user/Feedback" style={styles.link}>
+              <ListItem sx={styles.listItem}>
+                <ListItemIcon sx={styles.listItemIcon}>
+                  <QuestionAnswerOutlined/>
+                </ListItemIcon>
+                <ListItemText>Feedback</ListItemText>
+              </ListItem>
+            </Link>
+            </List>
+        </Box>
+        <Box id="sidebarFooter" sx={styles.sidebarFooter}>
+        <Box
+      sx={{
+        maxWidth: 300,
+        padding: theme.spacing(2),
+        borderRadius: theme.shape.borderRadius,
+        boxShadow: theme.shadows[2],
+        // backgroundColor: theme.palette.background.paper,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: theme.spacing(2),
+      }}
+    >
+      {/* Plan Message */}
+      <Box>
+        <Typography variant="body1" fontWeight="bold" gutterBottom>
+          ✨ Plan about to expire
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Enjoy 10% off when renewing your plan today.
+        </Typography>
+      </Box>
+
+      {/* Discount Button */}
+      <Button
+        variant="contained"
+        sx={{
+          borderRadius: theme.shape.borderRadius,
+          textTransform: 'none',
+          backgroundColor: '#8fc9e5',
+          fontWeight: '600',
+          boxShadow: theme.shadows[3],
+          '&:hover': {
+            backgroundColor: theme.palette.primary.dark,
+          },
+        }}
       >
-        Farmsah
-      </Typography>
-      <List sx={styles.list}>
-        <Link to="/user/home" style={styles.link}>
-          <ListItem sx={styles.listItem}>
-            <ListItemIcon sx={styles.listItemIcon}>
-              <HomeIcon />
-            </ListItemIcon>
-            {!isCollapsed && <ListItemText primary="Home" />}
-          </ListItem>
-        </Link>
-        <Link to="/user/farms" style={styles.link}>
-          <ListItem sx={styles.listItem}>
-            <ListItemIcon sx={styles.listItemIcon}>
-              <MapIcon />
-            </ListItemIcon>
-            {!isCollapsed && <ListItemText primary="Farms" />}
-          </ListItem>
-        </Link>
-        <Link to="/user/crops" style={styles.link}>
-          <ListItem sx={styles.listItem}>
-            <ListItemIcon sx={styles.listItemIcon}>
-              <AgricultureIcon />
-            </ListItemIcon>
-            {!isCollapsed && <ListItemText primary="Crops" />}
-          </ListItem>
-        </Link>
-        <Link to="/user/insights" style={styles.link}>
-          <ListItem sx={styles.listItem}>
-            <ListItemIcon sx={styles.listItemIcon}>
-              <InsightsIcon />
-            </ListItemIcon>
-            {!isCollapsed && <ListItemText primary="AI Insights" />}
-          </ListItem>
-        </Link>
-        <Link to="/user/weather" style={styles.link}>
-          <ListItem sx={styles.listItem}>
-            <ListItemIcon sx={styles.listItemIcon}>
-              <CloudIcon />
-            </ListItemIcon>
-            {!isCollapsed && <ListItemText primary="Weather" />}
-          </ListItem>
-        </Link>
-        <Link to="/user/market" style={styles.link}>
-          <ListItem sx={styles.listItem}>
-            <ListItemIcon sx={styles.listItemIcon}>
-              <StorefrontIcon />
-            </ListItemIcon>
-            {!isCollapsed && <ListItemText primary="Market" />}
-          </ListItem>
-        </Link>
-        <Link to="/user/resources" style={styles.link}>
-          <ListItem sx={styles.listItem}>
-            <ListItemIcon sx={styles.listItemIcon}>
-              <BookIcon />
-            </ListItemIcon>
-            {!isCollapsed && <ListItemText primary="Resources" />}
-          </ListItem>
-        </Link>
-        <Link to="/user/settings" style={styles.link}>
-          <ListItem sx={styles.listItem}>
-            <ListItemIcon sx={styles.listItemIcon}>
-              <SettingsIcon />
-            </ListItemIcon>
-            {!isCollapsed && <ListItemText primary="Settings" />}
-          </ListItem>
-        </Link>
-      </List>
+        Get the discount
+      </Button>
+
+      <Divider />
+
+      {/* User Info */}
+      <Box display="flex" alignItems="center" gap={theme.spacing(1)}>
+        <Avatar
+          alt="Riley Carter"
+          src="/static/images/avatar/1.jpg" // Replace with actual image path
+        />
+        <Box>
+          <Typography variant="body1">Riley Carter</Typography>
+          <Typography variant="body2" color="text.secondary">
+            riley@email.com
+          </Typography>
+        </Box>
+      </Box>
+    </Box>
+      </Box>
+      </Box>
+      
     </>
   );
 
@@ -190,7 +304,7 @@ const Sidebar = () => {
             ...(isCollapsed && styles.minimizedSidebar),
           }}
         >
-          <IconButton
+          {/* <IconButton
             sx={{
               position: 'absolute',
               top: '10px',
@@ -204,7 +318,7 @@ const Sidebar = () => {
             onClick={handleToggleSidebar}
           >
             {isCollapsed ? '>' : '<'}
-          </IconButton>
+          </IconButton> */}
           {SidebarContent}
         </Box>
       )}

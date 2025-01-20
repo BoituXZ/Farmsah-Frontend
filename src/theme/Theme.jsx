@@ -8,6 +8,8 @@ export const homeTheme = (mode) =>
         ? {
             // Light Mode Palette
             background: {
+              gradient: "linear-gradient(to bottom,rgba(175, 206, 210, 0.75), #f0f0f0)",
+              gradient2: "hsl(220, 35%, 97%))",
               black: "#000000",
               blue: "#8fc9e5",
               green: "#5a9367",

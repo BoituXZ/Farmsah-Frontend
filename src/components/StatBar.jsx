@@ -30,9 +30,10 @@ const StatBar = () => {
         width: "100%",
         maxHeight: "410px",
         margin: "0 auto",
-        padding: "1rem",
+        padding: "2rem 1rem",
         backgroundColor: "white",
         borderRadius: "8px",
+
         boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
       }}
     >
@@ -41,10 +42,11 @@ const StatBar = () => {
         sx={{
           fontWeight: "400",
           textAlign: "left",
+          fontSize: "1.2rem",
           marginBottom: "8px",
         }}
       >
-        Yield Data (Last 6 Months)
+        Yield Data
       </Typography>
       <Typography
         variant="subtitle2"
@@ -56,7 +58,7 @@ const StatBar = () => {
       >
         Low and High Yield Per Month
       </Typography>
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width="100%" height={240}>
         <BarChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
 
           <XAxis dataKey="month" />

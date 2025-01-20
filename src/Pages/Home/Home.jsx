@@ -55,10 +55,13 @@ const trendType = ({ data }) => {
       <Box
         id="page"
         sx={{
-          bgcolor: "background.default",
+          // background: (theme) => theme.palette.background.gradient,
           color: "text.primary",
           borderBottom: "1px dashed red",
           minHeight: "100vh",
+          padding: "1rem",
+          background: (theme) => theme.palette.background.gradient2,
+
           
         }}
       >
@@ -66,10 +69,10 @@ const trendType = ({ data }) => {
         <Box
           id="pageHeader"
           sx={{
-            bgcolor: "background.paper",
             color: "text.primary",
-            padding: "0.2rem",
+            // padding: "0.2rem",
             display: "flex",
+            width: "100%",
             justifyContent: "space-between",
             // justifyContent: "space-between",
             alignItems: "center",
@@ -78,8 +81,9 @@ const trendType = ({ data }) => {
           <Typography
             variant="h1"
             sx={{
+              width: "100%",
               fontSize: "2rem",
-              fontWeight: "400",
+              fontWeight: "500",
               // border: "solid 1px blue",
             }}
           >
@@ -93,26 +97,26 @@ const trendType = ({ data }) => {
         </Box>
 
         {/* Body Content */}
-        <Box id="bodyContent" sx={{ padding: "1rem" }}>
+        <Box id="bodyContent" sx={{padding: "1rem"}}>
           <Box id="bodyOverview">
-            <Typography
-              variant="h1"
+            {/* <Typography
+              variant="h2"
               sx={{
-                fontSize: "1rem",
+                fontSize: "1.1rem",
                 fontWeight: "600",
-                padding: "1rem",
+                padding: "0.4rem 0.2rem",
               }}
             >
               Overview
-            </Typography>
+            </Typography> */}
             <Box
               id="overviewContent"
               sx={{
                 display: "flex",
                 flexWrap: "wrap",
                 gap: "15px",
+                // padding: "1rem 1rem",
                 width: "100%",
-                padding: "0.2rem",
               }}
             >
               <StatCard title="Crops" value="1203Kg" chartType="line" chartData={cropsData} trendType={trendType(cropsData)}  />
@@ -121,7 +125,7 @@ const trendType = ({ data }) => {
               <StatCard title="Profits" value="$12,000" chartType="line" chartData={profitsData} trendType={trendType(profitsData)}/>
             </Box>
           </Box>
-          <Box id="bodyCharts"  sx={{display:"flex",flexDirection:"row", width:"100%", flexWrap:"wrap", height:"453px", padding:"1rem", gap:"1rem"}}> 
+          <Box id="bodyCharts"  sx={{display:"flex",flexDirection:"row", width:"100%", flexWrap:"wrap", height:"453px", padding: "1rem 0", gap:"1rem"}}> 
               <Box  id="yieldGraph" sx={{flex:"1", borderRadius:"0.5rem"}}>
                 <Card variant="outlined">
                   <StatBar/>

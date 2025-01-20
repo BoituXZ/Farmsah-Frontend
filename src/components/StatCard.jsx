@@ -53,11 +53,9 @@ const StatCard = ({ title, value, chartType, chartData, trendType }) => {
       variant="outlined"
       sx={{
         flex: "1",
-        flexBasis: "300px",
-        width: "300px",
-        height: "200px",
-        maxHeight: "270px",
-        maxWidth: "350px",
+        // flexBasis: "300px",
+        maxHeight: "200px",
+        maxWidth: "300px",
         padding: "0.4rem",
         margin: "auto",
         borderRadius: "0.5rem",

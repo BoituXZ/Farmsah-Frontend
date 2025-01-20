@@ -95,9 +95,7 @@
 
 
 body{
-    background-image: url("/public/assets/background.jpg");
-    background-size:  cover;
-    background-position: 50% 0%;
+    background-color: white;
 }
 @layer entireContainer{
     .LPContainer{

@@ -59,7 +59,7 @@ export const PagesLayout = () => {
         <Sidebar />
       </div>
       <div className={styles.restOfPage}>
-      <Outlet />
+        <Outlet />
       </div>
       
     </div>

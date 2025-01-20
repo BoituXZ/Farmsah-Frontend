@@ -21,12 +21,14 @@ const StatChart = () => {
         padding: "1rem",
         backgroundColor: "white",
         borderRadius: "8px",
+        
       }}
     >
       <Typography
         variant="h2"
         sx={{
           fontWeight: "400",
+          fontSize: "1.2rem",
           textAlign: "left",
           marginBottom: "16px",
         }}
@@ -60,6 +62,7 @@ const StatChart = () => {
             dataKey="Profit"
             stroke="#8884d8"
             fillOpacity={1}
+            
             fill="url(#colorSessions)"
           />
         </AreaChart>
