@@ -1,6 +1,8 @@
 import { Outlet, NavLink, Link } from "react-router-dom";
 import styles from './Layout.module.css'
 import Sidebar from "./Sidebar/Sidebar";
+import { Box, Divider } from "@mui/material";
+// TODO make everyting material UI
 const Layout = () => {
 
     const linkStyle = ({ isActive }) => ({
@@ -52,18 +54,37 @@ export default Layout;
 
 
 export const PagesLayout = () => {
-  return(
-    <>
-    <div className={styles.pagesContainer}>
-      <div className={styles.sidebarContainer}>
+  return (
+    <Box
+      id="pageContainer"
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        height: '100vh', // Set height to viewport height
+        overflow: 'hidden', // Prevent whole page scrolling
+      }}
+    >
+      <Box
+        id="sidebarContainer"
+        sx={{
+          flex: '1',
+          border: 'solid 1px red',
+          height: '100%', // Ensure it spans the full height
+        }}
+      >
         <Sidebar />
-      </div>
-      <div className={styles.restOfPage}>
+      </Box>
+
+      <Box
+        id="restOfPage"
+        sx={{
+          flex: '6',
+          overflow: 'auto', // Enable scrolling only for this section
+          height: '100%', // Ensure it spans the full height
+        }}
+      >
         <Outlet />
-      </div>
-      
-    </div>
-    
-    </>
-  )
-}
+      </Box>
+    </Box>
+  );
+};

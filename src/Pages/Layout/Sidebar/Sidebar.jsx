@@ -18,14 +18,12 @@ import { InfoRounded, QuestionAnswerOutlined } from '@mui/icons-material';
 // Colors
 const styles = {
   sidebar: {
-    width: '200px',
+    width: '100%',
     height: '100vh',
     display: 'flex',
     flexDirection: 'column',
-    background: 'linear-gradient(to bottom,rgba(175, 206, 210, 0.75), #f0f0f0)',
     backDropFilter: 'blur(45px)', // Glassmorphism effect
-
-    border: 'solid 1px lightBlue',
+    backgroundColor: 'white',
     // backgroundColor: "grey", // Background color for the sidebar f9f9f9
 
   },
@@ -66,7 +64,7 @@ const styles = {
   heading: {
     fontFamily: 'Montserrat, sans-serif',
     fontWeight: '400',
-    fontSize: '27px',
+    fontSize: '2rem',
     height: '100%',
     width: '100%',
     textAlign: 'center',
@@ -77,7 +75,7 @@ const styles = {
   },
   listItem: {
     fontFamily: "Playfair Display, serif",
-    fontSize: '16px',
+    fontSize: '1rem',
     padding: '8px 0',
     fontWeight: '200',
     color: '#000000',
@@ -236,41 +234,11 @@ const Sidebar = () => {
         </Typography>
       </Box>
 
-      {/* Discount Button */}
-      <Button
-        variant="contained"
-        sx={{
-          borderRadius: theme.shape.borderRadius,
-          textTransform: 'none',
-          backgroundColor: '#8fc9e5',
-          fontWeight: '600',
-          boxShadow: theme.shadows[3],
-          '&:hover': {
-            backgroundColor: theme.palette.primary.dark,
-          },
-        }}
-      >
-        Get the discount
-      </Button>
-
-      <Divider />
-
-      {/* User Info */}
-      <Box display="flex" alignItems="center" gap={theme.spacing(1)}>
-        <Avatar
-          alt="Riley Carter"
-          src="/static/images/avatar/1.jpg" // Replace with actual image path
-        />
-        <Box>
-          <Typography variant="body1">Riley Carter</Typography>
-          <Typography variant="body2" color="text.secondary">
-            riley@email.com
-          </Typography>
-        </Box>
+      
       </Box>
     </Box>
       </Box>
-      </Box>
+      
       
     </>
   );

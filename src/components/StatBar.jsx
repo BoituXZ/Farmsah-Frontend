@@ -33,6 +33,7 @@ const StatBar = () => {
         padding: "2rem 1rem",
         backgroundColor: "white",
         borderRadius: "8px",
+        background: (theme) => theme.palette.background.paper,
 
         boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
       }}

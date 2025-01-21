@@ -21,6 +21,8 @@ const StatChart = () => {
         padding: "1rem",
         backgroundColor: "white",
         borderRadius: "8px",
+        background: (theme) => theme.palette.background.paper,
+
         
       }}
     >

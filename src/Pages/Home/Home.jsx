@@ -60,7 +60,8 @@ const trendType = ({ data }) => {
           borderBottom: "1px dashed red",
           minHeight: "100vh",
           padding: "1rem",
-          background: (theme) => theme.palette.background.gradient2,
+          width: "100%",
+          background: (theme) => theme.palette.background.default,
 
           
         }}

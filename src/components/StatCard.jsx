@@ -59,6 +59,8 @@ const StatCard = ({ title, value, chartType, chartData, trendType }) => {
         padding: "0.4rem",
         margin: "auto",
         borderRadius: "0.5rem",
+        background: (theme) => theme.palette.background.paper,
+        
       }}
     >
       <CardContent sx={{ padding: "0.5rem", margin: "0rem" }}>

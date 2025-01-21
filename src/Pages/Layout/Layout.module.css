@@ -151,23 +151,3 @@
 }
 
 
-@layer sideBar{
-    .pagesContainer{
-        display: flex;
-        height: 100vh;
-        flex-direction: row;
-        /* border: solid red 2px; */
-        /* gap: 1px; */
-        overflow: hidden;
-    }
-    .sidebarContainer{
-        max-width: 200px;
-        height: 100vh;
-        
-    }
-    .restOfPage{
-        flex: 4;
-        overflow-y: auto;
-        /* border: solid blue 2px; */
-    }
-}
