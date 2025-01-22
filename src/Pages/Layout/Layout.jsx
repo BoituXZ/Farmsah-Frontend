@@ -4,6 +4,7 @@ import Sidebar from "./Sidebar/Sidebar";
 import { Box, CssBaseline, Divider, ThemeProvider } from "@mui/material";
 import { useState } from "react";
 import { Theme } from "../../theme/Theme";
+import Header from "../../components/Header";
 // TODO make everyting material UI
 const Layout = () => {
 
@@ -58,44 +59,52 @@ export default Layout;
 
 export const PagesLayout = () => {
   // Theme mode state
-  const [mode, setMode] = useState("light"); // Light mode by default
+  const [mode, setMode] = useState("light"); // Theme mode state
   const toggleMode = () => {
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
-  }; 
+  };
+
   return (
     <ThemeProvider theme={Theme(mode)}>
       <CssBaseline />
       <Box
-      id="pageContainer"
-      sx={{
-        display: 'flex',
-        flexDirection: 'row',
-        height: '100vh', // Set height to viewport height
-        overflow: 'hidden', // Prevent whole page scrolling
-      }}
-    >
-      <Box
-        id="sidebarContainer"
+        id="pageContainer"
         sx={{
-          flex: '1',
-          // border: 'solid 1px red',
-          height: '100%', // Ensure it spans the full height
+          display: "flex",
+          flexDirection: "row",
+          height: "100vh",
+          overflow: "hidden",
         }}
       >
-        <Sidebar />
+        {/* Sidebar */}
+        <Box
+          id="sidebarContainer"
+          sx={{
+            flex: "1",
+            height: "100%",
+          }}
+        >
+          <Sidebar />
+        </Box>
+
+        <Divider />
+
+        {/* Main Content */}
+        <Box
+          id="restOfPage"
+          sx={{
+            flex: "6",
+            overflow: "auto",
+            height: "100%",
+          }}
+        >
+          {/* Header with toggle */}
+          <Header title="Dashboard" mode={mode} toggleMode={toggleMode} />
+
+          {/* Outlet for rendering page content */}
+          <Outlet />
+        </Box>
       </Box>
-      <Divider />
-      <Box
-        id="restOfPage"
-        sx={{
-          flex: '6',
-          overflow: 'auto', // Enable scrolling only for this section
-          height: '100%', // Ensure it spans the full height
-        }}
-      >
-        <Outlet />
-      </Box>
-    </Box>
     </ThemeProvider>
   );
 };

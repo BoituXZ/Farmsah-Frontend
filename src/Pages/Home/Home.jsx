@@ -66,37 +66,6 @@ const trendType = ({ data }) => {
           
         }}
       >
-        {/* Header */}
-        <Box
-          id="pageHeader"
-          sx={{
-            color: "text.primary",
-            // padding: "0.2rem",
-            display: "flex",
-            width: "100%",
-            justifyContent: "space-between",
-            // justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Typography
-            variant="h1"
-            sx={{
-              width: "100%",
-              fontSize: "2rem",
-              fontWeight: "500",
-              // border: "solid 1px blue",
-            }}
-          >
-            Dashboard
-          </Typography>
-
-          {/* Toggle Mode Button */}
-          <IconButton onClick={toggleMode} color="inherit" sx={{border: "solid 1px black"}}>
-            {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
-          </IconButton>
-        </Box>
-
         {/* Body Content */}
         <Box id="bodyContent" sx={{padding: "1rem"}}>
           <Box id="bodyOverview">
