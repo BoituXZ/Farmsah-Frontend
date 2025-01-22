@@ -1,7 +1,9 @@
 import { Outlet, NavLink, Link } from "react-router-dom";
 import styles from './Layout.module.css'
 import Sidebar from "./Sidebar/Sidebar";
-import { Box, Divider } from "@mui/material";
+import { Box, CssBaseline, Divider, ThemeProvider } from "@mui/material";
+import { useState } from "react";
+import { Theme } from "../../theme/Theme";
 // TODO make everyting material UI
 const Layout = () => {
 
@@ -53,9 +55,17 @@ export default Layout;
 
 
 
+
 export const PagesLayout = () => {
+  // Theme mode state
+  const [mode, setMode] = useState("light"); // Light mode by default
+  const toggleMode = () => {
+    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+  }; 
   return (
-    <Box
+    <ThemeProvider theme={Theme(mode)}>
+      <CssBaseline />
+      <Box
       id="pageContainer"
       sx={{
         display: 'flex',
@@ -68,13 +78,13 @@ export const PagesLayout = () => {
         id="sidebarContainer"
         sx={{
           flex: '1',
-          border: 'solid 1px red',
+          // border: 'solid 1px red',
           height: '100%', // Ensure it spans the full height
         }}
       >
         <Sidebar />
       </Box>
-
+      <Divider />
       <Box
         id="restOfPage"
         sx={{
@@ -86,5 +96,6 @@ export const PagesLayout = () => {
         <Outlet />
       </Box>
     </Box>
+    </ThemeProvider>
   );
 };

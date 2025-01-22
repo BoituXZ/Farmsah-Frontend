@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material";
 
-export const homeTheme = (mode) =>
+
+export const Theme = (mode) =>
   createTheme({
     palette: {
       mode, // Dynamic mode: 'light' or 'dark'
@@ -12,8 +13,9 @@ export const homeTheme = (mode) =>
               gradient2: "rgba(175, 206, 210, 0.37)",
               black: "#000000",
               blue: "#8fc9e5",
-              green: "#5a9367",
+              green: "#2c5f2dff",
               white: "#f9f9f9",
+              white2: "rgba(249, 249, 249, 0.55)", // White with opacity
               yellow: "#f7d17b",
               beige: "#ede0cf",
               default: "#f9f9f9", // Background for light mode
@@ -53,30 +55,20 @@ export const homeTheme = (mode) =>
           }),
     },
     typography: {
-      fontFamily: "'Merriweather Sans', 'serif'", // Default font family
-      h1: {
-        fontFamily: "'Montserrat', 'serif'",
-        fontSize: "2rem", // Define sizes explicitly
-        fontWeight: 700,
-      },
-      h2: {
-        fontFamily: "'Lato', 'serif'",
-        fontSize: "1.5rem",
-        fontWeight: 600,
-      },
-      subtitle1: {
-        fontFamily: "'Merriweather Sans', 'serif'",
-        fontSize: "1rem",
-        fontWeight: 400,
-      },
-      body1: {
-        fontFamily: "'Merriweather Sans', 'serif'",
-        fontSize: "1rem",
-      },
-      body2: {
-        fontFamily: "'Playfair Display', 'serif'",
-        fontSize: "0.875rem",
+      fontFamily: "'Merriweather Sans', serif", // Default font
+      h1: { fontFamily: "'Montserrat', serif", fontSize: "2rem", fontWeight: 700 },
+      h2: { fontFamily: "'Lato', serif", fontSize: "1.5rem", fontWeight: 600 },
+      subtitle1: { fontFamily: "'Merriweather Sans', serif", fontSize: "1rem", fontWeight: 400 },
+      body1: { fontFamily: "'Merriweather Sans', serif", fontSize: "1rem" },
+      body2: { fontFamily: "'Playfair Display', serif", fontSize: "0.875rem" },
+    },
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          body: {
+            fontFamily: "'Merriweather Sans', serif", // Default font for the body
+          },
+        },
       },
     },
-    
   });

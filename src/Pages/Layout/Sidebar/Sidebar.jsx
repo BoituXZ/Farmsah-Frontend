@@ -12,7 +12,8 @@ import StorefrontIcon from '@mui/icons-material/Storefront';
 import BookIcon from '@mui/icons-material/Book';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { InfoRounded, QuestionAnswerOutlined } from '@mui/icons-material';
-
+import { color } from 'framer-motion';
+// TODO: Make it coool
 
 
 // Colors
@@ -23,7 +24,8 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     backDropFilter: 'blur(45px)', // Glassmorphism effect
-    backgroundColor: 'white',
+    backgroundColor: (theme) => theme.palette.background.green,
+    
     // backgroundColor: "grey", // Background color for the sidebar f9f9f9
 
   },
@@ -51,7 +53,6 @@ const styles = {
     height: '100%',
     padding: '1px 12px',
     justifyContent: 'center',
-    color: "black",
     // border: 'solid 1px black',
   },
   list2:{
@@ -71,17 +72,21 @@ const styles = {
     padding: '9px 10px',
     marginBottom: '16px',
     borderBottom: '1px solid #f7d17b', // Subtle border for the glass
-    color: '#5a9367', // Green color for the heading
+    color: (theme) => theme.palette.background.white
   },
   listItem: {
     fontFamily: "Playfair Display, serif",
-    fontSize: '1rem',
     padding: '8px 0',
     fontWeight: '200',
-    color: '#000000',
+    color: (theme) => theme.palette.background.white2,
     cursor: 'pointer',
+    transition: '40ms',
     '&:hover': {
-      color: '#5a9bd5ff',
+      color: (theme) => theme.palette.background.white,
+    },
+    listItemText:{
+      fontSize: "30rem",
+      color: "red"
     },
   },
   listItemIcon: {
@@ -127,7 +132,7 @@ const Sidebar = () => {
             <Link to="/user/home" style={styles.link}>
               <ListItem sx={styles.listItem}>
                 <ListItemIcon sx={styles.listItemIcon}>
-                  <HomeIcon />
+                  <HomeIcon  />
                 </ListItemIcon>
                 <ListItemText>Home</ListItemText>
               </ListItem>
@@ -137,7 +142,7 @@ const Sidebar = () => {
                 <ListItemIcon sx={styles.listItemIcon}>
                   <AgricultureIcon />
                 </ListItemIcon>
-                <ListItemText>Farms</ListItemText>
+                <ListItemText sx={styles.listItemText}>Farms</ListItemText>
               </ListItem>
             </Link>
             <Link to="/user/crops" style={styles.link}>

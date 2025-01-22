@@ -51,19 +51,23 @@ const StatCard = ({ title, value, chartType, chartData, trendType }) => {
   return (
     <Card
       variant="outlined"
+
       sx={{
         flex: "1",
         // flexBasis: "300px",
         maxHeight: "200px",
         maxWidth: "300px",
         padding: "0.4rem",
+        boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.2)",
         margin: "auto",
         borderRadius: "0.5rem",
         background: (theme) => theme.palette.background.paper,
-        
-      }}
-    >
-      <CardContent sx={{ padding: "0.5rem", margin: "0rem" }}>
+        "&:hover": {
+          boxShadow: "none",
+        },
+            }}
+          >
+            <CardContent sx={{ padding: "0.5rem", margin: "0rem" }}>
         <Typography
           variant="h2"
           sx={{

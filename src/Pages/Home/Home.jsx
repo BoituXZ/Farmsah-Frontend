@@ -1,6 +1,6 @@
 import  { useState } from "react";
 import { ThemeProvider, CssBaseline, Box, Typography, IconButton, Card } from "@mui/material";
-import { homeTheme } from "../../theme/Theme";
+import { Theme } from "../../theme/Theme";
 import StatCard from "../../components/StatCard";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -50,7 +50,7 @@ const trendType = ({ data }) => {
   };
 
   return (
-    <ThemeProvider theme={homeTheme(mode)}>
+    <ThemeProvider theme={Theme(mode)}>
       <CssBaseline />
       <Box
         id="page"
