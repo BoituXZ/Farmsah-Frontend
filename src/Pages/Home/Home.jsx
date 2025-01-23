@@ -1,12 +1,11 @@
-import React from "react";
-import { CssBaseline, Box, Typography, Card } from "@mui/material";
-import { useThemeContext } from "../../Pages/Layout/Layout";
+
+import { CssBaseline, Box, Card } from "@mui/material";
 import StatCard from "../../components/StatCard";
 import StatChart from "../../components/StatChart";
 import StatBar from "../../components/StatBar";
 
 const Home = () => {
-  const { mode } = useThemeContext();
+
 
   const cropsData = { data: [1, 2, 4, 5, 9, 10, 12, 14, 26, 28, 45] };
   const weatherData = { data: [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50] };

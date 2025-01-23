@@ -1,8 +1,8 @@
 // src/components/Header.jsx
-import React from "react";
 import { Box, Typography, IconButton } from "@mui/material";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import PropTypes from "prop-types";
 
 const Header = ({ title, mode, toggleMode }) => {
   return (
@@ -25,7 +25,8 @@ const Header = ({ title, mode, toggleMode }) => {
         variant="h1"
         sx={{
           fontSize: "1.5rem",
-          fontWeight: "500",
+          fontWeight: "600",
+          fontFamily: (theme) => theme.typography.h1.fontFamily,
         }}
       >
         {title}
@@ -37,6 +38,14 @@ const Header = ({ title, mode, toggleMode }) => {
       </IconButton>
     </Box>
   );
+};
+
+
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+  mode: PropTypes.oneOf(["light", "dark"]).isRequired,
+  toggleMode: PropTypes.func.isRequired,
 };
 
 export default Header;
