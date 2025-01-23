@@ -5,9 +5,11 @@ import { Box, CssBaseline, Divider, ThemeProvider } from "@mui/material";
 import { useState, createContext, useContext } from "react";
 import { Theme } from "../../theme/Theme";
 import Header from "../../components/Header";
+import { useLocation } from "react-router-dom";
 
 
 // TODO make everyting material UI
+// TODO make the navbar materialUI
 const Layout = () => {
 
     const linkStyle = ({ isActive }) => ({
@@ -70,6 +72,19 @@ export const PagesLayout = () => {
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
 
+
+  const location = useLocation();
+
+  const getTitle = (pathname) => {
+    // I don't want to make the top section of the page everytime, so this function uses the path to determine the title of the page
+    const path = pathname.split("/")[2]
+    const pageTitle = path.charAt(0).toUpperCase() + path.slice(1)
+    if (pageTitle === "Home") {
+      return "Dashboard";
+    }
+    return pageTitle;
+  };
+
   return (
     <ThemeContext.Provider value={{ mode, toggleMode }}>
       <ThemeProvider theme={Theme(mode)}>
@@ -106,7 +121,12 @@ export const PagesLayout = () => {
             }}
           >
             {/* Header with toggle */}
-            <Header title="Dashboard" mode={mode} toggleMode={toggleMode} />
+            {/* <Header title="Dashboard" mode={mode} toggleMode={toggleMode} /> */}
+            
+
+            
+
+            <Header title={getTitle(location.pathname)} mode={mode} toggleMode={toggleMode} />
 
             {/* Outlet for rendering page content */}
             <Outlet />

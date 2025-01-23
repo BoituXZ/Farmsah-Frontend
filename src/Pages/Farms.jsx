@@ -1,17 +1,21 @@
-import React from 'react'
 import { Theme } from '../theme/Theme'
 import { ThemeProvider } from '@mui/material/styles';
-import { CssBaseline } from '@mui/material';
+import { Box } from '@mui/material';
 
 
 const Farms = () => {
 
   return(
-    <ThemeProvider theme={Theme(mode)}>
-      <CssBaseline />
-      <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100vw', backgroundColor: homeTheme.palette.background.green}}>
-        <h1 style={{color: 'white'}}>Farms</h1>
-      </div>
+    <ThemeProvider theme={Theme}>
+      <Box id="page"
+        sx={{ border: "solid 1px red",
+          width: "100%",
+          height: "100%",
+        }}
+      
+      >
+        lorem ipsum
+      </Box>
     </ThemeProvider>
   )
 
