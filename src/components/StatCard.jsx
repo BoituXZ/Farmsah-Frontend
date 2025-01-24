@@ -55,6 +55,7 @@ const StatCard = ({ title, value, chartType, chartData, trendType }) => {
       sx={{
         flex: "1",
         // flexBasis: "300px",
+        minWidth: "250px",
         maxHeight: "200px",
         maxWidth: "300px",
         padding: "0.4rem",

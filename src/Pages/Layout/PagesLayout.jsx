@@ -1,4 +1,4 @@
-import { Box, CssBaseline, Divider, ThemeProvider } from "@mui/material";
+import { Box, CssBaseline, Divider, ThemeProvider, useMediaQuery } from "@mui/material";
 import { useState, createContext, useContext } from "react";
 import { Theme } from "../../theme/Theme";
 import Header from "../../components/Header";
@@ -11,19 +11,19 @@ export const useThemeContext = () => useContext(ThemeContext);
 
 const PagesLayout = () => {
   const [mode, setMode] = useState("light");
+  const isSmallScreen = useMediaQuery('(max-width: 900px)'); // Media query for small screens
 
   const toggleMode = () => {
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
-
 
   const location = useLocation();
   console.log("Current mode:", mode); // Should be "light" or "dark"
 
   const getTitle = (pathname) => {
     // I don't want to make the top section of the page everytime, so this function uses the path to determine the title of the page
-    const path = pathname.split("/")[2]
-    const pageTitle = path.charAt(0).toUpperCase() + path.slice(1)
+    const path = pathname.split("/")[2];
+    const pageTitle = path.charAt(0).toUpperCase() + path.slice(1);
     if (pageTitle === "Home") {
       return "Dashboard";
     }
@@ -47,7 +47,7 @@ const PagesLayout = () => {
           <Box
             id="sidebarContainer"
             sx={{
-              flex: "1",
+              flex: isSmallScreen ? "0 0 6px" : "1",
               height: "100%",
             }}
           >
@@ -60,17 +60,12 @@ const PagesLayout = () => {
           <Box
             id="restOfPage"
             sx={{
-              flex: "6",
+              flex: isSmallScreen ? "1" : "6",
               overflow: "auto",
               height: "100%",
             }}
           >
             {/* Header with toggle */}
-            {/* <Header title="Dashboard" mode={mode} toggleMode={toggleMode} /> */}
-            
-
-            
-
             <Header title={getTitle(location.pathname)} mode={mode} toggleMode={toggleMode} />
 
             {/* Outlet for rendering page content */}
