@@ -1,13 +1,17 @@
 import { createTheme } from "@mui/material";
 
+export const Theme = (mode) => {
+  // Ensure mode is a valid string
+  if (typeof mode !== "string" || (mode !== "light" && mode !== "dark")) {
+    console.error("Invalid mode passed to Theme:", mode);
+    mode = "light"; // Default to light mode if invalid
+  }
 
-export const Theme = (mode) =>
-  createTheme({
+  return createTheme({
     palette: {
       mode, // Dynamic mode: 'light' or 'dark'
       ...(mode === "light"
         ? {
-            // Light Mode Palette
             background: {
               gradient: "linear-gradient(to bottom,rgba(175, 206, 210, 0.75), #f0f0f0)",
               gradient2: "rgba(175, 206, 210, 0.37)",
@@ -32,9 +36,8 @@ export const Theme = (mode) =>
             },
           }
         : {
-            // Dark Mode Palette
             background: {
-              black: "#000000",
+              black: "#1f1f1f",
               blue: "#2d5177", // Darker blue for dark mode
               green: "#355e3b", // Deep green
               white: "#1f1f1f", // Dark gray for dark mode background
@@ -72,3 +75,4 @@ export const Theme = (mode) =>
       },
     },
   });
+};
