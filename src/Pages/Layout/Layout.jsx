@@ -45,7 +45,7 @@ const Layout = () => {
         </nav>
       </section>
       <div className={styles.signupButtonContainer}>
-      <Link to="/authentication" className={styles.signupButton}>Sign Up</Link>
+      <Link to="/user/home" className={styles.signupButton}>Sign Up</Link>
       </div>
       <Outlet />
     </>
