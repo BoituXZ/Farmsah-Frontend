@@ -1,12 +1,12 @@
 
-import { CssBaseline, Box, Card } from "@mui/material";
+import { CssBaseline, Box, Card, useMediaQuery } from "@mui/material";
 import StatCard from "../../components/StatCard";
 import StatChart from "../../components/StatChart";
 import StatBar from "../../components/StatBar";
 
 const Home = () => {
 
-
+  const isSmallScreen = useMediaQuery('(max-width: 900px)'); // Media query for small screens
   const cropsData = { data: [1, 2, 4, 5, 9, 10, 12, 14, 26, 28, 45] };
   const weatherData = { data: [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50] };
   const waterData = { data: [3, 1, 4, 3, 5, 1] };
@@ -40,14 +40,14 @@ const Home = () => {
             sx={{
               display: "flex",
               flexWrap: "wrap",
-              gap: "15px",
+              gap: isSmallScreen ? "2rem" : "1rem",
               width: "100%",
             }}
           >
-            <StatCard title="Crops" value="1203Kg" chartType="line" chartData={cropsData} trendType={trendType(cropsData)} />
-            <StatCard title="Weather" value="48°F" chartType="line" chartData={weatherData} trendType={trendType(weatherData)} />
-            <StatCard title="Water" value="129,000L" chartType="line" chartData={waterData} trendType={trendType(waterData)} />
-            <StatCard title="Profits" value="$12,000" chartType="line" chartData={profitsData} trendType={trendType(profitsData)} />
+            <StatCard title="Crops" value="1203Kg" chartType="line" chartData={cropsData} trendType={trendType(cropsData)} screenSize={isSmallScreen} />
+            <StatCard title="Weather" value="48°F" chartType="line" chartData={weatherData} trendType={trendType(weatherData)} screenSize={isSmallScreen} />
+            <StatCard title="Water" value="129,000L" chartType="line" chartData={waterData} trendType={trendType(waterData)} screenSize={isSmallScreen} />
+            <StatCard title="Profits" value="$12,000" chartType="line" chartData={profitsData} trendType={trendType(profitsData)} screenSize={isSmallScreen} />
           </Box>
         </Box>
         <Box id="bodyCharts" sx={{ display: "flex", flexDirection: "row", width: "100%", flexWrap: "wrap", height: "453px", padding: "1rem 0", gap: "1rem" }}>

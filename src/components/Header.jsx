@@ -4,13 +4,14 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import PropTypes from "prop-types";
 
-const Header = ({ title, mode, toggleMode }) => {
+const Header = ({ title, mode, toggleMode, screenSize }) => {
+
   return (
     <Box
       id="pageHeader"
       sx={{
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: screenSize ? "start":"space-between",
         alignItems: "center",
         width: "100%",
         padding: "1rem",
@@ -46,6 +47,7 @@ Header.propTypes = {
   title: PropTypes.string.isRequired,
   mode: PropTypes.oneOf(["light", "dark"]).isRequired,
   toggleMode: PropTypes.func.isRequired,
+  screenSize: PropTypes.bool.isRequired,
 };
 
 export default Header;

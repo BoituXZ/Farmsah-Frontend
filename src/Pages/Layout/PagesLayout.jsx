@@ -66,7 +66,7 @@ const PagesLayout = () => {
             }}
           >
             {/* Header with toggle */}
-            <Header title={getTitle(location.pathname)} mode={mode} toggleMode={toggleMode} />
+            <Header title={getTitle(location.pathname)} mode={mode} toggleMode={toggleMode} screenSize={isSmallScreen} />
 
             {/* Outlet for rendering page content */}
             <Outlet />

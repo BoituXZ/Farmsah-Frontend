@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Typography, List, ListItem, ListItemText, ListItemIcon, IconButton, Drawer, Divider, Avatar, Button } from '@mui/material';
+import { Box, Typography, List, ListItem, ListItemText, ListItemIcon, IconButton, Drawer,} from '@mui/material';
 import { Menu as MenuIcon, Close as CloseIcon} from '@mui/icons-material';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -12,7 +12,7 @@ import StorefrontIcon from '@mui/icons-material/Storefront';
 import BookIcon from '@mui/icons-material/Book';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { InfoRounded, QuestionAnswerOutlined } from '@mui/icons-material';
-import { color } from 'framer-motion';
+
 // TODO: Make it coool
 
 
@@ -113,11 +113,10 @@ const styles = {
 };
 
 const Sidebar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false); // For desktop sidebar minimization
+  const [isCollapsed] = useState(false); // For desktop sidebar minimization
   const [isDrawerOpen, setIsDrawerOpen] = useState(false); // For mobile hamburger menu
   const isSmallScreen = useMediaQuery('(max-width: 900px)'); // Media query for small screens
 
-  const handleToggleSidebar = () => setIsCollapsed((prev) => !prev); // Toggle minimization
   const handleToggleDrawer = () => setIsDrawerOpen((prev) => !prev); // Toggle drawer
   const theme = useTheme();
   const SidebarContent = (

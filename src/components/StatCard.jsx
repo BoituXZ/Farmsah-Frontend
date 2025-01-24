@@ -2,11 +2,12 @@ import PropTypes from "prop-types";
 import { Card, CardContent, Typography, Box } from "@mui/material";
 import { BarChart, SparkLineChart, PieChart } from "@mui/x-charts";
 
-
-const StatCard = ({ title, value, chartType, chartData, trendType }) => {
+// Screen size uses a media query to check how big the screen is
+const StatCard = ({ title, value, chartType, chartData, trendType, screenSize }) => {
   console.log("ChartType is:", chartType);
   console.log("ChartData is:", chartData);
   console.log("TrendType is:", trendType);
+  console.log("ScreenSize is:", screenSize);
 
   const chartColors = {
     up: "rgb(171, 226, 171)",
@@ -57,10 +58,12 @@ const StatCard = ({ title, value, chartType, chartData, trendType }) => {
         // flexBasis: "300px",
         minWidth: "250px",
         maxHeight: "200px",
-        maxWidth: "300px",
+        width: screenSize ? "350px":"auto",
+        maxWidth: screenSize ? "350px":"300px",
         padding: "0.4rem",
         boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.2)",
         margin: "auto",
+
         borderRadius: "0.5rem",
         background: (theme) => theme.palette.background.paper,
         "&:hover": {
@@ -112,6 +115,7 @@ StatCard.propTypes = {
   chartType: PropTypes.oneOf(["bar", "line", "pie"]),
   chartData: PropTypes.object,
   trendType: PropTypes.number.isRequired,
+  screenSize: PropTypes.bool.isRequired,
 };
 
 export default StatCard;
