@@ -32,7 +32,6 @@ const Home = () => {
         background: (theme) => theme.palette.background.default,
       }}
     >
-      <CssBaseline />
       <Box id="bodyContent" sx={{ padding: "1rem" }}>
         <Box id="bodyOverview">
           <Box
@@ -41,6 +40,10 @@ const Home = () => {
               display: "flex",
               flexWrap: "wrap",
               gap: isSmallScreen ? "2rem" : "1rem",
+              padding: isSmallScreen ? "1rem" : "0",
+              justifyContent: "space-evenly",
+            
+              
               width: "100%",
             }}
           >

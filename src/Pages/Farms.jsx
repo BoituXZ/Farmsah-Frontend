@@ -7,7 +7,7 @@ import { Css } from '@mui/icons-material';
 const Farms = () => {
 
   return(
-    <ThemeProvider theme={Theme}>
+    
       
       <Box id="page"
       sx={{ display: "flex",flexDirection: "row", height: "100%", width: "100%" }}>
@@ -50,7 +50,7 @@ const Farms = () => {
 
       </Box>
       
-    </ThemeProvider>
+
   )
 
 }
