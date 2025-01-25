@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloud, faSeedling, faTractor, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import styles from "./LandingPage.module.css";
 import { Link } from "react-router-dom";
-import { Box, Button, ThemeProvider, Typography, useTheme } from "@mui/material"; // Added useTheme
+import { Box, Button, Grid, ThemeProvider, Typography, useTheme } from "@mui/material"; // Added useTheme
 import { Theme } from "../../../theme/Theme";
 
 const LandingPage = () => {
@@ -15,7 +15,7 @@ const LandingPage = () => {
           backgroundImage: "url('/assets/background.jpg')",
           backgroundSize: 'cover', // Ensures the image covers the box
           backgroundPosition: 'center', // Centers the image
-          // border: 'solid 1px red',
+          border: 'solid 2px red',
           display: "flex",
           flexDirection: "column",
           maxHeight: {sm:"100vh", md:"100%"},
@@ -46,7 +46,6 @@ const LandingPage = () => {
               minWidth: {xs:"100%", sm:"50%"}, // Using theme.breakpoints here
               marginLeft: "1rem",
               marginBottom: "2.4rem",
-              border: "solid 1px red",
               [theme.breakpoints.down('sm')]: { // Using theme.breakpoints here
                 minWidth: "80%",
                 marginLeft: "0.5rem",
@@ -99,7 +98,6 @@ const LandingPage = () => {
               marginRight: "1rem",
               padding: "1rem",
               marginBottom: "4rem",
-              border: "solid 2px green",
               [theme.breakpoints.down('sm')]: { // Using theme.breakpoints here
                 width: "90%",
                 marginRight: "0.5rem",
@@ -183,6 +181,195 @@ const LandingPage = () => {
             </Button>
           </Box>
         </Box>
+
+        <Box
+      id="introSection"
+      sx={{
+        margin: 0,
+        height: "1024px",
+        // maxHeight: "1024px",
+        display: "flex",
+        flexWrap: "wrap",
+        // background: "transparent",
+        flexDirection: "column",
+        gap: {sm: "0.1rem", md:"1rem"},
+        [theme.breakpoints.down('md')]: {
+          height: "100%",
+         },
+            
+            
+      }}
+    >
+      {/* Intro Banner */}
+      <Box
+        sx={{
+          margin: 0,
+          display: "flex",
+          backgroundColor: "#000",
+          color: "#FFF",
+          height: "124px",
+          [theme.breakpoints.down('md')]: {
+            padding: "1rem",
+          }
+        }}
+      >
+        <Typography
+          variant="h1"
+          sx={{
+            alignSelf: "center",
+            fontFamily: "var(--heading)",
+            fontSize: "var(--h1)",
+            margin: 0,
+            padding: "1rem",
+            [theme.breakpoints.down('md')]: {
+              fontSize: "1.5rem",}
+          }}
+        >
+          Farming Smarter for a Resilient Future
+        </Typography>
+      </Box>
+
+      {/* Intro Section Body */}
+      <Box
+        sx={{
+          flex: 4,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Typography
+          variant="body1"
+          sx={{
+            flex: 1,
+            fontFamily: "var(--heading1)",
+            fontWeight: 700,
+            fontStyle: "oblique",
+            padding: "1rem",
+            textAlign: "center",
+            
+          }}
+        >
+          In 2024, Southern African farmers faced unprecedented crop losses due to unpredictable weather and a lack of tailored planning tools.<br />
+          Our AI-powered platform changes the game by helping you make informed decisions.<br />
+          From crop suggestions based on real-time weather insights to advanced tracking tools, we empower you to grow smarter, maximize yields,<br />
+          and secure your farm’s future—no matter the challenges.
+        </Typography>
+
+        {/* Features Section */}
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            flex: 4,
+            margin: "1rem 0",
+            boxSizing: "border-box",
+            display: "flex",
+            gap: "1rem",
+            flexDirection: "row",
+            height: "max-content",
+            padding: "4rem 2rem",
+            border: "solid 2px red",
+            [theme.breakpoints.down('md')]: {
+              flexDirection: "column",
+            } // Using theme.breakpoints here
+          }}
+        >
+          {[
+            {
+              icon: faSeedling,
+              title: "AI-Powered Crop Suggestions",
+              description: "Get personalized crop suggestions based on your farm’s location, soil type, and weather conditions.",
+            },
+            {
+              icon: faCloud,
+              title: "Real-Time Weather Insights",
+              description: "Get accurate weather forecasts and insights to plan your farming activities effectively.",
+            },
+            {
+              icon: faTractor,
+              title: "Smart Farming Tools",
+              description: "Access advanced tools to track your farm’s performance, monitor crop health, and optimize your yields.",
+            },
+            {
+              icon: faInfoCircle,
+              title: "Expert Guidance",
+              description: "Connect with our team of experts for personalized advice and support to help you succeed.",
+            },
+          ].map((feature, index) => (
+            <Grid
+              key={index}
+              item
+              sx={{
+                flex: 1,
+                padding: "1rem",
+                background: "rgba(255, 255, 255, 0.485)",
+                borderRadius: "1rem",
+              }}
+            >
+              <Box
+                sx={{
+                  padding: "2rem",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <FontAwesomeIcon
+                  icon={feature.icon}
+                  fontSize="80px"
+                  style={{ color: "#000" }}
+                  onMouseOver={(e) => (e.target.style.color = "var(--hunter-green-primary)")}
+                  onMouseOut={(e) => (e.target.style.color = "#000")}
+                />
+              </Box>
+              <Typography variant="h5" sx={{ textAlign: "center" }}>
+                {feature.title}
+              </Typography>
+              <Typography variant="body2" sx={{ textAlign: "center" }}>
+                {feature.description}
+              </Typography>
+            </Grid>
+          ))}
+        </Grid>
+
+        {/* Explore Button */}
+        <Box
+          sx={{
+            flex: 1,
+            margin: "auto",
+            width: "14rem",
+          }}
+        >
+          <Link to="/signup" style={{ textDecoration: "none" }}>
+            <Button
+              variant="contained"
+              sx={{
+                width: "100%",
+                textAlign: "center",
+                height: "4.2rem",
+                background: "var(--trans)",
+                color: "#000",
+                fontSize: "1.2rem",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "normal",
+                borderRadius: "50px",
+                border: "none",
+                "&:hover": {
+                  background: "#000",
+                  color: "#FFF",
+                },
+                [theme.breakpoints.down('md')]: {
+                  backgroundColor: "#000",
+                  color: "#FFF",
+                }
+              }}
+            >
+              Explore
+            </Button>
+          </Link>
+        </Box>
+      </Box>
+    </Box>
       </Box>
     </ThemeProvider>
   );
