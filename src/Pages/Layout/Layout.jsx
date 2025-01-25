@@ -33,7 +33,8 @@ const Layout = () => {
         alignItems: "center",
         height: "100%",
         // backgroundColor: "var(--xanthous-accent)",
-        backgroundImage: 'url("/assets/background.jpg")',
+        // backgroundImage: 'url("/assets/background3.jpg")',
+        backgroundImage: {xs: 'url("/assets/background3.jpg")', sm: 'url("/assets/background3.jpg")', md: 'url("/assets/background.jpg")'},
         backgroundSize: "cover",
         backgroundPosition: "center",
         backdropFilter: "blur(40px)",
@@ -69,17 +70,19 @@ const Layout = () => {
           >
             <NavLink to="/" style={linkStyle}>
               <Typography variant="h2" 
-              sx={{fontSize: "1.1rem"}}
+              sx={{
+                fontSize: {xs:"0.8rem", sm:"1.1rem", md:"1.1rem"}
+              }}
               >Home</Typography>
             </NavLink>
             <NavLink to="/about" style={linkStyle}>
               <Typography variant="h2"
-              sx={{fontSize: "1.1rem"}}
+              sx={{fontSize: {xs:"0.8rem", sm:"1.1rem", md:"1.1rem"}}}
               >About Us</Typography>
             </NavLink>
             <NavLink to="/contact" style={linkStyle}>
               <Typography variant="h2"
-              sx={{fontSize: "1.1rem"}}
+              sx={{fontSize: {xs:"0.8rem", sm:"1.1rem", md:"1.1rem"}}}
               >Contact Us</Typography>
             </NavLink>
           </Toolbar>

@@ -33,6 +33,11 @@ const LandingPage = () => {
             gap: {sm: "0.1rem", md:"1rem"},
             flexWrap: "wrap",
             height: "100%",
+            [theme.breakpoints.down('md')]: {
+                height:"100vh",
+                justifyContent: "space-evenly",
+                paddingBottom: "0rem",
+            }, // Using theme.breakpoints here
             
           }}
         >
@@ -44,8 +49,9 @@ const LandingPage = () => {
               marginLeft: "1rem",
               marginBottom: "2.4rem",
               [theme.breakpoints.down('sm')]: { // Using theme.breakpoints here
-                minWidth: "80%",
-                marginLeft: "0.5rem",
+                minWidth: "70%",
+                marginLeft: "0rem",
+                marginRight: "1.2rem",
               },
             }}
           >
@@ -80,7 +86,7 @@ const LandingPage = () => {
               sx={{
                 textAlign: "right",
                 fontSize: { xs: "1rem", sm: "1.5rem" },
-                fontWeight: "700",
+                fontWeight: "900",
                 lineHeight: "normal",
                 [theme.breakpoints.up('sm')]: { 
                   textAlign: "left",
@@ -137,18 +143,21 @@ const LandingPage = () => {
           <Box
             component="div"
             sx={{
-              background: "rgba(217, 217, 217, 0.48)",
+              // background: "rgba(217, 217, 217, 0.48)",
               display: "flex",
               flexDirection: "row",
               flexWrap: "wrap",
               justifyContent: "space-between",
               padding: "2rem 1rem",
               height: "12rem",
-              [theme.breakpoints.down('sm')]: { // Using theme.breakpoints here
+              [theme.breakpoints.down('md')]: { // Using theme.breakpoints here
                 flexDirection: "column",
                 padding: "0.1rem 0.1rem",
-                // alignItems: "center",
                 height: "auto",
+                alignItems: "center",
+                margin: "0 1rem",
+                // alignItems: "center",
+                // height: "100%",
               },
             }}
           >
@@ -159,6 +168,11 @@ const LandingPage = () => {
                 fontSize: { xs: "1.2rem", sm: "1.8rem" },
                 fontWeight: "800",
                 margin: { xs: "0 0.5rem", sm: "0 1rem" },
+                [theme.breakpoints.down('md')]: { // Using theme.breakpoints here
+                  textAlign: "center",
+                  fontSize: "1.5rem",
+                  display: "none"
+                }
               }}
             >
               Start Optimizing Your Farm Today<br />
@@ -339,9 +353,12 @@ const LandingPage = () => {
             flex: 1,
             margin: "auto",
             width: "14rem",
+            [theme.breakpoints.down('md')]: {
+              display: "none"
+            }
           }}
         >
-          <Link to="/signup" style={{ textDecoration: "none" }}>
+          <Link to="/user/home" style={{ textDecoration: "none" }}>
             <Button
               variant="contained"
               sx={{
