@@ -12,29 +12,32 @@ const LandingPage = () => {
         backgroundImage: "url('/assets/background.jpg')",
         backgroundSize: 'cover', // Ensures the image covers the box
         backgroundPosition: 'center', // Centers the image
-        border: 'solid 1px red'
+        border: 'solid 1px red',
+        display: "flex",
+        flexDirection: "column",
+        maxHeight: "4096px"
       }}
     >
-      <div className={styles.LPContainer}>
-        <section className={styles.heroSection}>
-          <div className={styles.headlineText}>
-            <h2>Southern African farmers lost</h2>
-            <span>50%</span>
-            <h4>of their crops in 2024 due to<br/> unpredictable weather and poor planning.</h4>
-          
-          </div>
-          <div className={styles.supportiveHeadline}>
-            <h2>We’re here to change that with<br/>
-            <span>AI-Powered Farming</span> Tools.</h2>
-            <p>Get accurate crop suggestions, real-time weather insights, and smart tools to<br/> boost your yields—no matter the climate challenges.</p>
-          </div>
-          <div className={styles.callToAction}>
-            <h1>Start Optimizing Your Farm Today<br/>
-            See How It <span>Works</span></h1>
-            <button>Learn More</button>
-          </div>
-          </section>
-        <section className={styles.introSection}>
+      <Box id="heroSection" sx={{display: "flex", flexDirection: "column", gap: "1rem", flexWrap:"wrap", maxHeight:"1024"}}>
+            <div className={styles.headlineText}>
+              <h2>Southern African farmers lost</h2>
+              <span>50%</span>
+              <h4>of their crops in 2024 due to<br/> unpredictable weather and poor planning.</h4>
+            
+            </div>
+            <div className={styles.supportiveHeadline}>
+              <h2>We’re here to change that with<br/>
+              <span>AI-Powered Farming</span> Tools.</h2>
+              <p>Get accurate crop suggestions, real-time weather insights, and smart tools to<br/> boost your yields—no matter the climate challenges.</p>
+            </div>
+            <div className={styles.callToAction}>
+              <h1>Start Optimizing Your Farm Today<br/>
+              See How It <span>Works</span></h1>
+              <button>Learn More</button>
+            </div> 
+      </Box>
+        
+        <Box id="introSection">
           <div className={styles.introBanner}>
             <h1>Farming Smarter for a Resilient Future</h1>
           </div>
@@ -82,8 +85,8 @@ const LandingPage = () => {
               </Link>
             </div>
           </div>
-        </section>
-      </div>
+        </Box>
+        
     </Box>
 
 
