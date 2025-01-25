@@ -33,7 +33,7 @@ const Layout = () => {
         alignItems: "center",
         height: "100%",
         // backgroundColor: "var(--xanthous-accent)",
-        backgroundImage: 'url("public/assets/background.jpg")',
+        backgroundImage: 'url("/assets/background.jpg")',
         backgroundSize: "cover",
         backgroundPosition: "center",
         backdropFilter: "blur(40px)",
