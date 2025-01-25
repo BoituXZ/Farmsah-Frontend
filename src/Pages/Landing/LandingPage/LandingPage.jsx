@@ -18,7 +18,12 @@ const LandingPage = () => {
           // border: 'solid 1px red',
           display: "flex",
           flexDirection: "column",
-          maxHeight: "4096px",
+          maxHeight: {sm:"100vh", md:"100%"},
+          overflow: "hidden",
+          [theme.breakpoints.down('sm')]: { // Using theme.breakpoints here
+            maxHeight: "auto",
+            width: "100vw",
+          },
         }}
       >
         {/* Hero Section */}
@@ -27,9 +32,9 @@ const LandingPage = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: "1rem",
+            gap: {sm: "0.1rem", md:"1rem"},
             flexWrap: "wrap",
-            height: "1024px",
+            height: "100%",
             border: "solid 2px blue", // Using theme.breakpoints here
             
           }}
@@ -93,7 +98,7 @@ const LandingPage = () => {
               width: "50%",
               marginRight: "1rem",
               padding: "1rem",
-              marginBottom: "2.9rem",
+              marginBottom: "4rem",
               border: "solid 2px green",
               [theme.breakpoints.down('sm')]: { // Using theme.breakpoints here
                 width: "90%",
@@ -140,7 +145,8 @@ const LandingPage = () => {
               height: "12rem",
               [theme.breakpoints.down('sm')]: { // Using theme.breakpoints here
                 flexDirection: "column",
-                alignItems: "center",
+                padding: "0.1rem 0.1rem",
+                // alignItems: "center",
                 height: "auto",
               },
             }}
@@ -167,6 +173,10 @@ const LandingPage = () => {
                 color: "#FFF",
                 fontSize: { xs: "1rem", sm: "1.2rem" },
                 margin: { xs: "1rem 0", sm: "0 3rem" },
+                [theme.breakpoints.down('md')]: { 
+                  width: "9rem",
+                  height: "4rem",
+                }// Using theme.breakpoints here
               }}
             >
               Learn More
