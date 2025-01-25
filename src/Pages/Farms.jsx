@@ -60,7 +60,7 @@ const Farms = () => {
           <FarmCard 
             key={index}
             image={farm.image}
-            name={farm.name}
+            farmName={farm.name}
             location={farm.location}
             size={farm.size}
             livestock={farm.livestock}
