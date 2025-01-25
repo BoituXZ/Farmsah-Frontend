@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloud, faSeedling, faTractor, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import styles from "./LandingPage.module.css";
 import { Link } from "react-router-dom";
 import { Box, Button, Grid, ThemeProvider, Typography, useTheme } from "@mui/material"; // Added useTheme
 import { Theme } from "../../../theme/Theme";
@@ -12,10 +11,9 @@ const LandingPage = () => {
     <ThemeProvider theme={Theme}>
       <Box
         sx={{
-          backgroundImage: "url('/assets/background.jpg')",
+          // backgroundImage: "url('/assets/background.jpg')",
           backgroundSize: 'cover', // Ensures the image covers the box
           backgroundPosition: 'center', // Centers the image
-          border: 'solid 2px red',
           display: "flex",
           flexDirection: "column",
           maxHeight: {sm:"100vh", md:"100%"},
@@ -35,13 +33,12 @@ const LandingPage = () => {
             gap: {sm: "0.1rem", md:"1rem"},
             flexWrap: "wrap",
             height: "100%",
-            border: "solid 2px blue", // Using theme.breakpoints here
             
           }}
         >
           {/* Headline Text */}
           <Box
-            className={styles.headlineText}
+            
             sx={{
               minWidth: {xs:"100%", sm:"50%"}, // Using theme.breakpoints here
               marginLeft: "1rem",
@@ -72,6 +69,8 @@ const LandingPage = () => {
                 fontWeight: "800",
                 lineHeight: "normal",
                 margin: '0 1rem',
+                color: "#fff",
+                
               }}
             >
               50%
@@ -83,6 +82,11 @@ const LandingPage = () => {
                 fontSize: { xs: "1rem", sm: "1.5rem" },
                 fontWeight: "700",
                 lineHeight: "normal",
+                [theme.breakpoints.up('sm')]: { 
+                  textAlign: "left",
+                  fontSize: "1.5rem",
+                  marginLeft: "10rem",
+                }// Using theme.breakpoints here
               }}
             >
               of their crops in 2024 due to<br /> unpredictable weather and poor planning.
@@ -91,7 +95,7 @@ const LandingPage = () => {
 
           {/* Supportive Headline */}
           <Box
-            className={styles.supportiveHeadline}
+
             sx={{
               alignSelf: "self-end",
               width: "50%",
@@ -131,7 +135,6 @@ const LandingPage = () => {
 
           {/* Call To Action */}
           <Box
-            className={styles.callToAction}
             component="div"
             sx={{
               background: "rgba(217, 217, 217, 0.48)",
@@ -268,7 +271,6 @@ const LandingPage = () => {
             flexDirection: "row",
             height: "max-content",
             padding: "4rem 2rem",
-            border: "solid 2px red",
             [theme.breakpoints.down('md')]: {
               flexDirection: "column",
             } // Using theme.breakpoints here
