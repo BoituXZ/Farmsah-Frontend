@@ -2,56 +2,81 @@ import { Theme } from '../theme/Theme'
 import { ThemeProvider } from '@mui/material/styles';
 import { Accordion, Box, Card, CssBaseline, Divider, Typography } from '@mui/material';
 import { Css } from '@mui/icons-material';
-
+import FarmCard from '../components/FarmCard';
 
 const Farms = () => {
+  const farmData = [
+    {
+      image: 'https://images.pexels.com/photos/422218/pexels-photo-422218.jpeg',
+      name: 'Sunny Acres',
+      location: 'California, USA',
+      size: '150 acres',
+      livestock: 'Cattle, Chickens',
+      crops: 'Corn, Wheat'
+    },
+    {
+      image: 'https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg',
+      name: 'Green Valley',
+      location: 'Texas, USA',
+      size: '200 acres',
+      livestock: 'Sheep, Goats',
+      crops: 'Soybeans, Barley'
+    },
+    {
+      image: 'https://images.pexels.com/photos/442116/pexels-photo-442116.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      name: 'Blue Mountain Farm',
+      location: 'Colorado, USA',
+      size: '300 acres',
+      livestock: 'Horses, Pigs',
+      crops: 'Grapes, Alfalfa'
+    },
+    {
+      image: 'https://images.pexels.com/photos/143133/pexels-photo-143133.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      name: 'Riverbend Farm',
+      location: 'Oregon, USA',
+      size: '250 acres',
+      livestock: 'Ducks, Turkeys',
+      crops: 'Carrots, Peas'
+    }
+  ];
 
   return(
-    
-      
-      <Box id="page"
+    <Box id="page"
       sx={{ display: "flex",flexDirection: "row", height: "100%", width: "100%" }}>
-          <Box id="maiContent"
-          sx={{ border: "solid 1px red",
-            width: "100%",
-            height: "100%",
-            flex: "4",
-            overflow: "auto",
-            padding: "10px"}}>
-            <Card variant="outlined"
-            sx={{display: "flex", flexDirection: "column", width: "90%", padding: "10px"}}>
-              <Box id="cardHeader"
-              sx={{width: "100%",
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}>
-                <Typography variant='h2'>Farm Name</Typography>
-                <Typography variant='subtitle1'>Location</Typography>
-              </Box>
-              {/* <Divider />  Figure out wht the divider isn't working */}
-              <Box id="cardImage"
-              sx={{maxWidth: "1px", maxHeight: "40px"}}>
-                {/* <img src="https://images.pexels.com/photos/974314/pexels-photo-974314.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="placeholder" /> */}
-              </Box>
-              <Box id="cardDetails">
-                <Typography variant='subtitle1'>Size</Typography>
-              </Box>
-            </Card>
-        </Box>
-      
-        <Box id="sideContent"
-      sx={{ border: "solid 1px blue", flex: "1", overflow: "None",
-      }}
-      >
-        <Typography variant='h2'>Farm List</Typography>
+      <Box id="maiContent"
+        sx={{ 
+          // border: "solid 1px red",
+          width: "100%",
+          height: "100%",
+          flex: "4",
+          overflow: "auto",
+          gap: "15px",
+          display: "flex",
+          flexDirection: "column",
+          padding: "10px"}}>
 
-          </Box>
-
+        {/* Farm cards */}
+        {farmData.map((farm, index) => (
+          <FarmCard 
+            key={index}
+            image={farm.image}
+            name={farm.name}
+            location={farm.location}
+            size={farm.size}
+            livestock={farm.livestock}
+            crops={farm.crops}
+          />
+        ))}
       </Box>
       
-
+      <Box id="sideContent"
+        sx={{ display:{xs:"none", sm:"flex", md:"flex"},
+        // border: "solid 1px blue"
+         flex: "1", overflow: "None" }}>
+        <Typography variant='h2'>Farm List</Typography>
+      </Box>
+    </Box>
   )
-
 }
+
 export default Farms
