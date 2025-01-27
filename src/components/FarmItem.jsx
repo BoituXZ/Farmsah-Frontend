@@ -16,6 +16,7 @@ const FarmItem = ({ farmName, location }) => {
                 padding: "5px",
                 backgroundColor: "rgba(101, 95, 95, 0.2)",
                 borderRadius: "5px",
+                boxShadow: "0 2px 2px rgba(0, 0, 0, 0.2)",
               }}
             >
               <Typography variant='h1'

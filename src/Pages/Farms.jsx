@@ -43,7 +43,7 @@ const Farms = () => {
 
   return(
     <Box id="page"
-      sx={{ display: "flex",flexDirection: "row", height: "100%", width: "100%" }}>
+      sx={{ display: "flex",flexDirection: "row", height: "100%", width: "100%", }}>
       <Box id="maiContent"
         sx={{ 
           // border: "solid 1px red",
@@ -74,7 +74,7 @@ const Farms = () => {
         sx={{ display:{xs:"none", sm:"flex", md:"flex"},
         flex: "1", 
         overflow: "None",
-        minWidth: "250px",
+        minWidth: "280px",
         flexDirection: "column",
         }}>
           <Box id="sideContentHeader" 
