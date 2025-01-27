@@ -3,6 +3,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { Accordion, Box, Card, CssBaseline, Divider, Typography } from '@mui/material';
 import { Css } from '@mui/icons-material';
 import FarmCard from '../components/FarmCard';
+import FarmItem from '../components/FarmItem';
 
 const Farms = () => {
   const farmData = [
@@ -42,7 +43,7 @@ const Farms = () => {
 
   return(
     <Box id="page"
-      sx={{ display: "flex",flexDirection: "row", height: "100%", width: "100%" }}>
+      sx={{ display: "flex",flexDirection: "row", height: "100%", width: "100%", }}>
       <Box id="maiContent"
         sx={{ 
           // border: "solid 1px red",
@@ -71,9 +72,29 @@ const Farms = () => {
       
       <Box id="sideContent"
         sx={{ display:{xs:"none", sm:"flex", md:"flex"},
-        // border: "solid 1px blue"
-         flex: "1", overflow: "None" }}>
-        <Typography variant='h2'>Farm List</Typography>
+        flex: "1", 
+        overflow: "None",
+        minWidth: "280px",
+        flexDirection: "column",
+        }}>
+          <Box id="sideContentHeader" 
+          
+          sx={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "10px", overflowY: "auto"}}>
+            <Typography variant='h2'>Farm List</Typography>
+          </Box>
+          <Divider/>
+          <Box id="sideContentBody"
+            sx={{display: "flex", flexDirection: "column", padding: "2px", gap: "5px", overflowY: "auto"}}>
+            
+            {farmData.map((farm, index) => (
+              <FarmItem
+                key={index}
+                farmName={farm.name}
+                location={farm.location}/>  
+            ))}
+            </Box>
+        
+        
       </Box>
     </Box>
   )
