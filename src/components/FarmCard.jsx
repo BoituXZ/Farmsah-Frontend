@@ -10,7 +10,8 @@ const FarmCard = ({ farmName, location, size, crops, livestock, image }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
-    setIsEditing(false); // Reset editing state when modal closes
+    setIsEditing(false);
+     // Reset editing state when modal closes
   };
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -100,7 +101,7 @@ const FarmCard = ({ farmName, location, size, crops, livestock, image }) => {
               <IconButton onClick={handleEditClick}>
                 <Edit />
               </IconButton>
-              <IconButton onClick={handleClose}>
+              <IconButton onClick={ () => {handleClose();}}>
                 <Close/>
               </IconButton>
             </Box>
