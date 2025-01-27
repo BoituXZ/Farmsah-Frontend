@@ -3,17 +3,21 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { Close, Edit } from "@mui/icons-material";
 
-
 // TODO: Fix modal not closing
 const FarmCard = ({ farmName, location, size, crops, livestock, image }) => {
   const [open, setOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleOpen = () => setOpen(true);
+  // Updated handleOpen function with check for open state
+  const handleOpen = () => {
+    if (!open) {
+      setOpen(true); // Open modal only if it's not already open
+    }
+  };
+  
   const handleClose = () => {
     setOpen(false);
-    setIsEditing(false);
-     // Reset editing state when modal closes
+    setIsEditing(false); // Reset editing state when modal closes
   };
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -98,15 +102,14 @@ const FarmCard = ({ farmName, location, size, crops, livestock, image }) => {
         >
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Typography variant="h5">Farm Details</Typography>
-            <Box sx={{display:"flex", flexDirection:"row", gap: "2px"}}>
+            <Box sx={{ display: "flex", flexDirection: "row", gap: "2px" }}>
               <IconButton onClick={handleEditClick}>
                 <Edit />
               </IconButton>
-              <IconButton onClick={ () => {handleClose();}}>
-                <Close/>
+              <IconButton onClick={handleClose}>
+                <Close />
               </IconButton>
             </Box>
-            
           </Box>
 
           <Box
