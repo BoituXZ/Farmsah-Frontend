@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { Close, Edit } from "@mui/icons-material";
 
+
+// TODO: Fix modal not closing
 const FarmCard = ({ farmName, location, size, crops, livestock, image }) => {
   const [open, setOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
