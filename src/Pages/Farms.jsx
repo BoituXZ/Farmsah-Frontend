@@ -71,8 +71,11 @@ const Farms = () => {
       
       <Box id="sideContent"
         sx={{ display:{xs:"none", sm:"flex", md:"flex"},
-        // border: "solid 1px blue"
-         flex: "1", overflow: "None" }}>
+        border: "solid 1px blue",
+        flex: "1", 
+        overflow: "None",
+        minWidth: "250px",
+        }}>
         <Typography variant='h2'>Farm List</Typography>
       </Box>
     </Box>
