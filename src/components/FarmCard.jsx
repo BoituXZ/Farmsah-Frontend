@@ -1,7 +1,7 @@
 import { Box, Button, Modal, TextField, Typography, IconButton } from "@mui/material";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { Edit } from "@mui/icons-material";
+import { Close, Edit } from "@mui/icons-material";
 
 const FarmCard = ({ farmName, location, size, crops, livestock, image }) => {
   const [open, setOpen] = useState(false);
@@ -95,12 +95,15 @@ const FarmCard = ({ farmName, location, size, crops, livestock, image }) => {
         >
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Typography variant="h5">Farm Details</Typography>
-            <IconButton onClick={handleEditClick}>
-              <Edit />
-            </IconButton>
-            <IconButton onClick={handleOpen}>
-              Close
-            </IconButton>
+            <Box sx={{display:"flex", flexDirection:"row", gap: "2px"}}>
+              <IconButton onClick={handleEditClick}>
+                <Edit />
+              </IconButton>
+              <IconButton onClick={handleClose}>
+                <Close/>
+              </IconButton>
+            </Box>
+            
           </Box>
 
           <Box
