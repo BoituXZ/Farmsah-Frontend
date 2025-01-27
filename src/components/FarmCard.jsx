@@ -94,7 +94,6 @@ const FarmCard = ({ farmName, location, size, crops, livestock, image }) => {
             boxShadow: 24,
           }}
         >
-          {console.log("Modal received open state:", open)}
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Typography variant="h5">Farm Details</Typography>
             <Box sx={{display:"flex", flexDirection:"row", gap: "2px"}}>
