@@ -71,18 +71,18 @@ const Layout = () => {
             <NavLink to="/" style={linkStyle}>
               <Typography variant="h2" 
               sx={{
-                fontSize: {xs:"0.8rem", sm:"1.1rem", md:"1.1rem"}
+                fontSize: {xs:"0.8rem", sm:"1.1rem", md:"0.9rem"}
               }}
               >Home</Typography>
             </NavLink>
             <NavLink to="/about" style={linkStyle}>
               <Typography variant="h2"
-              sx={{fontSize: {xs:"0.8rem", sm:"1.1rem", md:"1.1rem"}}}
+              sx={{fontSize: {xs:"0.8rem", sm:"1.1rem", md:"0.9rem"}}}
               >About Us</Typography>
             </NavLink>
             <NavLink to="/contact" style={linkStyle}>
               <Typography variant="h2"
-              sx={{fontSize: {xs:"0.8rem", sm:"1.1rem", md:"1.1rem"}}}
+              sx={{fontSize: {xs:"0.8rem", sm:"1.1rem", md:"0.9rem"}}}
               >Contact Us</Typography>
             </NavLink>
           </Toolbar>
