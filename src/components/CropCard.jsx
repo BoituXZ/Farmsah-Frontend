@@ -98,13 +98,13 @@ const CropCard = ({ cropData }) => {
             </Box>
 
             <Box id="cardDetails" sx={{ padding: "10px", display: "grid", gridTemplateColumns: "repeat(2, 1fr)", 
-                gap: {xs:"5px",md:"10px"}
+                gap: {xs:"8px",md:"10px"}
                  }}>
                 <Box>
                     <Typography variant="h2"
                     sx={{ fontSize: "0.9rem", fontWeight: "600" }}
                     >Crops:</Typography>
-                    <Typography variant="body1" sx={{ fontSize: "0.6rem", marginLeft: "10px" }}>
+                    <Typography variant="body1" sx={{ fontSize: "0.6rem", marginLeft: "10px", textAlign: "left" }}>
                         {crops}
                     </Typography>
                 </Box>
@@ -112,7 +112,7 @@ const CropCard = ({ cropData }) => {
                     <Typography variant="h2"
                     sx={{ fontSize: "0.9rem", fontWeight: "600" }}
                     >Livestock:</Typography>
-                    <Typography variant="body1" sx={{ fontSize: "0.6rem", marginLeft: "10px" }}>
+                    <Typography variant="body1" sx={{ fontSize: "0.6rem", marginLeft: "10px", textAlign: "left" }}>
                         {livestock}
                     </Typography>
                 </Box>
@@ -120,7 +120,7 @@ const CropCard = ({ cropData }) => {
                     <Typography variant="h2"
                     sx={{ fontSize: "0.9rem", fontWeight: "600" }}
                     >Recommended Pesticide:</Typography>
-                    <Typography variant="body1" sx={{ fontSize: "0.6rem", marginLeft: "10px" }}>
+                    <Typography variant="body1" sx={{ fontSize: "0.6rem", marginLeft: "10px", textAlign: "left" }}>
                         {recommendedPesticide}
                     </Typography>
                 </Box>
@@ -128,7 +128,7 @@ const CropCard = ({ cropData }) => {
                     <Typography variant="h2"
                     sx={{ fontSize: "0.9rem", fontWeight: "600" }}
                     >Amount Planted:</Typography>
-                    <Typography variant="body1" sx={{ fontSize: "0.6rem", marginLeft: "10px" }}>
+                    <Typography variant="body1" sx={{ fontSize: "0.6rem", marginLeft: "10px", textAlign: "left" }}>
                         {amountPlanted}
                     </Typography>
                 </Box>
@@ -136,7 +136,7 @@ const CropCard = ({ cropData }) => {
                     <Typography variant="h2"
                     sx={{ fontSize: "0.9rem", fontWeight: "600" }}
                     >Expected Harvest:</Typography>
-                    <Typography variant="body1" sx={{ fontSize: "0.6rem", marginLeft: "10px" }}>
+                    <Typography variant="body1" sx={{ fontSize: "0.6rem", marginLeft: "10px", textAlign: "left" }}>
                         {expectedHarvest}
                     </Typography>
                 </Box>
@@ -144,7 +144,7 @@ const CropCard = ({ cropData }) => {
                     <Typography variant="h2"
                     sx={{ fontSize: "0.9rem", fontWeight: "600" }}
                     >AI Suggestions:</Typography>
-                    <Typography variant="body1" sx={{ fontSize: "0.6rem", marginLeft: "10px" }}>
+                    <Typography variant="body1" sx={{ fontSize: "0.6rem", marginLeft: "10px", textAlign: "left" }}>
                         {aiSuggestions}
                     </Typography>
                 </Box>
