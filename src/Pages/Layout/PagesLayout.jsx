@@ -42,7 +42,7 @@ const PagesLayout = () => {
             display: "flex",
             flexDirection: "row",
             height: "100vh",
-            overflow: "hidden",
+            overflow: "none",
           }}
         >
           {/* Sidebar */}
@@ -51,6 +51,7 @@ const PagesLayout = () => {
             sx={{
               flex: isSmallScreen ? "0 0 6px" : "1",
               height: "100%",
+              overflow: "auto",
             }}
           >
             <Sidebar />

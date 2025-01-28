@@ -2,9 +2,9 @@ import { Box, Typography } from '@mui/material'
 import PropTypes from "prop-types";
 
 
-const FarmItem = ({ farmName, location }) => {
+const CropItem = ({ cropName, yields }) => {
   return (
-    <Box id="farmItem"
+    <Box id="CropItem"
               sx={{
                 display: "flex",
                 flexDirection: "row",
@@ -19,18 +19,18 @@ const FarmItem = ({ farmName, location }) => {
             >
               <Typography variant='h1'
               sx={{fontSize: "0.8rem"}}
-              >{farmName}</Typography>
+              >{cropName}</Typography>
               <Typography variant='subtitle1'
               sx={{fontSize: "0.6rem",
                 color: "#2c5f2dff"
               }}
-              >{location}</Typography>
+              >{yields}</Typography>
             </Box>
   )
 }
 
-FarmItem.propTypes = {
-  farmName: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired
+CropItem.propTypes = {
+  cropName: PropTypes.string.isRequired,
+  yields: PropTypes.string.isRequired
 }
-export default FarmItem
+export default CropItem
