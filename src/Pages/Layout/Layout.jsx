@@ -1,5 +1,5 @@
 import { Outlet, NavLink, Link } from "react-router-dom";
-import { AppBar, Toolbar, Box, Typography, ThemeProvider, CssBaseline} from "@mui/material";
+import { AppBar, Toolbar, Box, Typography, ThemeProvider} from "@mui/material";
 import { Theme } from "../../theme/Theme";
 
 const Layout = () => {
