@@ -19,6 +19,7 @@ const PagesLayout = () => {
   };
 
   const location = useLocation();
+  console.log("Current location:", location.pathname);
   console.log("Current mode:", mode); // Should be "light" or "dark"
 
   const getTitle = (pathname) => {
@@ -69,7 +70,11 @@ const PagesLayout = () => {
             {/* Header with toggle */}
             <Header title={getTitle(location.pathname)} mode={mode} toggleMode={toggleMode} screenSize={isSmallScreen} />
 
-            <AddComponent />
+            {location.pathname !== "/user/home" && (
+                    <>
+                    <AddComponent />
+                    </>
+                  )}
             {/* Outlet for rendering page content */}
             <Outlet />
           </Box>
