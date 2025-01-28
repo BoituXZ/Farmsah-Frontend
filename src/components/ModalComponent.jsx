@@ -1,12 +1,13 @@
 import { Box, Modal, TextField, Typography, IconButton, Button } from "@mui/material";
 import { Edit as EditIcon } from "@mui/icons-material";
 import { useState } from "react";
-import PropTypes from 'prop-types';
-
+import { useLocation } from "react-router-dom"; // Import the hook
+import PropTypes from "prop-types";
 
 const ModalComponent = ({ farmName, location, crops, livestock, size, image, onSubmit }) => {
   const [isEditable, setIsEditable] = useState(false);
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation(); // Get the current location
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -32,14 +33,17 @@ const ModalComponent = ({ farmName, location, crops, livestock, size, image, onS
     handleClose();
   };
 
+  // Extract the last segment of the pathname
+  const headerTitle = pathname.split("/").filter(Boolean).pop(); // Get the last part of the path
+
   return (
     <div>
       <Button onClick={handleOpen}>View Details</Button>
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="Farm Card"
-        aria-describedby="Farm Card Details"
+        aria-labelledby="Dynamic Modal"
+        aria-describedby="Dynamic Modal Content"
       >
         <Box
           id="modalContentContainer"
@@ -72,7 +76,7 @@ const ModalComponent = ({ farmName, location, crops, livestock, size, image, onS
                 variant="h1"
                 sx={{ fontSize: { xs: "1.5rem", sm: "2rem", md: "2rem" }, padding: "10px" }}
               >
-                Farm Details
+                {headerTitle ? headerTitle.charAt(0).toUpperCase() + headerTitle.slice(1) : "Details"}
               </Typography>
               <IconButton onClick={toggleEdit}>
                 <EditIcon />
@@ -165,7 +169,6 @@ const ModalComponent = ({ farmName, location, crops, livestock, size, image, onS
     </div>
   );
 };
-
 
 ModalComponent.propTypes = {
   farmName: PropTypes.string.isRequired,
