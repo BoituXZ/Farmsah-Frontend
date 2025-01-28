@@ -1,7 +1,4 @@
-import { Theme } from '../theme/Theme'
-import { ThemeProvider } from '@mui/material/styles';
-import { Accordion, Box, Card, CssBaseline, Divider, Typography } from '@mui/material';
-import { Css } from '@mui/icons-material';
+import {Box,Divider, Typography } from '@mui/material';
 import FarmCard from '../components/FarmCard';
 import FarmItem from '../components/FarmItem';
 
