@@ -5,6 +5,8 @@ import AddIcon from "@mui/icons-material/Add";
 import { Close } from "@mui/icons-material";
 
 const AddComponent = () => {
+    
+
     const [open, setOpen] = useState(false);
       const handleOpen = () => setOpen(true);
       const handleClose = () => setOpen(false);
