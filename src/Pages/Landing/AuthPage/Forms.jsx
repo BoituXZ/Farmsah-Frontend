@@ -1,15 +1,82 @@
-import styles from './Forms.module.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { TextField, Button, Typography, FormControl, FormGroup, FormHelperText } from '@mui/material';
 
+const styles = {
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    padding: '0.2rem',
+    gap: '1rem',
+    height: '56%',
+    width: '340px',
+  },
+  signupForm:{
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '0.2rem',
+    gap: '1rem',
+    height: "86%",
+    width: "380px"
+  },
+  signupHeader: {
+    fontSize: 'var(--h4)',
+    textAlign: 'center',
+    fontFamily: 'var(--heading)',
+    marginBottom: '1rem',
+  },
+  signuplabel: {
+    margin: '0.2rem 0',
+    padding: '0 1rem',
+    width: '100%',
 
+  },
+  signupButton: {
+    width: '120px',
+    margin: '0.8rem auto',
+    height: '38px',
+    borderRadius: '20px',
+    background: 'var(--hunter-green-primary)',
+    border: 'none',
+    fontFamily: 'var(--heading)',
+    fontWeight: 600,
+    color: 'var(--almond-secondary)',
+    '&:hover': {
+      background: 'var(--blue-gray-accent)',
+      color: 'var(--jet-text)',
+    },
+  },
+  message: {
+    textAlign: 'center',
+    color: 'red',
+  },
+  loginFormHeader:{
+    marginBottom: "0.5rem",
+    textAlign: "center",
+    fontSize: 'var(--h4)',
+    fontFamily: 'var(--heading)',
+  },
+  loginLabel:{  
+    margin: '0.2rem 0',
+    color: 'red'
+  },
+  loginButton: {
+    width: "83px",
+    height: "38px",
+    margin: "0.8rem auto",
+    background: "#355e3b",
+    borderRadius: "20px",
+  }
+
+};
 
 export const SignupForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState(""); // Add this state for messages
+  const [message, setMessage] = useState("");
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -20,7 +87,6 @@ export const SignupForm = () => {
     }
 
     try {
-      // Sending data to the backend
       const res = await fetch("http://localhost:3010/signup", {
         method: "POST",
         headers: {
@@ -29,125 +95,124 @@ export const SignupForm = () => {
         body: JSON.stringify({ name, email, password }),
       });
 
-      // Getting the response from the API
       const data = await res.json();
 
       if (res.ok) {
-        setMessage(data.message); // Update message on success
+        setMessage(data.message);
       } else {
-        setMessage(data.message); // Update message on error
+        setMessage(data.message);
       }
     } catch {
-      setMessage("An error occurred. Please try again"); // Handle network errors
+      setMessage("An error occurred. Please try again");
     }
   };
 
   return (
-    <form onSubmit={handleSignup} className={styles.form}>
-      <h4 className={styles.signupHeader}>Sign Up</h4>
-      <label className={styles.signuplabel} htmlFor="name">
-        Name<br />
-        <input
-          type="text"
-          id="name"
+    <FormControl component="form" onSubmit={handleSignup} sx={{ ...styles.signupForm }}>
+      <Typography variant="h4" sx={{ ...styles.signupHeader }}>Sign Up</Typography>
+      <FormGroup>
+        <TextField
+          label="Name"
+          variant="standard"
+          fullWidth
           value={name}
           onChange={(e) => setName(e.target.value)}
+          sx={{ ...styles.signuplabel }}
         />
-      </label>
-
-      <label className={styles.signuplabel} htmlFor="email">
-        Email<br />
-        <input
+        <TextField
+          label="Email"
           type="email"
-          id="email"
+          variant="standard"
+          fullWidth
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          sx={{ ...styles.signuplabel }}
         />
-      </label>
-
-      <label className={styles.signuplabel} htmlFor="password">
-        Enter Password<br />
-        <input
+        <TextField
+          label="Enter Password"
           type="password"
-          id="password"
+          variant="standard"
+          fullWidth
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          sx={{ ...styles.signuplabel }}
         />
-      </label>
-
-      <label className={styles.signuplabel} htmlFor="confirmPassword">
-        Confirm Password<br />
-        <input
+        <TextField
+          label="Confirm Password"
           type="password"
-          id="confirmPassword"
+          variant="standard"
+          fullWidth
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
+          sx={{ ...styles.signuplabel }}
         />
-      </label>
-
-      <button type="submit" className={styles.signupButton}>
-        Sign Up
-      </button>
-
-      {/* Display the message */}
-      {message && <p className={styles.message}>{message}</p>}
-    </form>
+        <Button type="submit" variant="contained" sx={{ ...styles.signupButton }}>
+          Sign Up
+        </Button>
+        {message && <FormHelperText sx={{ ...styles.message }}>{message}</FormHelperText>}
+      </FormGroup>
+    </FormControl>
   );
 };
 
 export const LoginForm = () => {
-        const [email, setEmail] = useState("");
-        const [password, setPassword] = useState("");
-        const [message, setMessage] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-        const navigate = useNavigate();
+    try {
+      const res = await fetch("http://localhost:3010/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
+      const data = await res.json();
 
-        const handleLogin = async (e) => {
-          e.preventDefault();
-      
-          try {
-            // Sending login data to the backend
-            const res = await fetch("http://localhost:3010/login", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ email, password }),
-            });
-      
-            // Getting the response from the API
-            const data = await res.json();
-      
-            if (res.ok) {
-              setMessage(data.message, "Redirecting"); // Update message on success
-              navigate('/dashboard');
-              // Perform actions upon successful login, e.g., storing token, redirecting
-            } else {
-              setMessage(data.message); // Update message on error
-              console.log("Login failed:", data.message || "Unknown error");
-            }
-          } catch (error) {
-            setMessage("An error occurred. Please try again"); // Handle network errors
-            console.error("An error occurred. Please try again", error);
-          }
-        };
+      if (res.ok) {
+        setMessage(data.message);
+        navigate('/user/home');
+      } else {
+        setMessage(data.message);
+      }
+    } catch (error) {
+      setMessage("An error occurred. Please try again");
+    }
+  };
 
-    return(
-        <form  className={styles.form} onSubmit={handleLogin}>
-          <h4>Login</h4>
-                    <label htmlFor="email">Email<br/>
-                      <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                      </label>
-                    
-                    <label htmlFor="password">Enter Password<br/>
-                        <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        
-                    </label><br/><br/>
-                    <button type="submit" className={styles.button}>Log In</button>
-                    {/* Display the message */}
-                    {message && <p className={styles.message}>{message}</p>}
-                  </form>
-    )
-}
+  return (
+    <FormControl component="form" onSubmit={handleLogin} sx={{ ...styles.form }}>
+      <Typography variant="h4" sx={{ ...styles.loginFormHeader }}>Login</Typography>
+      <FormGroup>
+        <TextField
+          label="Email"
+          type="email"
+          variant="standard"
+          fullWidth
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          sx={{ ...styles.loginLabel }}
+        />
+        <TextField
+          label="Enter Password"
+          type="password"
+          variant="standard"
+          fullWidth
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          sx={{ ...styles.loginLabel }}
+        />
+        <Button type="submit" variant="contained" sx={{ ...styles.loginButton }}>
+          Log In
+        </Button>
+        {message && <FormHelperText sx={{ ...styles.message }}>{message}</FormHelperText>}
+      </FormGroup>
+    </FormControl>
+  );
+};
