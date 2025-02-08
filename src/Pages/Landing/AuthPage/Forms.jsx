@@ -122,7 +122,7 @@ export const LoginForm = () => {
       
             if (res.ok) {
               setMessage(data.message, "Redirecting"); // Update message on success
-              navigate('/dashboard');
+              navigate('/user/home');
               // Perform actions upon successful login, e.g., storing token, redirecting
             } else {
               setMessage(data.message); // Update message on error
