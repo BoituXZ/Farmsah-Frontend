@@ -1,15 +1,14 @@
-import styles from './Forms.module.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-
+import { TextField, Button, Typography, Box } from '@mui/material';
+import styles from './Forms.module.css';
 
 export const SignupForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState(""); // Add this state for messages
+  const [message, setMessage] = useState("");
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -20,7 +19,6 @@ export const SignupForm = () => {
     }
 
     try {
-      // Sending data to the backend
       const res = await fetch("http://localhost:3010/signup", {
         method: "POST",
         headers: {
@@ -29,125 +27,120 @@ export const SignupForm = () => {
         body: JSON.stringify({ name, email, password }),
       });
 
-      // Getting the response from the API
       const data = await res.json();
 
       if (res.ok) {
-        setMessage(data.message); // Update message on success
+        setMessage(data.message);
       } else {
-        setMessage(data.message); // Update message on error
+        setMessage(data.message);
       }
     } catch {
-      setMessage("An error occurred. Please try again"); // Handle network errors
+      setMessage("An error occurred. Please try again");
     }
   };
 
   return (
-    <form onSubmit={handleSignup} className={styles.form}>
-      <h4 className={styles.signupHeader}>Sign Up</h4>
-      <label className={styles.signuplabel} htmlFor="name">
-        Name<br />
-        <input
-          type="text"
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </label>
-
-      <label className={styles.signuplabel} htmlFor="email">
-        Email<br />
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
-
-      <label className={styles.signuplabel} htmlFor="password">
-        Enter Password<br />
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </label>
-
-      <label className={styles.signuplabel} htmlFor="confirmPassword">
-        Confirm Password<br />
-        <input
-          type="password"
-          id="confirmPassword"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-      </label>
-
-      <button type="submit" className={styles.signupButton}>
+    <Box component="form" onSubmit={handleSignup} sx={{ ...styles.form }}>
+      <Typography variant="h4" sx={{ ...styles.signupHeader }}>Sign Up</Typography>
+      <TextField
+        label="Name"
+        variant="standard"
+        fullWidth
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        sx={{ ...styles.signuplabel }}
+      />
+      <TextField
+        label="Email"
+        type="email"
+        variant="standard"
+        fullWidth
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        sx={{ ...styles.signuplabel }}
+      />
+      <TextField
+        label="Enter Password"
+        type="password"
+        variant="standard"
+        fullWidth
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        sx={{ ...styles.signuplabel }}
+      />
+      <TextField
+        label="Confirm Password"
+        type="password"
+        variant="standard"
+        fullWidth
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        sx={{ ...styles.signuplabel }}
+      />
+      <Button type="submit" variant="contained" sx={{ ...styles.signupButton }}>
         Sign Up
-      </button>
-
-      {/* Display the message */}
-      {message && <p className={styles.message}>{message}</p>}
-    </form>
+      </Button>
+      {message && <Typography sx={{ ...styles.message }}>{message}</Typography>}
+    </Box>
   );
 };
 
 export const LoginForm = () => {
-        const [email, setEmail] = useState("");
-        const [password, setPassword] = useState("");
-        const [message, setMessage] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-        const navigate = useNavigate();
+    try {
+      const res = await fetch("http://localhost:3010/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
+      const data = await res.json();
 
-        const handleLogin = async (e) => {
-          e.preventDefault();
-      
-          try {
-            // Sending login data to the backend
-            const res = await fetch("http://localhost:3010/login", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ email, password }),
-            });
-      
-            // Getting the response from the API
-            const data = await res.json();
-      
-            if (res.ok) {
-              setMessage(data.message, "Redirecting"); // Update message on success
-              navigate('/user/home');
-              // Perform actions upon successful login, e.g., storing token, redirecting
-            } else {
-              setMessage(data.message); // Update message on error
-              console.log("Login failed:", data.message || "Unknown error");
-            }
-          } catch (error) {
-            setMessage("An error occurred. Please try again"); // Handle network errors
-            console.error("An error occurred. Please try again", error);
-          }
-        };
+      if (res.ok) {
+        setMessage(data.message);
+        navigate('/user/home');
+      } else {
+        setMessage(data.message);
+      }
+    } catch (error) {
+      setMessage("An error occurred. Please try again");
+    }
+  };
 
-    return(
-        <form  className={styles.form} onSubmit={handleLogin}>
-          <h4>Login</h4>
-                    <label htmlFor="email">Email<br/>
-                      <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                      </label>
-                    
-                    <label htmlFor="password">Enter Password<br/>
-                        <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        
-                    </label><br/><br/>
-                    <button type="submit" className={styles.button}>Log In</button>
-                    {/* Display the message */}
-                    {message && <p className={styles.message}>{message}</p>}
-                  </form>
-    )
-}
+  return (
+    <Box component="form" onSubmit={handleLogin} sx={{ ...styles.form }}>
+      <Typography variant="h4">Login</Typography>
+      <TextField
+        label="Email"
+        type="email"
+        variant="standard"
+        fullWidth
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        sx={{ ...styles.signuplabel }}
+      />
+      <TextField
+        label="Enter Password"
+        type="password"
+        variant="standard"
+        fullWidth
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        sx={{ ...styles.signuplabel }}
+      />
+      <Button type="submit" variant="contained" sx={{ ...styles.button }}>
+        Log In
+      </Button>
+      {message && <Typography sx={{ ...styles.message }}>{message}</Typography>}
+    </Box>
+  );
+};
