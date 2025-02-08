@@ -13,23 +13,29 @@ const AuthPage = () => {
     <Box id="container"
     sx={{
       display: 'flex',
-      justifyContent: 'center',
       alignItems: 'center',
-      height: '100vh',
+      height: 'inherit',
+      width: '100%',
+      // padding: '1rem',  
     }}
     >
       
       <Box
       sx={{
         display: 'flex',
-        justifyContent: 'center',
         flexDirection: 'column',
         margin: 'auto',
         padding: '1rem',
-        width: '450px',
-        height: '480px',
         backdropFilter: 'blur(8rem)',
-        borderRadius: '8px',
+        borderRadius: '10px',
+        boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.1), 0px 4px 15px rgba(0, 0, 0, 0.1)', // Updated boxShadow for pop-out effect
+        backgroundColor: 'rgb(255, 255, 255)', // Ensure background color is set
+        transform: 'translateY(-10px)', // Slightly lift the box
+        transition: 'transform 0.3s ease-in-out', // Smooth transition for the lift effect
+        '&:hover': {
+          transform: 'translateY(-15px)', // Lift more on hover
+          boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.2), 0px 8px 20px rgba(0, 0, 0, 0.2)', // Stronger shadow on hover
+        },
       }}
     >
       {isLogin ? (
