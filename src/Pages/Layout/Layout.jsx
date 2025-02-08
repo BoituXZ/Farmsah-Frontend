@@ -1,9 +1,8 @@
-import { Outlet, NavLink, Link, useLocation } from "react-router-dom";
-import { AppBar, Toolbar, Box, Typography, ThemeProvider } from "@mui/material";
+import { Outlet, NavLink, Link } from "react-router-dom";
+import { AppBar, Toolbar, Box, Typography, ThemeProvider} from "@mui/material";
 import { Theme } from "../../theme/Theme";
 
 const Layout = () => {
-  const location = useLocation();
   const linkStyle = ({ isActive }) => ({
     color: isActive ? "#f1b42f" : "black",
     textDecoration: "none",
@@ -25,97 +24,101 @@ const Layout = () => {
 
   return (
     <ThemeProvider theme={Theme}>
+      {/* <CssBaseline /> */}
       <Box 
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100%",
+        // backgroundColor: "var(--xanthous-accent)",
+        // backgroundImage: 'url("/assets/background3.jpg")',
+        backgroundImage: {xs: 'url("/assets/background3.jpg")', sm: 'url("/assets/background3.jpg")', md: 'url("/assets/background.jpg")'},
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backdropFilter: "blur(40px)",
+      }}
+      >
+      <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-          backgroundImage: {xs: 'url("/assets/background3.jpg")', sm: 'url("/assets/background3.jpg")', md: 'url("/assets/background.jpg")'},
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backdropFilter: "blur(40px)",
+          display: "block",
+          border: "1px solid rgba(217, 217, 217, 0.31)",
+          backgroundColor: "rgba(217, 217, 217, 0.62)",
+          width: "23rem",
+          margin: "0.9rem auto",
+          borderRadius: "5rem",
         }}
       >
-        <Box
+        <AppBar
+          position="static"
           sx={{
-            display: "block",
-            border: "1px solid rgba(217, 217, 217, 0.31)",
-            backgroundColor: "rgba(217, 217, 217, 0.62)",
-            width: "23rem",
-            margin: "0.9rem auto",
+            background: "transparent",
+            boxShadow: "none",
             borderRadius: "5rem",
           }}
         >
-          <AppBar
-            position="static"
+          <Toolbar
             sx={{
-              background: "transparent",
-              boxShadow: "none",
-              borderRadius: "5rem",
+              display: "flex",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+              gap: "1.6rem",
+              padding: "1rem",
+              width: "100%",
             }}
           >
-            <Toolbar
+            <NavLink to="/" style={linkStyle}>
+              <Typography variant="h2" 
               sx={{
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                gap: "1.6rem",
-                padding: "1rem",
-                width: "100%",
+                fontSize: {xs:"0.8rem", sm:"1.1rem", md:"0.9rem"}
               }}
-            >
-              <NavLink to="/" style={linkStyle}>
-                <Typography variant="h2" 
-                  sx={{
-                    fontSize: {xs:"0.8rem", sm:"1.1rem", md:"0.9rem"}
-                  }}
-                >Home</Typography>
-              </NavLink>
-              <NavLink to="/about" style={linkStyle}>
-                <Typography variant="h2"
-                  sx={{fontSize: {xs:"0.8rem", sm:"1.1rem", md:"0.9rem"}}}
-                >About Us</Typography>
-              </NavLink>
-              <NavLink to="/contact" style={linkStyle}>
-                <Typography variant="h2"
-                  sx={{fontSize: {xs:"0.8rem", sm:"1.1rem", md:"0.9rem"}}}
-                >Contact Us</Typography>
-              </NavLink>
-            </Toolbar>
-          </AppBar>
-        </Box>
+              >Home</Typography>
+            </NavLink>
+            <NavLink to="/about" style={linkStyle}>
+              <Typography variant="h2"
+              sx={{fontSize: {xs:"0.8rem", sm:"1.1rem", md:"0.9rem"}}}
+              >About Us</Typography>
+            </NavLink>
+            <NavLink to="/contact" style={linkStyle}>
+              <Typography variant="h2"
+              sx={{fontSize: {xs:"0.8rem", sm:"1.1rem", md:"0.9rem"}}}
+              >Contact Us</Typography>
+            </NavLink>
+          </Toolbar>
+        </AppBar>
+      </Box>
 
-        <Box
-          sx={{
-            position: "fixed",
-            bottom: 20,
-            right: 20,
-            display: location.pathname === "/authentication" ? "none" : "block",
+      <Box
+        sx={{
+          position: "fixed",
+          bottom: 20,
+          right: 20,
+        }}
+      >
+        <Link
+          to="/user/home"
+          style={{
+            textDecoration: "none",
+            display: "inline-block",
+            backgroundColor: "var(--hunter-green-primary)",
+            color: "white",
+            fontFamily: "var(--heading)",
+            fontWeight: 500,
+            padding: "10px 20px",
+            borderRadius: "5rem",
+            fontSize: "16px",
+            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+            transition: "transform 0.3s ease, background-color 0.3s ease",
           }}
         >
-          <Link
-            to="/authentication"
-            style={{
-              textDecoration: "none",
-              display: "inline-block",
-              backgroundColor: "var(--hunter-green-primary)",
-              color: "white",
-              fontFamily: "var(--heading)",
-              fontWeight: 500,
-              padding: "10px 20px",
-              borderRadius: "5rem",
-              fontSize: "16px",
-              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-              transition: "transform 0.3s ease, background-color 0.3s ease",
-            }}
-          >
-            Sign Up
-          </Link>
-        </Box>
-        <Outlet />
+          Sign Up
+        </Link>
       </Box>
+      <Outlet />
+      </Box>
+      
+
     </ThemeProvider>
   );
 };
