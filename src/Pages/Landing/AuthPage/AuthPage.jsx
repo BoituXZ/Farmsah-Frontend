@@ -14,8 +14,9 @@ const AuthPage = () => {
     sx={{
       display: 'flex',
       alignItems: 'center',
-      height: 'inherit',
+      height: '100vh',
       width: '100%',
+      // border: "solid 1px red"
       // padding: '1rem',  
     }}
     >
