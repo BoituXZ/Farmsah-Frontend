@@ -320,6 +320,13 @@ const LandingPage = () => {
                 padding: "1rem",
                 background: "rgba(255, 255, 255, 0.485)",
                 borderRadius: "1rem",
+                [theme.breakpoints.up('md')]:{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  height: "80%",
+                  padding: "2rem",
+                },
               }}
             >
               <Box
@@ -327,6 +334,7 @@ const LandingPage = () => {
                   padding: "2rem",
                   display: "flex",
                   justifyContent: "center",
+                  
                 }}
               >
                 <FontAwesomeIcon
@@ -365,13 +373,14 @@ const LandingPage = () => {
                 width: "100%",
                 textAlign: "center",
                 height: "4.2rem",
-                background: "var(--trans)",
+                background: "rgba(255, 255, 255, 0.485)",
                 color: "#000",
                 fontSize: "1.2rem",
                 fontStyle: "normal",
                 fontWeight: 400,
                 lineHeight: "normal",
                 borderRadius: "50px",
+                borderColor: "#000",
                 border: "none",
                 "&:hover": {
                   background: "#000",
