@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
-import { Card, CardContent, Typography, Box } from "@mui/material";
-import { BarChart, SparkLineChart, PieChart } from "@mui/x-charts";
+import { Card, Typography, Box } from "@mui/material";
 import GrassIcon from '@mui/icons-material/Grass';
 
 // Screen size uses a media query to check how big the screen is
