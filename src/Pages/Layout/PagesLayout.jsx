@@ -19,8 +19,6 @@ const PagesLayout = () => {
   };
 
   const location = useLocation();
-  console.log("Current location:", location.pathname);
-  console.log("Current mode:", mode); // Should be "light" or "dark"
 
   const getTitle = (pathname) => {
     // I don't want to make the top section of the page everytime, so this function uses the path to determine the title of the page

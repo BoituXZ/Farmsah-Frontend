@@ -171,13 +171,15 @@ export const LoginForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
+        credentials: "include", // This ensures the cookie is sent along with the request
       });
+      
 
       const data = await res.json();
 
       if (res.ok) {
         setMessage(data.message);
-        navigate('/user/home');
+        navigate('/user/');
       } else {
         setMessage(data.message);
       }
