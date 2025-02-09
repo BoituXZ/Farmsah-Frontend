@@ -6,6 +6,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import Sidebar from "./Sidebar/Sidebar";
 import AddComponent from "../../components/AddComponent";
 
+
 const ThemeContext = createContext();
 
 export const useThemeContext = () => useContext(ThemeContext);
@@ -19,8 +20,6 @@ const PagesLayout = () => {
   };
 
   const location = useLocation();
-  console.log("Current location:", location.pathname);
-  console.log("Current mode:", mode); // Should be "light" or "dark"
 
   const getTitle = (pathname) => {
     // I don't want to make the top section of the page everytime, so this function uses the path to determine the title of the page
@@ -71,7 +70,7 @@ const PagesLayout = () => {
             {/* Header with toggle */}
             <Header title={getTitle(location.pathname)} mode={mode} toggleMode={toggleMode} screenSize={isSmallScreen} />
 
-            {location.pathname !== "/user/home" && (
+            {location.pathname !== "/user/" && (
                     <>
                     <AddComponent />
                     </>
