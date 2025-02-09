@@ -35,7 +35,7 @@ function App() {
             path="/user/"
             element={<ProtectedRoute element={<PagesLayout />} />} // Protect PagesLayout
           >
-            <Route index element={<Home />} />
+            <Route index path="" element={<Home />} />
             <Route path="farms" element={<Farms />} />
             <Route path="crops" element={<Crops />} />
             <Route path="insights" element={<Insights />} />

@@ -6,11 +6,13 @@ const ProtectedRoute = ({ element }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
 
+
+
+    // I think the issue is that this protected route is checking and thats what is causing the issue
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                // Change to a more specific path like /user/home
-                const response = await fetch("http://localhost:3010/user/farms", {
+                const response = await fetch("http://localhost:3010/user/", {
                     method: "GET",
                     credentials: "include", // Ensure session cookie is sent
                 });
@@ -20,7 +22,7 @@ const ProtectedRoute = ({ element }) => {
                 } else {
                     setIsAuthenticated(false);
                 }
-            } catch (error) {
+            } catch {
                 setIsAuthenticated(false);
             } finally {
                 setLoading(false);
