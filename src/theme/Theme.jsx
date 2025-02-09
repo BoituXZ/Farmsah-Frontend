@@ -47,7 +47,7 @@ export const Theme = (mode) => {
               paper: "#1f1f1f",
             },
             text: {
-              primary: "#ffffff", // White text for dark mode
+              primary: "rgba(255, 255, 255, 0.81)", // White text for dark mode
               secondary: "#8fc9e5", // Light blue for secondary text
             },
             accent: {

@@ -25,7 +25,7 @@ const PagesLayout = () => {
     // I don't want to make the top section of the page everytime, so this function uses the path to determine the title of the page
     const path = pathname.split("/")[2];
     const pageTitle = path.charAt(0).toUpperCase() + path.slice(1);
-    if (pageTitle === "Home") {
+    if (pageTitle === "") {
       return "Dashboard";
     }
     return pageTitle;

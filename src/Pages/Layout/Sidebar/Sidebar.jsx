@@ -128,7 +128,7 @@ const Sidebar = () => {
         </Box>
         <Box id='sidebarContent' sx={styles.sidebarContent}>
           <List sx={styles.list}>
-            <Link to="/user/home" style={styles.link}>
+            <Link to="/user/" style={styles.link}>
               <ListItem sx={styles.listItem}>
                 <ListItemIcon sx={styles.listItemIcon}>
                   <HomeIcon  />

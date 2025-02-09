@@ -16,7 +16,9 @@ const StatChart = () => {
     <Box
       sx={{
         width: "100%",
-        maxHeight: "410px",
+        maxHeight: "400px",
+        minWidth: {xs: "290px", md:"100%"},
+        
         margin: "0 auto",
         padding: "1rem",
         backgroundColor: "white",
