@@ -28,7 +28,7 @@ const StatBar = () => {
     <Box
       sx={{
         width: "100%",
-        maxHeight: "410px",
+        minHeight: "400px",
         margin: "0 auto",
         padding: "2rem 1rem",
         backgroundColor: "white",
