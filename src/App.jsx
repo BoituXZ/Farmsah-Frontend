@@ -33,7 +33,7 @@ function App() {
           {/* Protected User Routes */}
           <Route
             path="/user/"
-            element={<ProtectedRoute element={<PagesLayout />} />} // Protect PagesLayout
+            element={<PagesLayout />}  // Protect PagesLayout
           >
             <Route index path="" element={<Home />} />
             <Route path="farms" element={<Farms />} />

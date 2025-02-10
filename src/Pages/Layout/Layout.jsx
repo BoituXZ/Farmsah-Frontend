@@ -97,7 +97,7 @@ const Layout = () => {
         }}
       >
         <Link
-          to="/authentication"
+          to="/user/"
           style={{
             textDecoration: "none",
             display: "inline-block",
