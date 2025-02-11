@@ -9,7 +9,7 @@ const Farms = () => {
   useEffect(() => {
     const fetchFarms = async () => {
       try {
-        const response = await fetch("/user/farms", {
+        const response = await fetch("http://localhost:3010/user/farms", {
           credentials: "include", // Ensures cookies (session) are sent
         });
 
