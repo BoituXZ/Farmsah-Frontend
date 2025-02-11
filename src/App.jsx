@@ -32,8 +32,8 @@ function App() {
         <Routes>
           {/* Protected User Routes */}
           <Route
-            path="/user/"
-            element={<PagesLayout />}  // Protect PagesLayout
+            path="/user/" 
+            element={<ProtectedRoute element={<PagesLayout/>}/>}  // Protect PagesLayout
           >
             <Route index path="" element={<Home />} />
             <Route path="farms" element={<Farms />} />
