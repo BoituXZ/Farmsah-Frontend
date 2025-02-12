@@ -4,9 +4,15 @@ import { useState } from "react";
 import { Close, Edit } from "@mui/icons-material";
 
 // TODO: Fix modal not closing
-const FarmCard = ({ farmName, location, size, crops, livestock, image }) => {
+const FarmCard = ({ slug, farmName, location, size, crops, livestock, image,}) => {
   const [open, setOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [newFarmName, setFarmName] = useState(farmName);
+  const [newLocation, setLocation] = useState(location);
+  const [newSize, setSize] = useState(size);
+  const [newCrops, setCrops] = useState(crops);
+  const [newLivestock, setLivestock] = useState(livestock);
+  const [newFarmImage, setFarmImage] = useState(image);
 
   // Updated handleOpen function with check for open state
   const handleOpen = () => {
@@ -27,13 +33,33 @@ const FarmCard = ({ farmName, location, size, crops, livestock, image }) => {
     setSelectedImage(file);
   };
 
-  const [newFarmName, setFarmName] = useState(farmName);
-  const [newLocation, setLocation] = useState(location);
-  const [newSize, setSize] = useState(size);
-  const [newCrops, setCrops] = useState(crops);
-  const [newLivestock, setLivestock] = useState(livestock);
+  
 
   const handleEditClick = () => setIsEditing(true);
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch(`http://localhost:3010/user/farms/${slug}`, {
+        method: "PUT",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: newFarmName,
+          location: newLocation,
+          size: newSize,
+          crops: newCrops,
+          livestock: newLivestock,
+          imageUrl: newFarmImage,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Failed to update farm");
+
+      console.log("Farm updated successfully");
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Error updating farm:", error);
+    }
+  };
 
   return (
     <Box
@@ -118,6 +144,7 @@ const FarmCard = ({ farmName, location, size, crops, livestock, image }) => {
           >
             {isEditing && (
               <>
+                <TextField label="Farm Image" value={newFarmImage} onChange={(e) => setFarmImage(e.target.value)} />
                 <TextField
                   label="Farm Name"
                   value={newFarmName}
@@ -153,7 +180,7 @@ const FarmCard = ({ farmName, location, size, crops, livestock, image }) => {
                       newSize,
                       newCrops,
                       newLivestock,
-                    });
+                    });handleSubmit();
                     setIsEditing(false); // Close editing mode
                   }}
                 >
@@ -179,12 +206,14 @@ const FarmCard = ({ farmName, location, size, crops, livestock, image }) => {
 };
 
 FarmCard.propTypes = {
+  slug: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   farmName: PropTypes.string,
   location: PropTypes.string,
   size: PropTypes.string,
   crops: PropTypes.string,
   livestock: PropTypes.string,
+
 };
 
 export default FarmCard;
