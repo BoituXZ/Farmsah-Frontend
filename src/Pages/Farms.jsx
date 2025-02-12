@@ -10,11 +10,11 @@ const Farms = () => {
     const fetchFarms = async () => {
       try {
         const response = await fetch("http://localhost:3010/user/farms", {
-          credentials: "include", // Ensures cookies (session) are sent
+          credentials: "include", 
         });
 
         if (!response.ok) {
-          throw new Error("Failed to fetch farms");
+          throw new Error("Failed to fetch farms, you did something wrong!");
         }
 
         const data = await response.json();
@@ -44,16 +44,17 @@ const Farms = () => {
       >
         {/* Farm cards */}
         {farms.map((farm) => (
-          <FarmCard
-            key={farm.id}
-            image={farm.image_url || "https://via.placeholder.com/150"} // Default image if none
-            farmName={farm.name}
-            location={farm.location}
-            size={`${farm.size} acres`}
-            livestock={farm.livestock || "No livestock"}
-            crops={farm.crops || "No crops"}
-          />
-        ))}
+  <FarmCard
+    key={farm.id}
+    slug={farm.slug}
+    image={farm.image_url || "https://via.placeholder.com/150"}
+    farmName={farm.name}
+    location={farm.location}
+    size={`${farm.size} acres`}
+    livestock={farm.livestock || "No livestock"}
+    crops={farm.crops || "No crops"}
+  />
+))}
       </Box>
 
       <Box
