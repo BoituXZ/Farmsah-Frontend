@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Modal, TextField, Button, Typography, IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { Close } from "@mui/icons-material";
-import { useLocation } from "react-router-dom"; // Import useLocation
+import { useLocation } from "react-router-dom";
 
 const AddComponent = () => {
   const [open, setOpen] = useState(false);
@@ -11,16 +11,56 @@ const AddComponent = () => {
   const handleClose = () => setOpen(false);
 
   const [newFarmName, setFarmName] = useState("");
+  const [newFarmImage, setFarmImage] = useState("");
   const [newLocation, setLocation] = useState("");
   const [newSize, setSize] = useState("");
   const [newCrops, setCrops] = useState("");
   const [newLivestock, setLivestock] = useState("");
 
-  const { pathname } = useLocation(); // Get the current location
-  const headerTitle = pathname.split("/").filter(Boolean).pop(); // Extract the last segment of the path
-  const modalTitle = headerTitle
-    ? headerTitle.charAt(0).toUpperCase() + headerTitle.slice(1) // Capitalize the first letter
-    : "Details"; // Default title if the path is empty
+  const { pathname } = useLocation();
+  const headerTitle = pathname.split("/").filter(Boolean).pop();
+  const modalTitle = headerTitle ? headerTitle.charAt(0).toUpperCase() + headerTitle.slice(1) : "Details";
+
+  const handleSubmit = async () => {
+    const farmData = {
+      name: newFarmName,
+      location: newLocation,
+      size: newSize,
+      cropsId: newCrops ? Number(newCrops) : null,   // Convert to number or null
+      livestockId: newLivestock ? Number(newLivestock) : null,  // Convert to number or null
+      imageUrl: newFarmImage,
+    };
+  
+    try {
+      const response = await fetch("http://localhost:3010/user/farms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(farmData),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Failed to add farm: ${await response.text()}`);
+      }
+  
+      console.log("Farm added successfully!");
+      handleClose();
+    } catch (error) {
+      console.error("Error adding farm:", error);
+    }
+  };
+  
+  
+  
+
+  const resetForm = () => {
+    setFarmName("");
+    setFarmImage("");
+    setLocation("");
+    setSize("");
+    setCrops("");
+    setLivestock("");
+  };
 
   return (
     <Box id="addComponentContainer">
@@ -89,44 +129,13 @@ const AddComponent = () => {
             component="form"
             sx={{ display: "flex", flexDirection: "column", gap: "20px", marginTop: "20px" }}
           >
-            <TextField
-              label="Farm Name"
-              value={newFarmName}
-              onChange={(e) => setFarmName(e.target.value)}
-            />
-            <TextField
-              label="Location"
-              value={newLocation}
-              onChange={(e) => setLocation(e.target.value)}
-            />
-            <TextField
-              label="Size"
-              value={newSize}
-              onChange={(e) => setSize(e.target.value)}
-            />
-            <TextField
-              label="Crops"
-              value={newCrops}
-              onChange={(e) => setCrops(e.target.value)}
-            />
-            <TextField
-              label="Livestock"
-              value={newLivestock}
-              onChange={(e) => setLivestock(e.target.value)}
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => {
-                console.log({
-                  newFarmName,
-                  newLocation,
-                  newSize,
-                  newCrops,
-                  newLivestock,
-                }); // Close editing mode
-              }}
-            >
+            <TextField label="Farm Image" value={newFarmImage} onChange={(e) => setFarmImage(e.target.value)} />
+            <TextField label="Farm Name" value={newFarmName} onChange={(e) => setFarmName(e.target.value)} />
+            <TextField label="Location" value={newLocation} onChange={(e) => setLocation(e.target.value)} />
+            <TextField label="Size" value={newSize} onChange={(e) => setSize(e.target.value)} />
+            <TextField label="Crops" value={newCrops} onChange={(e) => setCrops(e.target.value)} />
+            <TextField label="Livestock" value={newLivestock} onChange={(e) => setLivestock(e.target.value)} />
+            <Button variant="contained" color="primary" onClick={handleSubmit}>
               Submit
             </Button>
           </Box>
