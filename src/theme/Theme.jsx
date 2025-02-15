@@ -39,7 +39,7 @@ export const Theme = (mode) => {
             background: {
               black: "#1f1f1f",
               blue: "#2d5177", // Darker blue for dark mode
-              green: "#355e3b", // Deep green
+              green: "#2c5f2dff", // Deep green
               white: "#1f1f1f", // Dark gray for dark mode background
               yellow: "#a68c4a", // Muted yellow for dark mode
               beige: "#3d3a32", // Muted beige

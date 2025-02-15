@@ -32,13 +32,11 @@ const Farms = () => {
       <Box
         id="mainContent"
         sx={{
-          width: "100%",
-          height: "100%",
-          flex: "4",
-          overflow: "auto",
-          gap: "15px",
+          overflowY: "auto",
           display: "flex",
+          flex: "4",
           flexDirection: "column",
+          gap: "10px",
           padding: "10px",
         }}
       >
