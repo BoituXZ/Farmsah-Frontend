@@ -10,7 +10,8 @@ const CropItem = ({ cropName, yields }) => {
                 flexDirection: "row",
                 justifyContent: "space-between",
                 alignItems: "center",
-                border: "solid 1px white",
+                
+                
                 padding: "5px",
                 backgroundColor: "rgba(101, 95, 95, 0.2)",
                 borderRadius: "5px",

@@ -71,12 +71,12 @@ const FarmCard = ({ slug, farmName, location, size, crops, livestock, image,}) =
         flexDirection: "column",
         width: { xs: "100%", sm: "100%", md: "90%" },
         padding: "15px",
-        border: "1px solid rgba(255, 255, 255, 0.3)",
+        border: "1px solid rgba(29, 46, 35, 0.24)",
         height: { xs: "280px", sm: "280px", md: "420px" },
         borderRadius: "9px",
-        margin: { xs: "auto", sm: "auto", md: "0" },
+        margin: { xs: "2px", sm: "2px", md: "0" },
         background: "rgba(255, 255, 255, 0.2)",
-        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
+        boxShadow: "1px 3px 5px rgba(0, 0, 0, 0.2)",
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
         "&:hover": {
           transform: "scale(1.01)",
@@ -115,10 +115,11 @@ const FarmCard = ({ slug, farmName, location, size, crops, livestock, image,}) =
       <Modal open={open} onClose={handleClose} aria-labelledby="Farm Details" aria-describedby="Edit farm details">
         <Box
           sx={{
-            backgroundColor: "white",
+            backgroundColor: (theme) => theme.palette.background.paper,
             width: { xs: "400px", sm: "700px", md: "800px" },
             padding: "20px",
             borderRadius: "10px",
+            // border: "solid 1px black",
             position: "absolute",
             top: "50%",
             left: "50%",

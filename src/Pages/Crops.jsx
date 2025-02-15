@@ -59,13 +59,14 @@ const Crops = () => {
     return (
         <Box
             id="page"
-            sx={{ display: "flex", flexDirection: "row", height: "100%", width: "100%" }}
+            sx={{ display: "flex", flexDirection: "row", height: "100%", width: "100%",  }}
         >
             <Box
                 id="mainContent"
                 sx={{
-                    overflow: "auto",
+                    overflowY: "auto",
                     display: "flex",
+                    flex: "4",
                     flexDirection: "column",
                     gap: "10px",
                     padding: "10px",
