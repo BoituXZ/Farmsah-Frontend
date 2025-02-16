@@ -1,62 +1,80 @@
-import { Box } from "@mui/material";
-import { useState } from "react";
-import { Modal, TextField, Button, Typography, IconButton } from "@mui/material";
+import { useState, useEffect } from "react";
+import { Box, InputLabel, MenuItem, Select, TextField, Button, Typography, IconButton, Modal } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { Close } from "@mui/icons-material";
 import { useLocation } from "react-router-dom";
 
-const AddComponent = () => {
+const AddCropComponent = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const [newCropName, setCropName] = useState("");
-  const [newCropImage, setCropImage] = useState("");
   const [newLocation, setLocation] = useState("");
   const [newSize, setSize] = useState("");
   const [newCrops, setCrops] = useState("");
   const [newPastCrops, setPastCrops] = useState("");
+  const [newCropImage, setCropImage] = useState("");
   const [newCropImage2, setCropImage2] = useState("");
   const [newCropImage3, setCropImage3] = useState("");
 
+  const [availableFarms, setAvailableFarms] = useState([]); // Store farms
+  const [selectedFarm, setSelectedFarm] = useState(""); // Store selected farm
 
   const { pathname } = useLocation();
   const headerTitle = pathname.split("/").filter(Boolean).pop();
   const modalTitle = headerTitle ? headerTitle.charAt(0).toUpperCase() + headerTitle.slice(1) : "Details";
+
+  // Fetch farms when the modal opens
+  useEffect(() => {
+    if (open) {
+      const fetchFarms = async () => {
+        try {
+          const response = await fetch("http://localhost:3010/user/farms", {
+            credentials: "include",
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to fetch farms.");
+          }
+
+          const farms = await response.json();
+          setAvailableFarms(farms);
+        } catch (error) {
+          console.error("Error fetching farms:", error);
+        }
+      };
+
+      fetchFarms();
+    }
+  }, [open]); // Fetch farms only when modal opens
 
   const handleSubmit = async () => {
     const cropData = {
       name: newCropName,
       location: newLocation,
       size: newSize,
-      cropsId: newCrops ? Number(newCrops) : null,   // Convert to number or null
-      livestockId: newLivestock ? Number(newLivestock) : null,  // Convert to number or null
-      imageUrl: newCropImage,
+      farmId: selectedFarm ? Number(selectedFarm) : null, // Ensure valid farm ID
     };
-  
+
     try {
-      const response = await fetch("http://localhost:3010/user/farms", {
+      const response = await fetch("http://localhost:3010/user/crops", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify(cropData),
       });
-  
+
       if (!response.ok) {
-        throw new Error(`Failed to add farm: ${await response.text()}`);
+        throw new Error(`Failed to add crop: ${await response.text()}`);
       }
-  
-      console.log("Crops added successfully!");
+
+      console.log("Crop added successfully!");
       handleClose();
     } catch (error) {
-      console.error("Error adding Crops:", error);
+      console.error("Error adding crop:", error);
     }
   };
-  
-  
-  
-
-
 
   return (
     <Box id="addComponentContainer">
@@ -133,7 +151,27 @@ const AddComponent = () => {
             <TextField label="Size" value={newSize} onChange={(e) => setSize(e.target.value)} />
             <TextField label="Crops" value={newCrops} onChange={(e) => setCrops(e.target.value)} />
             <TextField label="Past Crops" value={newPastCrops} onChange={(e) => setPastCrops(e.target.value)} />
-            
+
+            {/* Farm Selection Dropdown */}
+            <InputLabel id="farm-select-label">Select Farm</InputLabel>
+            <Select
+              labelId="farm-select-label"
+              id="farm-select"
+              value={selectedFarm}
+              onChange={(e) => setSelectedFarm(e.target.value)}
+              fullWidth
+            >
+              {availableFarms.length > 0 ? (
+                availableFarms.map((farm) => (
+                  <MenuItem key={farm.id} value={farm.id}>
+                    {farm.name} - {farm.location}
+                  </MenuItem>
+                ))
+              ) : (
+                <MenuItem disabled>No farms available</MenuItem>
+              )}
+            </Select>
+
             <Button variant="contained" color="primary" onClick={handleSubmit}>
               Submit
             </Button>
@@ -144,4 +182,4 @@ const AddComponent = () => {
   );
 };
 
-export default AddComponent;
+export default AddCropComponent;
