@@ -1,60 +1,51 @@
 import { Box, Divider, Typography } from '@mui/material';
 import CropCard from '../components/CropCard';
 import CropItem from '../components/CropItem';
+import AddCropComponent from '../components/AddCropComponent';
+import { useState, useEffect } from 'react';
 
 const Crops = () => {
-    const cropData = [
-        {
-            image: 'https://images.pexels.com/photos/45211/walnuts-nuts-healthy-shell-45211.jpeg',
-            image2: 'https://images.pexels.com/photos/4110251/pexels-photo-4110251.jpeg',
-            image3: 'https://images.pexels.com/photos/52521/pistachio-nuts-pistachios-crisps-52521.jpeg',
-            name: 'Sunny Acres',
-            location: 'California, USA',
-            size: '150 acres',
-            livestock: 'Cattle, Chickens',
-            crops: 'Corn, Wheat',
-            lastYield: {
-                value: '2000 kg',
-                date: '2023-09-15',
-            },
-            currentYield: {
-                value: '2200 kg',
-                date: '2023-10-10',
-            },
-            pesticideRecommendation: [
-                { crop: 'Corn', pesticide: 'Atrazine' },
-                { crop: 'Wheat', pesticide: 'Chlorpyrifos' },
-            ],
-            amountPlanted: '100 hectares',
-            expectedHarvest: '3000 kg',
-            aiSuggestions: 'Consider planting soybeans after harvesting corn to improve soil nitrogen content.',
-        },
-        {
-            image: 'https://images.pexels.com/photos/158780/cabbage-vegetable-collard-greens-green-cabbage-158780.jpeg',
-            image2: 'https://images.pexels.com/photos/161573/cabbage-vegetable-diet-vitamin-161573.jpeg',
-            image3: 'https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg',
-            name: 'Green Valley',
-            location: 'Ontario, Canada',
-            size: '200 acres',
-            livestock: 'Sheep, Ducks',
-            crops: 'Cabbage, Lettuce',
-            lastYield: {
-                value: '1500 kg',
-                date: '2023-08-25',
-            },
-            currentYield: {
-                value: '1700 kg',
-                date: '2023-09-30',
-            },
-            pesticideRecommendation: [
-                { crop: 'Cabbage', pesticide: 'Spinosad' },
-                { crop: 'Lettuce', pesticide: 'Imidacloprid' },
-            ],
-            amountPlanted: '50 hectares',
-            expectedHarvest: '2500 kg',
-            aiSuggestions: 'Install drip irrigation to reduce water waste and improve crop yield for leafy vegetables.',
-        },
-    ];
+    const [cropsData, setCropsData] = useState([]);
+
+    useEffect(() => {
+        const fetchCrops = async () => {
+            try {
+                const response = await fetch("http://localhost:3010/user/crops", {
+                    credentials: "include",
+                });
+    
+                if (!response.ok) {
+                    throw new Error("Failed to fetch crops, you did something wrong!");
+                }
+    
+                const data = await response.json();
+    
+                // Transform the data if needed
+                const formattedCrops = data.map((crop) => ({
+                    id: crop.id,
+                    name: crop.name,
+                    amountPlanted: crop.amount_planted,
+                    expectedHarvest: crop.expected_harvest,
+                    farmId: crop.farm_id,
+                    farmName: crop.farm_name, // This requires a join in the backend
+                    location: crop.location,   // Also needs to be fetched from farms
+                    aiSuggestions: crop.ai_suggestions,
+                    recommendedPesticide: crop.recommended_pesticide, // Ensure these exist in backend
+                    image: crop.image || "", // Handle missing image gracefully
+                    image2: crop.image2 || "",
+                    image3: crop.image3 || "",
+                }));
+    
+                setCropsData(formattedCrops);
+            } catch (error) {
+                console.error("Error fetching crops:", error);
+            }
+        };
+    
+        fetchCrops();
+    }, []);
+    
+
 
     return (
         <Box
@@ -72,10 +63,16 @@ const Crops = () => {
                     padding: "10px",
                 }}
             >
-                {cropData.map((crop, index) => (
-                    <CropCard key={index} cropData={crop} />
-                ))}
+                {cropsData.map((crop) => (
+    <CropCard 
+        key={crop.id} // key is used by React, don't pass it as a prop
+        {...crop} // Spread the crop object for cleaner prop handling
+    />
+))}
+
             </Box>
+            <Divider orientation="vertical" />
+            <AddCropComponent />
             <Box
                 id="sideContentContainer"
                 sx={{
@@ -115,7 +112,7 @@ const Crops = () => {
                             overflowY: "auto",
                         }}
                     >
-                        {cropData.map((crop, index) =>
+                        {cropsData.map((crop, index) =>
                             crop.crops.split(", ").map((cropName, cropIndex) => (
                                 <CropItem key={`${index}-${cropIndex}`} cropName={cropName} location={crop.location} />
                             ))

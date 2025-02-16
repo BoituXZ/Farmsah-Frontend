@@ -4,7 +4,7 @@ import { Theme } from "../../theme/Theme";
 import Header from "../../components/Header";
 import { Outlet, useLocation } from "react-router-dom";
 import Sidebar from "./Sidebar/Sidebar";
-import AddComponent from "../../components/AddComponent";
+import AddFarmComponent from "../../components/AddFarmComponent";
 
 
 const ThemeContext = createContext();
@@ -70,11 +70,11 @@ const PagesLayout = () => {
             {/* Header with toggle */}
             <Header title={getTitle(location.pathname)} mode={mode} toggleMode={toggleMode} screenSize={isSmallScreen} />
 
-            {location.pathname !== "/user/" && (
+            {/* {location.pathname !== "/user/" && (
                     <>
-                    <AddComponent />
+                    <AddFarmComponent />
                     </>
-                  )}
+                  )} */}
             {/* Outlet for rendering page content */}
             <Outlet />
           </Box>

@@ -1,0 +1,147 @@
+import { Box } from "@mui/material";
+import { useState } from "react";
+import { Modal, TextField, Button, Typography, IconButton } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import { Close } from "@mui/icons-material";
+import { useLocation } from "react-router-dom";
+
+const AddComponent = () => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const [newCropName, setCropName] = useState("");
+  const [newCropImage, setCropImage] = useState("");
+  const [newLocation, setLocation] = useState("");
+  const [newSize, setSize] = useState("");
+  const [newCrops, setCrops] = useState("");
+  const [newPastCrops, setPastCrops] = useState("");
+  const [newCropImage2, setCropImage2] = useState("");
+  const [newCropImage3, setCropImage3] = useState("");
+
+
+  const { pathname } = useLocation();
+  const headerTitle = pathname.split("/").filter(Boolean).pop();
+  const modalTitle = headerTitle ? headerTitle.charAt(0).toUpperCase() + headerTitle.slice(1) : "Details";
+
+  const handleSubmit = async () => {
+    const cropData = {
+      name: newCropName,
+      location: newLocation,
+      size: newSize,
+      cropsId: newCrops ? Number(newCrops) : null,   // Convert to number or null
+      livestockId: newLivestock ? Number(newLivestock) : null,  // Convert to number or null
+      imageUrl: newCropImage,
+    };
+  
+    try {
+      const response = await fetch("http://localhost:3010/user/farms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(cropData),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Failed to add farm: ${await response.text()}`);
+      }
+  
+      console.log("Crops added successfully!");
+      handleClose();
+    } catch (error) {
+      console.error("Error adding Crops:", error);
+    }
+  };
+  
+  
+  
+
+
+
+  return (
+    <Box id="addComponentContainer">
+      <Box
+        id="addButtonContainer"
+        sx={{
+          maxWidth: "100px",
+          maxHeight: "100px",
+          display: "flex",
+          justifyContent: "center",
+          padding: "1px",
+          position: "fixed",
+          top: { xs: "93vh", md: "90vh" },
+          left: { xs: "82vw", md: "75vw" },
+        }}
+        onClick={handleOpen}
+      >
+        <Box
+          id="addButton"
+          sx={{
+            width: { xs: "56px", sm: "60px", md: "60px" },
+            height: { xs: "56px", sm: "60px", md: "60px" },
+            backgroundColor: "#2c5f2dff",
+            borderRadius: "50%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            ":hover": { backgroundColor: "rgb(255, 183, 0)", cursor: "pointer" },
+          }}
+        >
+          <AddIcon sx={{ fontSize: "2rem" }} />
+        </Box>
+      </Box>
+
+      <Modal open={open} onClose={handleClose} aria-labelledby="Details" aria-describedby="details">
+        <Box
+          sx={{
+            backgroundColor: "white",
+            width: { xs: "400px", sm: "700px", md: "800px" },
+            padding: "20px",
+            borderRadius: "10px",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            boxShadow: 24,
+          }}
+        >
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography
+              variant="h5"
+              sx={{
+                fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.8rem" },
+              }}
+            >
+              {modalTitle} Details
+            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "row", gap: "2px" }}>
+              <IconButton onClick={handleClose}>
+                <Close />
+              </IconButton>
+            </Box>
+          </Box>
+
+          <Box
+            component="form"
+            sx={{ display: "flex", flexDirection: "column", gap: "20px", marginTop: "20px" }}
+          >
+            <TextField label="Crop Image" value={newCropImage} onChange={(e) => setCropImage(e.target.value)} />
+            <TextField label="Crop Image 2" value={newCropImage2} onChange={(e) => setCropImage2(e.target.value)} />
+            <TextField label="Crop Image 3" value={newCropImage3} onChange={(e) => setCropImage3(e.target.value)} />
+            <TextField label="Crop Name" value={newCropName} onChange={(e) => setCropName(e.target.value)} />
+            <TextField label="Location" value={newLocation} onChange={(e) => setLocation(e.target.value)} />
+            <TextField label="Size" value={newSize} onChange={(e) => setSize(e.target.value)} />
+            <TextField label="Crops" value={newCrops} onChange={(e) => setCrops(e.target.value)} />
+            <TextField label="Past Crops" value={newPastCrops} onChange={(e) => setPastCrops(e.target.value)} />
+            
+            <Button variant="contained" color="primary" onClick={handleSubmit}>
+              Submit
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
+    </Box>
+  );
+};
+
+export default AddComponent;
