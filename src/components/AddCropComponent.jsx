@@ -51,14 +51,16 @@ const AddCropComponent = () => {
 
   const handleSubmit = async () => {
     const cropData = {
+      farmId: selectedFarm ? Number(selectedFarm) : null,
       name: newCropName,
-      location: newLocation,
-      size: newSize,
-      farmId: selectedFarm ? Number(selectedFarm) : null, // Ensure valid farm ID
+      amountPlanted: Number(newSize) || 0, // Ensure number
+      expectedHarvest: Number(newCrops) || 0, // Use `newCrops` for expectedHarvest?
+      aiSuggestions: newPastCrops, // Assuming past crops could be AI suggestions?
     };
+    
 
     try {
-      const response = await fetch("http://localhost:3010/user/crops", {
+      const response = await fetch("http://localhost:3010/user/crops/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -121,6 +123,8 @@ const AddCropComponent = () => {
             left: "50%",
             transform: "translate(-50%, -50%)",
             boxShadow: 24,
+            height: "700px"
+
           }}
         >
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -144,16 +148,13 @@ const AddCropComponent = () => {
             sx={{ display: "flex", flexDirection: "column", gap: "20px", marginTop: "20px" }}
           >
             <TextField label="Crop Image" value={newCropImage} onChange={(e) => setCropImage(e.target.value)} />
-            <TextField label="Crop Image 2" value={newCropImage2} onChange={(e) => setCropImage2(e.target.value)} />
-            <TextField label="Crop Image 3" value={newCropImage3} onChange={(e) => setCropImage3(e.target.value)} />
             <TextField label="Crop Name" value={newCropName} onChange={(e) => setCropName(e.target.value)} />
-            <TextField label="Location" value={newLocation} onChange={(e) => setLocation(e.target.value)} />
             <TextField label="Size" value={newSize} onChange={(e) => setSize(e.target.value)} />
             <TextField label="Crops" value={newCrops} onChange={(e) => setCrops(e.target.value)} />
             <TextField label="Past Crops" value={newPastCrops} onChange={(e) => setPastCrops(e.target.value)} />
 
             {/* Farm Selection Dropdown */}
-            <InputLabel id="farm-select-label">Select Farm</InputLabel>
+            <InputLabel id="farm-select-label">Location</InputLabel>
             <Select
               labelId="farm-select-label"
               id="farm-select"

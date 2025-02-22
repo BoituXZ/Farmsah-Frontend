@@ -113,9 +113,9 @@ const Crops = () => {
                         }}
                     >
                         {cropsData.map((crop, index) =>
-                            crop.crops.split(", ").map((cropName, cropIndex) => (
+                            crop.crops ? crop.crops.split(", ").map((cropName, cropIndex) => (
                                 <CropItem key={`${index}-${cropIndex}`} cropName={cropName} location={crop.location} />
-                            ))
+                            )) : null
                         )}
                     </Box>
                 </Box>
