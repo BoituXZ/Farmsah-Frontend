@@ -1,65 +1,81 @@
-import { Box } from "@mui/material";
-import { useState } from "react";
-import { Modal, TextField, Button, Typography, IconButton } from "@mui/material";
+import { useState, useEffect } from "react";
+import { Box, InputLabel, MenuItem, Select, TextField, Button, Typography, IconButton, Modal } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { Close } from "@mui/icons-material";
 import { useLocation } from "react-router-dom";
 
-const AddComponent = () => {
+const AddCropComponent = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [newFarmName, setFarmName] = useState("");
-  const [newFarmImage, setFarmImage] = useState("");
+  const [newCropName, setCropName] = useState("");
   const [newLocation, setLocation] = useState("");
   const [newSize, setSize] = useState("");
   const [newCrops, setCrops] = useState("");
-  const [newLivestock, setLivestock] = useState("");
+  const [newPastCrops, setPastCrops] = useState("");
+  const [newCropImage, setCropImage] = useState("");
+  const [newCropImage2, setCropImage2] = useState("");
+  const [newCropImage3, setCropImage3] = useState("");
+
+  const [availableFarms, setAvailableFarms] = useState([]); // Store farms
+  const [selectedFarm, setSelectedFarm] = useState(""); // Store selected farm
 
   const { pathname } = useLocation();
   const headerTitle = pathname.split("/").filter(Boolean).pop();
   const modalTitle = headerTitle ? headerTitle.charAt(0).toUpperCase() + headerTitle.slice(1) : "Details";
 
+  // Fetch farms when the modal opens
+  useEffect(() => {
+    if (open) {
+      const fetchFarms = async () => {
+        try {
+          const response = await fetch("http://localhost:3010/user/farms", {
+            credentials: "include",
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to fetch farms.");
+          }
+
+          const farms = await response.json();
+          setAvailableFarms(farms);
+        } catch (error) {
+          console.error("Error fetching farms:", error);
+        }
+      };
+
+      fetchFarms();
+    }
+  }, [open]); // Fetch farms only when modal opens
+
   const handleSubmit = async () => {
-    const farmData = {
-      name: newFarmName,
-      location: newLocation,
-      size: newSize,
-      cropsId: newCrops ? Number(newCrops) : null,   // Convert to number or null
-      livestockId: newLivestock ? Number(newLivestock) : null,  // Convert to number or null
-      imageUrl: newFarmImage,
+    const cropData = {
+      farmId: selectedFarm ? Number(selectedFarm) : null,
+      name: newCropName,
+      amountPlanted: Number(newSize) || 0, // Ensure number
+      expectedHarvest: Number(newCrops) || 0, // Use `newCrops` for expectedHarvest?
+      aiSuggestions: newPastCrops, // Assuming past crops could be AI suggestions?
     };
-  
+    
+
     try {
-      const response = await fetch("http://localhost:3010/user/farms", {
+      const response = await fetch("http://localhost:3010/user/crops/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify(farmData),
+        body: JSON.stringify(cropData),
       });
-  
+
       if (!response.ok) {
-        throw new Error(`Failed to add farm: ${await response.text()}`);
+        throw new Error(`Failed to add crop: ${await response.text()}`);
       }
-  
-      console.log("Farm added successfully!");
+
+      console.log("Crop added successfully!");
       handleClose();
     } catch (error) {
-      console.error("Error adding farm:", error);
+      console.error("Error adding crop:", error);
     }
-  };
-  
-  
-  
-
-  const resetForm = () => {
-    setFarmName("");
-    setFarmImage("");
-    setLocation("");
-    setSize("");
-    setCrops("");
-    setLivestock("");
   };
 
   return (
@@ -107,6 +123,8 @@ const AddComponent = () => {
             left: "50%",
             transform: "translate(-50%, -50%)",
             boxShadow: 24,
+            height: "620px"
+
           }}
         >
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -129,12 +147,34 @@ const AddComponent = () => {
             component="form"
             sx={{ display: "flex", flexDirection: "column", gap: "20px", marginTop: "20px" }}
           >
-            <TextField label="Farm Image" value={newFarmImage} onChange={(e) => setFarmImage(e.target.value)} />
-            <TextField label="Farm Name" value={newFarmName} onChange={(e) => setFarmName(e.target.value)} />
-            <TextField label="Location" value={newLocation} onChange={(e) => setLocation(e.target.value)} />
+            <TextField label="Crop Image" value={newCropImage} onChange={(e) => setCropImage(e.target.value)} />
+            <TextField label="Crop Name" value={newCropName} onChange={(e) => setCropName(e.target.value)} />
             <TextField label="Size" value={newSize} onChange={(e) => setSize(e.target.value)} />
             <TextField label="Crops" value={newCrops} onChange={(e) => setCrops(e.target.value)} />
-            <TextField label="Livestock" value={newLivestock} onChange={(e) => setLivestock(e.target.value)} />
+            <TextField label="Past Crops" value={newPastCrops} onChange={(e) => setPastCrops(e.target.value)} />
+
+            <Box>
+            <InputLabel id="farm-select-label">Location</InputLabel>
+            <Select
+              labelId="farm-select-label"
+              id="farm-select"
+              value={selectedFarm}
+              onChange={(e) => setSelectedFarm(e.target.value)}
+              fullWidth
+            >
+              {availableFarms.length > 0 ? (
+                availableFarms.map((farm) => (
+                  <MenuItem key={farm.id} value={farm.id}>
+                    {farm.name} - {farm.location}
+                  </MenuItem>
+                ))
+              ) : (
+                <MenuItem disabled>No farms available</MenuItem>
+              )}
+            </Select>
+            </Box>  
+          
+
             <Button variant="contained" color="primary" onClick={handleSubmit}>
               Submit
             </Button>
@@ -145,4 +185,4 @@ const AddComponent = () => {
   );
 };
 
-export default AddComponent;
+export default AddCropComponent;

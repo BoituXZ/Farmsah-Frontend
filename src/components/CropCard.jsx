@@ -1,24 +1,11 @@
-import { Box, Button, Modal, TextField, Typography, IconButton } from "@mui/material";
+import { Box, Button, Modal, TextField, Typography, IconButton, MenuItem, Select, InputLabel } from "@mui/material";
 import PropTypes from "prop-types";
-import { useState } from "react";
-import { Close, Edit} from "@mui/icons-material";
+import { useEffect, useState } from "react";
+import { Close, Delete, Edit, RecyclingOutlined} from "@mui/icons-material";
 
-const CropCard = ({ cropData }) => {
-    const {
-        image,
-        image2,
-        image3,
-        name,
-        location,
-        size,
-        crops,
-        livestock,
-        amountPlanted,
-        expectedHarvest,
-        aiSuggestions,
-        recommendedPesticide,
-    } = cropData;
+// Fix the ID
 
+const CropCard = ({ id, name, amountPlanted, expectedHarvest, location, farmId, farmName, aiSuggestions, recommendedPesticide, image, image2, image3 }) => {
     const [open, setOpen] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -34,33 +21,31 @@ const CropCard = ({ cropData }) => {
     };
 
     const [newCropName, setCropName] = useState(name);
+    const [cropID, newCropId] = useState(id)
     const [newLocation, setLocation] = useState(location);
-    const [newSize, setSize] = useState(size);
-    const [newCrops, setCrops] = useState(crops);
-    const [newLivestock, setLivestock] = useState(livestock);
     const [newAmountPlanted, setAmountPlanted] = useState(amountPlanted);
-    const [newCropImage, setCropImage] = useState(image)
-    const [newCropImage2, setCropImage2] = useState(image2)
-    const [newCropImage3, setCropImage3] = useState(image3)
-    const newAiSuggestions = aiSuggestions
-    const newPesticide = recommendedPesticide
-    const newExpectedHarvest = expectedHarvest
+    const [newCropImage, setCropImage] = useState(image);
+    const [newCropImage2, setCropImage2] = useState(image2);
+    const [newCropImage3, setCropImage3] = useState(image3);
+    const [newExpectedHarvest, setExpectedHarvest] = useState(expectedHarvest);
+    const [newAiSuggestions, setAiSuggestions] = useState(aiSuggestions);
+    const [newPesticide, setPesticide] = useState(recommendedPesticide);
+    const [availableFarms, setAvailableFarms] = useState([]); // Store farms
+    const [selectedFarm, setSelectedFarm] = useState(""); // Store selected farm
     
 
 
     const handleEditClick = () => setIsEditing(true);
     const handleSubmit = async () => {
         try {
-          const response = await fetch(`http://localhost:3010/user/crops/${slug}`, {
+          const response = await fetch(`http://localhost:3010/user/crops/`, {
             method: "PUT",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               name: newCropName,
               location: newLocation,
-              size: newSize,
-              crops: newCrops,
-              livestock: newLivestock,
+              PastCrops: newPastCrops,
               imageUrl: newCropImage,
               imageUrl2: newCropImage2,
               imageUrl3: newCropImage3,
@@ -68,14 +53,57 @@ const CropCard = ({ cropData }) => {
             }),
           });
     
-          if (!response.ok) throw new Error("Failed to update farm");
+          if (!response.ok) throw new Error("Failed to update crops");
     
-          console.log("Farm updated successfully");
+          console.log("Crops updated successfully");
           setIsEditing(false);
         } catch (error) {
           console.error("Error updating farm:", error);
         }
       };
+    
+    const handleDelete = async () =>{
+        try {
+            const response = await fetch(`http://localhost:3010/user/crops/${cropID}`, {
+            method: "DELETE",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },})
+            
+            if (!response.ok) throw new Error("Failed to update crops");
+            console.log("Crops updated successfully");
+            setOpen(false);
+            window.location.reloadx
+            
+
+        } catch (error){
+            console.error("Error deleting Crop:", error)
+        }
+    }
+
+
+      useEffect(() => {
+          if (open) {
+            const fetchFarms = async () => {
+              try {
+                const response = await fetch("http://localhost:3010/user/farms", {
+                  credentials: "include",
+                });
+      
+                if (!response.ok) {
+                  throw new Error("Failed to fetch farms.");
+                }
+      
+                const farms = await response.json();
+                setAvailableFarms(farms);
+              } catch (error) {
+                console.error("Error fetching farms:", error);
+              }
+            };
+      
+            fetchFarms();
+          }
+        }, [open]); // Fetch farms only when modal opens
+      
 
     return (
         <Box
@@ -155,7 +183,7 @@ const CropCard = ({ cropData }) => {
                     sx={{ fontSize: "0.9rem", fontWeight: "600" }}
                     >Crops:</Typography>
                     <Typography variant="body2" sx={{ fontSize: "0.8rem", marginLeft: "10px", textAlign: "left", fontWeight: "600", color: "green" }}>
-                        {crops}
+                        {name}
                     </Typography>
                 </Box>
                 <Box sx={{
@@ -165,9 +193,9 @@ const CropCard = ({ cropData }) => {
                 }}>
                     <Typography variant="h2"
                     sx={{ fontSize: "0.9rem", fontWeight: "600" }}
-                    >Livestock:</Typography>
+                    >PastCrops:</Typography>
                     <Typography variant="body2" sx={{ fontSize: "0.8rem", marginLeft: "10px", textAlign: "left", fontWeight: "600", color: "green" }}>
-                        {livestock}
+                        Temp
                     </Typography>
                 </Box>
                 <Box sx={{
@@ -257,20 +285,42 @@ const CropCard = ({ cropData }) => {
                             <IconButton onClick={handleClose}>
                                 <Close />
                             </IconButton>
+                            <IconButton onClick={handleDelete}>
+                                <Delete />
+                            </IconButton>
                             </Box>
                     </Box>
 
                     <Box component="form" sx={{ display: "flex", flexDirection: "column", gap: "20px", marginTop: "20px" }}>
                         {isEditing ? (
                             <>  
-                                <TextField label= "CropImage 1" value={newCropImage} onChange={(e) => {setCropImage(e.target.value)}} />
-                                <TextField label= "CropImage 2" value={newCropImage} onChange={(e) => {setCropImage2(e.target.value)}} />
-                                <TextField label= "CropImage 3" value={newCropImage} onChange={(e) => {setCropImage3(e.target.value)}} />
+                                <TextField label= "Crop Image 1" value={newCropImage} onChange={(e) => {setCropImage(e.target.value)}} />
+                                <TextField label= "Crop Image 2" value={newCropImage} onChange={(e) => {setCropImage2(e.target.value)}} />
+                                <TextField label= "Crop Image 3" value={newCropImage} onChange={(e) => {setCropImage3(e.target.value)}} />
                                 <TextField label="Crop Name" value={newCropName} onChange={(e) => setCropName(e.target.value)} />
-                                <TextField label="Location" value={newLocation} onChange={(e) => setLocation(e.target.value)} />
-                                <TextField label="Size" value={newSize} onChange={(e) => setSize(e.target.value)} />
-                                <TextField label="Crops" value={newCrops} onChange={(e) => setCrops(e.target.value)} />
-                                <TextField label="Livestock" value={newLivestock} onChange={(e) => setLivestock(e.target.value)} />
+                                <Box>
+            <InputLabel id="farm-select-label">Location</InputLabel>
+            <Select
+              labelId="farm-select-label"
+              id="farm-select"
+              value={selectedFarm}
+              onChange={(e) => setSelectedFarm(e.target.value)}
+              fullWidth
+            >
+              {availableFarms.length > 0 ? (
+                availableFarms.map((farm) => (
+                  <MenuItem key={farm.id} value={farm.id}>
+                    {farm.name} - {farm.location}
+                  </MenuItem>
+                ))
+              ) : (
+                <MenuItem disabled>No farms available</MenuItem>
+              )}
+            </Select>
+                                    </Box>  
+                                {/* <TextField label="Size" value={newSize} onChange={(e) => setSize(e.target.value)} /> */}
+                                <TextField label="Crops" value={newCropName} onChange={(e) => setCropName(e.target.value)} />
+                                {/* <TextField label="Past Crops" value={newPastCrops} onChange={(e) => setPastCrops(e.target.value)} /> */}
                                 <TextField
                                     label="Amount Planted"
                                     value={newAmountPlanted}
@@ -284,15 +334,17 @@ const CropCard = ({ cropData }) => {
                                         console.log({
                                             newCropName,
                                             newLocation,
-                                            newSize,
-                                            newCrops,
-                                            newLivestock,
                                             newPesticide,
                                             newAmountPlanted,
 
                                         });
                                         handleSubmit();
                                         setIsEditing(false);
+                                        
+                                    }}
+                                    sx={{
+                                        backgroundColor: "#2c5f2dff",
+                                        ":hover": { backgroundColor: "rgb(255, 183, 0)", cursor: "pointer" },
                                     }}
                                 >
                                     Submit
@@ -318,21 +370,21 @@ const CropCard = ({ cropData }) => {
                                     fontSize: "0.8rem",
                                 }}>Size: 
                                     <Typography variant="body1">
-                                    {newSize}
+                                    Temp
                                     </Typography>
                                 </Typography>
                                 <Typography sx={{
                                     fontSize: "0.8rem",
                                 }}>Crops: 
                                     <Typography variant="body1">
-                                    {newCrops}
+                                    {newCropName}
                                     </Typography>
                                 </Typography>
                                 <Typography sx={{
                                     fontSize: "0.8rem",
-                                }}>Livestock: 
+                                }}>PastCrops: 
                                     <Typography variant="body1">
-                                    {newLivestock}
+                                    {/* {newPastCrops} */}
                                     </Typography>
                                 </Typography>
                                 <Typography sx={{
@@ -373,33 +425,17 @@ const CropCard = ({ cropData }) => {
 };
 
 CropCard.propTypes = {
-    cropData: PropTypes.shape({
-        image: PropTypes.string.isRequired,
-        image2: PropTypes.string.isRequired,
-        image3: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        location: PropTypes.string.isRequired,
-        size: PropTypes.string.isRequired,
-        crops: PropTypes.string.isRequired,
-        livestock: PropTypes.string.isRequired,
-        lastYield: PropTypes.shape({
-            value: PropTypes.string.isRequired,
-            date: PropTypes.string.isRequired,
-        }).isRequired,
-        currentYield: PropTypes.shape({
-            value: PropTypes.string.isRequired,
-            date: PropTypes.string.isRequired,
-        }).isRequired,
-        pesticideRecommendation: PropTypes.arrayOf(
-            PropTypes.shape({
-                crop: PropTypes.string.isRequired,
-                pesticide: PropTypes.string.isRequired,
-            })
-        ).isRequired,
-        amountPlanted: PropTypes.string.isRequired,
-        expectedHarvest: PropTypes.string.isRequired,
-        aiSuggestions: PropTypes.string.isRequired,
-    }).isRequired,
+    id: PropTypes.string.isRequired, 
+    name: PropTypes.string.isRequired,
+    amountPlanted: PropTypes.number.isRequired,
+    expectedHarvest: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
+    farmId: PropTypes.string.isRequired,
+    farmName: PropTypes.string.isRequired,
+    aiSuggestions: PropTypes.string.isRequired,
+    recommendedPesticide: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    image2: PropTypes.string.isRequired,
+    image3: PropTypes.string.isRequired,
 };
-
 export default CropCard;

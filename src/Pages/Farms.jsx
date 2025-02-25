@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Box, Divider, Typography } from "@mui/material";
 import FarmCard from "../components/FarmCard";
 import FarmItem from "../components/FarmItem";
+import AddFarmComponent from "../components/AddFarmComponent";
 
 const Farms = () => {
   const [farms, setFarms] = useState([]);
@@ -54,6 +55,8 @@ const Farms = () => {
   />
 ))}
       </Box>
+      <Divider />
+      <AddFarmComponent />
 
       <Box
         id="sideContent"
