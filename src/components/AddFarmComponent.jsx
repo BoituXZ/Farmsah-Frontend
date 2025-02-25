@@ -1,3 +1,4 @@
+
 import { Box } from "@mui/material";
 import { useState } from "react";
 import { Modal, TextField, Button, Typography, IconButton } from "@mui/material";
@@ -135,7 +136,14 @@ const AddComponent = () => {
             <TextField label="Size" value={newSize} onChange={(e) => setSize(e.target.value)} />
             <TextField label="Crops" value={newCrops} onChange={(e) => setCrops(e.target.value)} />
             <TextField label="Livestock" value={newLivestock} onChange={(e) => setLivestock(e.target.value)} />
-            <Button variant="contained" color="primary" onClick={handleSubmit}>
+            <Button variant="contained" onClick={handleSubmit}
+            sx={{
+              backgroundColor: "#2c5f2dff",
+              '&:active':{
+                backgroundColor: "#f7d17b"
+              },
+            }}
+            >
               Submit
             </Button>
           </Box>

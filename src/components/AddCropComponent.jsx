@@ -123,7 +123,7 @@ const AddCropComponent = () => {
             left: "50%",
             transform: "translate(-50%, -50%)",
             boxShadow: 24,
-            height: "700px"
+            height: "620px"
 
           }}
         >
@@ -153,7 +153,7 @@ const AddCropComponent = () => {
             <TextField label="Crops" value={newCrops} onChange={(e) => setCrops(e.target.value)} />
             <TextField label="Past Crops" value={newPastCrops} onChange={(e) => setPastCrops(e.target.value)} />
 
-            {/* Farm Selection Dropdown */}
+            <Box>
             <InputLabel id="farm-select-label">Location</InputLabel>
             <Select
               labelId="farm-select-label"
@@ -172,6 +172,8 @@ const AddCropComponent = () => {
                 <MenuItem disabled>No farms available</MenuItem>
               )}
             </Select>
+            </Box>  
+          
 
             <Button variant="contained" color="primary" onClick={handleSubmit}>
               Submit

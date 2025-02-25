@@ -68,7 +68,9 @@ const Crops = () => {
         key={crop.id} // key is used by React, don't pass it as a prop
         {...crop} // Spread the crop object for cleaner prop handling
     />
-))}
+))
+    
+}
 
             </Box>
             <Divider orientation="vertical" />
@@ -116,6 +118,7 @@ const Crops = () => {
                             crop.crops ? crop.crops.split(", ").map((cropName, cropIndex) => (
                                 <CropItem key={`${index}-${cropIndex}`} cropName={cropName} location={crop.location} />
                             )) : null
+                            
                         )}
                     </Box>
                 </Box>

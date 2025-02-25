@@ -184,6 +184,10 @@ const FarmCard = ({ slug, farmName, location, size, crops, livestock, image,}) =
                     });handleSubmit();
                     setIsEditing(false); // Close editing mode
                   }}
+                  sx={{
+                    backgroundColor: "#2c5f2dff",
+                    ":hover": { backgroundColor: "rgb(255, 183, 0)", cursor: "pointer" },
+                  }}
                 >
                   Submit
                 </Button>

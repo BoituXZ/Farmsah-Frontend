@@ -1,9 +1,11 @@
-import { Box, Button, Modal, TextField, Typography, IconButton } from "@mui/material";
+import { Box, Button, Modal, TextField, Typography, IconButton, MenuItem, Select, InputLabel } from "@mui/material";
 import PropTypes from "prop-types";
-import { useState } from "react";
-import { Close, Edit} from "@mui/icons-material";
+import { useEffect, useState } from "react";
+import { Close, Delete, Edit, RecyclingOutlined} from "@mui/icons-material";
 
-const CropCard = ({ name, amountPlanted, expectedHarvest, location, farmId, farmName, aiSuggestions, recommendedPesticide, image, image2, image3 }) => {
+// Fix the ID
+
+const CropCard = ({ id, name, amountPlanted, expectedHarvest, location, farmId, farmName, aiSuggestions, recommendedPesticide, image, image2, image3 }) => {
     const [open, setOpen] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -19,6 +21,7 @@ const CropCard = ({ name, amountPlanted, expectedHarvest, location, farmId, farm
     };
 
     const [newCropName, setCropName] = useState(name);
+    const [cropID, newCropId] = useState(id)
     const [newLocation, setLocation] = useState(location);
     const [newAmountPlanted, setAmountPlanted] = useState(amountPlanted);
     const [newCropImage, setCropImage] = useState(image);
@@ -27,6 +30,8 @@ const CropCard = ({ name, amountPlanted, expectedHarvest, location, farmId, farm
     const [newExpectedHarvest, setExpectedHarvest] = useState(expectedHarvest);
     const [newAiSuggestions, setAiSuggestions] = useState(aiSuggestions);
     const [newPesticide, setPesticide] = useState(recommendedPesticide);
+    const [availableFarms, setAvailableFarms] = useState([]); // Store farms
+    const [selectedFarm, setSelectedFarm] = useState(""); // Store selected farm
     
 
 
@@ -48,14 +53,57 @@ const CropCard = ({ name, amountPlanted, expectedHarvest, location, farmId, farm
             }),
           });
     
-          if (!response.ok) throw new Error("Failed to update farm");
+          if (!response.ok) throw new Error("Failed to update crops");
     
-          console.log("Farm updated successfully");
+          console.log("Crops updated successfully");
           setIsEditing(false);
         } catch (error) {
           console.error("Error updating farm:", error);
         }
       };
+    
+    const handleDelete = async () =>{
+        try {
+            const response = await fetch(`http://localhost:3010/user/crops/${cropID}`, {
+            method: "DELETE",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },})
+            
+            if (!response.ok) throw new Error("Failed to update crops");
+            console.log("Crops updated successfully");
+            setOpen(false);
+            window.location.reloadx
+            
+
+        } catch (error){
+            console.error("Error deleting Crop:", error)
+        }
+    }
+
+
+      useEffect(() => {
+          if (open) {
+            const fetchFarms = async () => {
+              try {
+                const response = await fetch("http://localhost:3010/user/farms", {
+                  credentials: "include",
+                });
+      
+                if (!response.ok) {
+                  throw new Error("Failed to fetch farms.");
+                }
+      
+                const farms = await response.json();
+                setAvailableFarms(farms);
+              } catch (error) {
+                console.error("Error fetching farms:", error);
+              }
+            };
+      
+            fetchFarms();
+          }
+        }, [open]); // Fetch farms only when modal opens
+      
 
     return (
         <Box
@@ -237,17 +285,39 @@ const CropCard = ({ name, amountPlanted, expectedHarvest, location, farmId, farm
                             <IconButton onClick={handleClose}>
                                 <Close />
                             </IconButton>
+                            <IconButton onClick={handleDelete}>
+                                <Delete />
+                            </IconButton>
                             </Box>
                     </Box>
 
                     <Box component="form" sx={{ display: "flex", flexDirection: "column", gap: "20px", marginTop: "20px" }}>
                         {isEditing ? (
                             <>  
-                                <TextField label= "CropImage 1" value={newCropImage} onChange={(e) => {setCropImage(e.target.value)}} />
-                                <TextField label= "CropImage 2" value={newCropImage} onChange={(e) => {setCropImage2(e.target.value)}} />
-                                <TextField label= "CropImage 3" value={newCropImage} onChange={(e) => {setCropImage3(e.target.value)}} />
+                                <TextField label= "Crop Image 1" value={newCropImage} onChange={(e) => {setCropImage(e.target.value)}} />
+                                <TextField label= "Crop Image 2" value={newCropImage} onChange={(e) => {setCropImage2(e.target.value)}} />
+                                <TextField label= "Crop Image 3" value={newCropImage} onChange={(e) => {setCropImage3(e.target.value)}} />
                                 <TextField label="Crop Name" value={newCropName} onChange={(e) => setCropName(e.target.value)} />
-                                <TextField label="Location" value={newLocation} onChange={(e) => setLocation(e.target.value)} />
+                                <Box>
+            <InputLabel id="farm-select-label">Location</InputLabel>
+            <Select
+              labelId="farm-select-label"
+              id="farm-select"
+              value={selectedFarm}
+              onChange={(e) => setSelectedFarm(e.target.value)}
+              fullWidth
+            >
+              {availableFarms.length > 0 ? (
+                availableFarms.map((farm) => (
+                  <MenuItem key={farm.id} value={farm.id}>
+                    {farm.name} - {farm.location}
+                  </MenuItem>
+                ))
+              ) : (
+                <MenuItem disabled>No farms available</MenuItem>
+              )}
+            </Select>
+                                    </Box>  
                                 {/* <TextField label="Size" value={newSize} onChange={(e) => setSize(e.target.value)} /> */}
                                 <TextField label="Crops" value={newCropName} onChange={(e) => setCropName(e.target.value)} />
                                 {/* <TextField label="Past Crops" value={newPastCrops} onChange={(e) => setPastCrops(e.target.value)} /> */}
@@ -270,6 +340,11 @@ const CropCard = ({ name, amountPlanted, expectedHarvest, location, farmId, farm
                                         });
                                         handleSubmit();
                                         setIsEditing(false);
+                                        
+                                    }}
+                                    sx={{
+                                        backgroundColor: "#2c5f2dff",
+                                        ":hover": { backgroundColor: "rgb(255, 183, 0)", cursor: "pointer" },
                                     }}
                                 >
                                     Submit
@@ -350,6 +425,7 @@ const CropCard = ({ name, amountPlanted, expectedHarvest, location, farmId, farm
 };
 
 CropCard.propTypes = {
+    id: PropTypes.string.isRequired, 
     name: PropTypes.string.isRequired,
     amountPlanted: PropTypes.number.isRequired,
     expectedHarvest: PropTypes.string.isRequired,
