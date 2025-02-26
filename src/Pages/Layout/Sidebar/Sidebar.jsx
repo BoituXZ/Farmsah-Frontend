@@ -75,7 +75,7 @@ const styles = {
     color: (theme) => theme.palette.background.white
   },
   listItem: {
-    fontFamily: "Playfair Display, serif",
+    fontFamily: 'Montserrat, sans-serif',
     padding: '8px 0',
     fontWeight: '200',
     color: (theme) => theme.palette.background.white2,

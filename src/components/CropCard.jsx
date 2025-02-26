@@ -140,7 +140,7 @@ const CropCard = ({ id, name, amountPlanted, expectedHarvest, location, farmId, 
             <Box id="cardImage" sx={{ maxHeight: { xs: "100px", md: "500px" }, overflow: "hidden", flex: "3",
                 }}>
                 <Box id="imagesCarousel" sx={{ display: "flex", flexDirection: "row", gap: "2px" }}>
-                    {[image, image2, image3].map((img, index) => (
+                    {[newCropImage, newCropImage2, newCropImage3].map((img, index) => (
                         <Box key={index} id={`image${index + 1}`} sx={{ flex: "1" }}>
                             <img
                                 src={img}

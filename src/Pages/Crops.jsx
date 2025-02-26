@@ -19,7 +19,8 @@ const Crops = () => {
                 }
     
                 const data = await response.json();
-    
+                
+                // Fix the image
                 // Transform the data if needed
                 const formattedCrops = data.map((crop) => ({
                     id: crop.id,
@@ -27,14 +28,12 @@ const Crops = () => {
                     amountPlanted: crop.amount_planted,
                     expectedHarvest: crop.expected_harvest,
                     farmId: crop.farm_id,
-                    farmName: crop.farm_name, // This requires a join in the backend
-                    location: crop.location,   // Also needs to be fetched from farms
                     aiSuggestions: crop.ai_suggestions,
-                    recommendedPesticide: crop.recommended_pesticide, // Ensure these exist in backend
-                    image: crop.image || "", // Handle missing image gracefully
-                    image2: crop.image2 || "",
-                    image3: crop.image3 || "",
+                    image: crop.crop_image || "",  // ✅ Corrected field name
+                    image2: crop.crop_image2 || "",
+                    image3: crop.crop_image3 || "",
                 }));
+                
     
                 setCropsData(formattedCrops);
             } catch (error) {

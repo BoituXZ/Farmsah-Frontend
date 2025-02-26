@@ -53,6 +53,9 @@ const AddCropComponent = () => {
     const cropData = {
       farmId: selectedFarm ? Number(selectedFarm) : null,
       name: newCropName,
+      cropImage: newCropImage,
+      cropImage2: newCropImage2,
+      cropImage3: newCropImage3,
       amountPlanted: Number(newSize) || 0, // Ensure number
       expectedHarvest: Number(newCrops) || 0, // Use `newCrops` for expectedHarvest?
       aiSuggestions: newPastCrops, // Assuming past crops could be AI suggestions?
@@ -114,7 +117,7 @@ const AddCropComponent = () => {
       <Modal open={open} onClose={handleClose} aria-labelledby="Details" aria-describedby="details">
         <Box
           sx={{
-            backgroundColor: "white",
+            backgroundColor: (theme) => theme.palette.background.paper,
             width: { xs: "400px", sm: "700px", md: "800px" },
             padding: "20px",
             borderRadius: "10px",
@@ -123,11 +126,11 @@ const AddCropComponent = () => {
             left: "50%",
             transform: "translate(-50%, -50%)",
             boxShadow: 24,
-            height: "620px"
+            height: "680px"
 
           }}
         >
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
             <Typography
               variant="h5"
               sx={{
@@ -145,15 +148,19 @@ const AddCropComponent = () => {
 
           <Box
             component="form"
-            sx={{ display: "flex", flexDirection: "column", gap: "20px", marginTop: "20px" }}
+            sx={{ display: "flex", flexDirection: "column", gap: "49px"}}
           >
-            <TextField label="Crop Image" value={newCropImage} onChange={(e) => setCropImage(e.target.value)} />
-            <TextField label="Crop Name" value={newCropName} onChange={(e) => setCropName(e.target.value)} />
-            <TextField label="Size" value={newSize} onChange={(e) => setSize(e.target.value)} />
-            <TextField label="Crops" value={newCrops} onChange={(e) => setCrops(e.target.value)} />
-            <TextField label="Past Crops" value={newPastCrops} onChange={(e) => setPastCrops(e.target.value)} />
+            <TextField label="Crop Image" value={newCropImage} onChange={(e) => setCropImage(e.target.value)} sx={{height: "15px"}} />
+            <TextField label="Crop Image 2" value={newCropImage2} onChange={(e) => setCropImage2(e.target.value)} sx={{height: "15px"}} />
+            <TextField label="Crop Image 3" value={newCropImage3} onChange={(e) => setCropImage3(e.target.value)} sx={{height: "15px"}} />
+            <TextField label="Crop Name" value={newCropName} onChange={(e) => setCropName(e.target.value)} sx={{height: "15px"}} />
+            <TextField label="Size" value={newSize} onChange={(e) => setSize(e.target.value)} sx={{height: "15px"}} />
+            <TextField label="Crops" value={newCrops} onChange={(e) => setCrops(e.target.value)} sx={{height: "15px"}} />
+            <TextField label="Past Crops" value={newPastCrops} onChange={(e) => setPastCrops(e.target.value)} sx={{height: "15px"}} />
 
-            <Box>
+            <Box
+            sx={{margin: 0, padding: 0 }}
+            >
             <InputLabel id="farm-select-label">Location</InputLabel>
             <Select
               labelId="farm-select-label"
@@ -175,10 +182,18 @@ const AddCropComponent = () => {
             </Box>  
           
 
-            <Button variant="contained" color="primary" onClick={handleSubmit}>
+            
+          </Box>
+          <Button variant="contained" onClick={handleSubmit}
+          fullWidth
+            sx={{
+              margin: "10px auto",
+              backgroundColor: "#2c5f2dff",
+              ":hover": { backgroundColor: "rgb(255, 183, 0)", cursor: "pointer" },
+            }}
+            >
               Submit
             </Button>
-          </Box>
         </Box>
       </Modal>
     </Box>
