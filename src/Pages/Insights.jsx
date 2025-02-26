@@ -1,8 +1,24 @@
-import React from 'react'
+import { Box } from '@mui/material'
+import InsightCard from '../components/InsightCard'
+
 
 const Insights = () => {
   return (
-    <div>Insights</div>
+    <Box
+    id="insightPageContainer"
+    sx={{
+      display: {xs:"flex",sm:"flex", md:"grid"},
+      flexDirection: "column",
+      gridTemplateColumns: "repeat(2, 1fr)",
+      gap: "12px",
+      padding: "1rem"
+    }}
+    >
+      <InsightCard />
+      <InsightCard />
+      <InsightCard />
+
+    </Box>
   )
 }
 
