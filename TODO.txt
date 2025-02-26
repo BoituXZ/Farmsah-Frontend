@@ -1,1 +1,2 @@
 Make it refresh when deleteing happens
+Fix Image not showing up
