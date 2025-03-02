@@ -18,6 +18,7 @@ const CropCard = ({ id, name, amountPlanted, expectedHarvest, location, farmId, 
     const handleClose = () => {
         setOpen(false);
         setIsEditing(false);
+        window.location.reload(); // Reload page after editing
     };
 
     const [newCropName, setCropName] = useState(name);
@@ -38,47 +39,48 @@ const CropCard = ({ id, name, amountPlanted, expectedHarvest, location, farmId, 
     const handleEditClick = () => setIsEditing(true);
     const handleSubmit = async () => {
         try {
-          const response = await fetch(`http://localhost:3010/user/crops/`, {
-            method: "PUT",
-            credentials: "include",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              name: newCropName,
-              location: newLocation,
-              PastCrops: newPastCrops,
-              imageUrl: newCropImage,
-              imageUrl2: newCropImage2,
-              imageUrl3: newCropImage3,
-
-            }),
-          });
+            const response = await fetch(`http://localhost:3010/user/crops/`, {
+                method: "PUT",
+                credentials: "include",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: newCropName,
+                    location: newLocation,
+                    imageUrl: newCropImage,
+                    imageUrl2: newCropImage2,
+                    imageUrl3: newCropImage3,
+                }),
+            });
     
-          if (!response.ok) throw new Error("Failed to update crops");
-    
-          console.log("Crops updated successfully");
-          setIsEditing(false);
+            if (!response.ok) throw new Error("Failed to update crop");
+            console.log("Crop updated successfully");
+            
+            setIsEditing(false);
+            window.location.reload(); // Reload page after editing
         } catch (error) {
-          console.error("Error updating farm:", error);
+            console.error("Error updating crop:", error);
         }
-      };
+    };
     
-    const handleDelete = async () =>{
+    
+      const handleDelete = async () => {
         try {
             const response = await fetch(`http://localhost:3010/user/crops/${cropID}`, {
-            method: "DELETE",
-            credentials: "include",
-            headers: { "Content-Type": "application/json" },})
-            
-            if (!response.ok) throw new Error("Failed to update crops");
-            console.log("Crops updated successfully");
+                method: "DELETE",
+                credentials: "include",
+                headers: { "Content-Type": "application/json" },
+            });
+    
+            if (!response.ok) throw new Error("Failed to delete crop");
+            console.log("Crop deleted successfully");
+    
             setOpen(false);
-            window.location.reloadx
-            
-
-        } catch (error){
-            console.error("Error deleting Crop:", error)
+            window.location.reload();  // Reload page after deleting
+        } catch (error) {
+            console.error("Error deleting Crop:", error);
         }
-    }
+    };
+    
 
 
       useEffect(() => {

@@ -1,3 +1,4 @@
+import { ThemeContext } from "@emotion/react"
 import { Box, Typography } from "@mui/material"
 
 
@@ -5,12 +6,21 @@ const InsightCard = () => {
   return (
     <Box id="insightCardContainer"
     sx={{
-        border: "solid 1px red",
+        border: "1px solid rgba(29, 46, 35, 0.24)",
         height: "320px", 
         maxWidth: {xs:"400px", sm:"300px", md:"600px"},
-        borderRadius: "6px",
         display: "flex",
         flexDirection: "column",
+        borderRadius: "9px",
+        justifyContent: "center",
+        background: "rgba(255, 255, 255, 0.2)",
+                boxShadow: "1px 3px 5px rgba(0, 0, 0, 0.2)",
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                "&:hover": {
+                    transform: "scale(1.01)",
+                    boxShadow: "0 12px 40px rgba(0, 0, 0, 0.3)",
+                },
+
 
     }}
     >
@@ -18,7 +28,6 @@ const InsightCard = () => {
         <Box
         id="cardHeader"
         sx={{
-            border: "1px blue solid",
             padding: "0 6px",
             margin: "3px"
         }}
@@ -32,7 +41,6 @@ const InsightCard = () => {
         id="suggestionSubject"
         sx={{
             margin: "3px 9px",
-            border: "solid 1px red",
             padding: "1px",
             width: "300px",
             marginBottom: "18px"
@@ -51,11 +59,9 @@ const InsightCard = () => {
         <Box 
         id="suggestionBody"
         sx={{
-            margin: "2px 2px",
-            border: "solid 1px red",
             padding: "3px",
             height: "200px",
-            width: "90%",
+            width: "100%",
             textAlign: "left",
             justifySelf: "center",
         }}
