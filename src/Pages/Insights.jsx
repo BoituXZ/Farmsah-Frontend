@@ -17,6 +17,11 @@ const Insights = () => {
       <InsightCard />
       <InsightCard />
       <InsightCard />
+      <InsightCard />
+      <InsightCard />
+      <InsightCard />
+
+
 
     </Box>
   )
