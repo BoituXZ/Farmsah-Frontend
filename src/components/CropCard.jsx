@@ -1,11 +1,11 @@
 import { Box, Button, Modal, TextField, Typography, IconButton, MenuItem, Select, InputLabel } from "@mui/material";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { Close, Delete, Edit, RecyclingOutlined} from "@mui/icons-material";
+import { Close, Delete, Edit} from "@mui/icons-material";
 
 // Fix the ID
 
-const CropCard = ({ id, name, amountPlanted, expectedHarvest, location, farmId, farmName, aiSuggestions, recommendedPesticide, image, image2, image3 }) => {
+const CropCard = ({ id, name, amountPlanted, expectedHarvest, location, aiSuggestions, recommendedPesticide, image, image2, image3 }) => {
     const [open, setOpen] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
 

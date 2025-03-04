@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Typography, List, ListItem, ListItemText, ListItemIcon, IconButton, Drawer,} from '@mui/material';
 import { Menu as MenuIcon, Close as CloseIcon} from '@mui/icons-material';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { useMediaQuery} from '@mui/material';
 import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
@@ -126,7 +126,6 @@ const Sidebar = () => {
   const isSmallScreen = useMediaQuery('(max-width: 900px)'); // Media query for small screens
 
   const handleToggleDrawer = () => setIsDrawerOpen((prev) => !prev); // Toggle drawer
-  const theme = useTheme();
   const SidebarContent = (
     
     <>

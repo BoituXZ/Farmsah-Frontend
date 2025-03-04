@@ -12,7 +12,7 @@ const NotFound = () => {
         textAlign: "center",
         margin: "auto",
       }}
-      >are we editing url's? :)</Typography>
+      >are we editing url&apos;s? :)</Typography>
     </Box>
   )
 }

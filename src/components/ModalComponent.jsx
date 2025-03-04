@@ -37,7 +37,7 @@ const ModalComponent = ({ farmName, location, crops, livestock, size, image, onS
   const headerTitle = pathname.split("/").filter(Boolean).pop(); // Get the last part of the path
 
   return (
-    <div>
+    <Box>
       <Button onClick={handleOpen}>View Details</Button>
       <Modal
         open={open}
@@ -166,7 +166,7 @@ const ModalComponent = ({ farmName, location, crops, livestock, size, image, onS
           </Box>
         </Box>
       </Modal>
-    </div>
+    </Box>
   );
 };
 

@@ -10,7 +10,6 @@ const AddCropComponent = () => {
   const handleClose = () => setOpen(false);
 
   const [newCropName, setCropName] = useState("");
-  const [newLocation, setLocation] = useState("");
   const [newSize, setSize] = useState("");
   const [newCrops, setCrops] = useState("");
   const [newPastCrops, setPastCrops] = useState("");
