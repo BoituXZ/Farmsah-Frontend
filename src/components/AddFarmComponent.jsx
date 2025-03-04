@@ -5,6 +5,7 @@ import { Modal, TextField, Button, Typography, IconButton } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add";
 import { Close } from "@mui/icons-material";
 import { useLocation } from "react-router-dom";
+import LocationPicker from "./LocationPicker";
 
 const AddComponent = () => {
   const [open, setOpen] = useState(false);
@@ -101,6 +102,7 @@ const AddComponent = () => {
           sx={{
             backgroundColor: "white",
             width: { xs: "400px", sm: "700px", md: "800px" },
+            height: "90%",
             padding: "20px",
             borderRadius: "10px",
             position: "absolute",
@@ -108,6 +110,14 @@ const AddComponent = () => {
             left: "50%",
             transform: "translate(-50%, -50%)",
             boxShadow: 24,
+            overflowY: "scroll",
+            "&::-webkit-scrollbar": { width: "5px", borderRadius: "10px" },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: "#2c5f2dff",
+              borderRadius: "10px", // Rounded edges
+            },
+            "&::-webkit-scrollbar-track": { backgroundColor: "rgba(0, 0, 0, 0.1)" },
+            "&::-webkit-scrollbar-thumb:hover": { background: "#1e4020" },
           }}
         >
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -132,6 +142,9 @@ const AddComponent = () => {
           >
             <TextField label="Farm Image" value={newFarmImage} onChange={(e) => setFarmImage(e.target.value)} />
             <TextField label="Farm Name" value={newFarmName} onChange={(e) => setFarmName(e.target.value)} />
+            <Box>
+              <LocationPicker setLocation={setLocation} />
+            </Box>
             <TextField label="Location" value={newLocation} onChange={(e) => setLocation(e.target.value)} />
             {/* Map SHould be heree where location is */}
             <TextField label="Size" value={newSize} onChange={(e) => setSize(e.target.value)} />

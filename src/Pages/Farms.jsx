@@ -39,6 +39,13 @@ const Farms = () => {
           flexDirection: "column",
           gap: "10px",
           padding: "10px",
+          "&::-webkit-scrollbar": { width: "5px", borderRadius: "10px" },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: "#2c5f2dff",
+              borderRadius: "10px", // Rounded edges
+            },
+            "&::-webkit-scrollbar-track": { backgroundColor: "rgba(0, 0, 0, 0.1)" },
+            "&::-webkit-scrollbar-thumb:hover": { background: "#1e4020" },
         }}
       >
         {/* Farm cards */}
