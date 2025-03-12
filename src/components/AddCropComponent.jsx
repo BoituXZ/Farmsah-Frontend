@@ -93,7 +93,8 @@ const AddCropComponent = () => {
           padding: "1px",
           position: "fixed",
           top: { xs: "93vh", md: "90vh" },
-          left: { xs: "82vw", md: "75vw" },
+          left: { xs: "82vw", md: "75.3vw" },
+
         }}
         onClick={handleOpen}
       >
@@ -102,7 +103,7 @@ const AddCropComponent = () => {
           sx={{
             width: { xs: "56px", sm: "60px", md: "60px" },
             height: { xs: "56px", sm: "60px", md: "60px" },
-            backgroundColor: "#2c5f2dff",
+            border: "solid 2px #2c5f2dff",
             borderRadius: "50%",
             display: "flex",
             justifyContent: "center",
@@ -110,7 +111,9 @@ const AddCropComponent = () => {
             ":hover": { backgroundColor: "rgb(255, 183, 0)", cursor: "pointer" },
           }}
         >
-          <AddIcon sx={{ fontSize: "2rem" }} />
+          <AddIcon sx={{ fontSize: "2rem",
+            color: "#2c5f2dff"
+           }} />
         </Box>
       </Box>
 

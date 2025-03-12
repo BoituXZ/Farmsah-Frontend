@@ -6,16 +6,18 @@ import AddFarmComponent from "../components/AddFarmComponent";
 
 const Farms = () => {
   const [farms, setFarms] = useState([]);
+  const [locationNames, setLocationNames] = useState({});
+  console.log(farms);
 
   useEffect(() => {
     const fetchFarms = async () => {
       try {
         const response = await fetch("http://localhost:3010/user/farms", {
-          credentials: "include", 
+          credentials: "include",
         });
 
         if (!response.ok) {
-          throw new Error("Failed to fetch farms, you did something wrong!");
+          throw new Error("Failed to fetch farms");
         }
 
         const data = await response.json();
@@ -28,6 +30,8 @@ const Farms = () => {
     fetchFarms();
   }, []);
 
+  
+
   return (
     <Box id="page" sx={{ display: "flex", flexDirection: "row", height: "100%", width: "100%" }}>
       <Box
@@ -35,32 +39,33 @@ const Farms = () => {
         sx={{
           overflowY: "auto",
           display: "flex",
+          overflowX: "none",
           flex: "4",
           flexDirection: "column",
           gap: "10px",
           padding: "10px",
           "&::-webkit-scrollbar": { width: "5px", borderRadius: "10px" },
-            "&::-webkit-scrollbar-thumb": {
-              backgroundColor: "#2c5f2dff",
-              borderRadius: "10px", // Rounded edges
-            },
-            "&::-webkit-scrollbar-track": { backgroundColor: "rgba(0, 0, 0, 0.1)" },
-            "&::-webkit-scrollbar-thumb:hover": { background: "#1e4020" },
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: "#2c5f2dff",
+            borderRadius: "10px", // Rounded edges
+          },
+          "&::-webkit-scrollbar-track": { backgroundColor: "rgba(0, 0, 0, 0.1)" },
+          "&::-webkit-scrollbar-thumb:hover": { background: "#1e4020" },
         }}
       >
         {/* Farm cards */}
         {farms.map((farm) => (
-  <FarmCard
-    key={farm.id}
-    slug={farm.slug}
-    image={farm.image_url || "https://via.placeholder.com/150"}
-    farmName={farm.name}
-    location={farm.location}
-    size={`${farm.size} acres`}
-    livestock={farm.livestock || "No livestock"}
-    crops={farm.crops || "No crops"}
-  />
-))}
+          <FarmCard
+            key={farm.id}
+            slug={farm.slug}
+            image={farm.image_url || "https://via.placeholder.com/150"}
+            farmName={farm.name}
+            location={farm.location}
+            size={`${farm.size} acres`}
+            livestock={farm.livestock || "No livestock"}
+            crops={farm.crops || "No crops"}
+          />
+        ))}
       </Box>
       <Divider />
       <AddFarmComponent />

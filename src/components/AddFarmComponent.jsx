@@ -18,6 +18,7 @@ const AddComponent = () => {
   const [newSize, setSize] = useState("");
   const [newCrops, setCrops] = useState("");
   const [newLivestock, setLivestock] = useState("");
+  const [newLocationName, setLocationName] = useState("");
 
   const { pathname } = useLocation();
   const headerTitle = pathname.split("/").filter(Boolean).pop();
@@ -27,6 +28,7 @@ const AddComponent = () => {
     const farmData = {
       name: newFarmName,
       location: newLocation,
+      locationName: newLocationName,
       size: newSize,
       cropsId: newCrops ? Number(newCrops) : null,   // Convert to number or null
       livestockId: newLivestock ? Number(newLivestock) : null,  // Convert to number or null
@@ -76,7 +78,7 @@ const AddComponent = () => {
           padding: "1px",
           position: "fixed",
           top: { xs: "93vh", md: "90vh" },
-          left: { xs: "82vw", md: "75vw" },
+          left: { xs: "82vw", md: "75.3vw" },
         }}
         onClick={handleOpen}
       >
@@ -85,22 +87,22 @@ const AddComponent = () => {
           sx={{
             width: { xs: "56px", sm: "60px", md: "60px" },
             height: { xs: "56px", sm: "60px", md: "60px" },
-            backgroundColor: "#2c5f2dff",
+            border: "solid 2px #2c5f2dff",
             borderRadius: "50%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            ":hover": { backgroundColor: "rgb(255, 183, 0)", cursor: "pointer" },
+            ":hover": { backgroundColor: "#8fc9e5", cursor: "pointer" },
           }}
         >
-          <AddIcon sx={{ fontSize: "2rem" }} />
+          <AddIcon sx={{ fontSize: "2rem", color: "#2c5f2dff" }} />
         </Box>
       </Box>
 
       <Modal open={open} onClose={handleClose} aria-labelledby="Details" aria-describedby="details">
         <Box
           sx={{
-            backgroundColor: "white",
+            backgroundColor: (theme) => theme.palette.background.white,
             width: { xs: "400px", sm: "700px", md: "800px" },
             height: "90%",
             padding: "20px",

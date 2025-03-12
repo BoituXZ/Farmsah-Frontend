@@ -72,7 +72,7 @@ const CropCard = ({ id, name, amountPlanted, expectedHarvest, location, farmId, 
             if (!response.ok) throw new Error("Failed to update crops");
             console.log("Crops updated successfully");
             setOpen(false);
-            window.location.reloadx
+            window.location.reload
             
 
         } catch (error){
