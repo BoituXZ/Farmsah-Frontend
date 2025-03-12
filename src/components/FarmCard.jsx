@@ -14,34 +14,33 @@ const FarmCard = ({ slug, farmName, location, size, crops, livestock, image,}) =
   const [newCrops, setCrops] = useState(crops);
   const [newLivestock, setLivestock] = useState(livestock);
   const [newFarmImage, setFarmImage] = useState(image);
+  const [displayLocation, setDisplayLocation] = useState(location);
+  
 
   const modalSize =() => isEditing ? "80%" : "auto" ;
 
-  const fetchLocationName = async (location) => {
-      const [lat, lng] = location.split(", "); 
-      // SPlitting the coordinates to assign them to lat and lng
+  useEffect(() => {
+    const fetchLocationName = async () => {
+      if (!location.includes(",")) return; // Already a name, no need to fetch
+      
+      const [lat, lng] = location.split(", ").map(parseFloat);
       try {
-        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`);
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+        );
         const data = await response.json();
-        if (data && data.display_name) {
-          console.log("Name is", data.display_name);
-          return data.display_name; // Return user-friendly name
+        if (data?.display_name) {
+          setDisplayLocation(data.display_name);
         } else {
-          console.log("Unknown Location");
-          return "Unknown Location";
+          setDisplayLocation("Unknown Location");
         }
       } catch (error) {
         console.error("Error fetching location name:", error);
-        return "Unknown Location";
+        setDisplayLocation("Unknown Location");
       }
     };
 
-  useEffect(() => {
-    const updateLocation = async () => {
-      const locationName = await fetchLocationName(location);
-      setLocation(locationName);
-    };
-    updateLocation();
+    fetchLocationName();
   }, [location]);
 
   const handleDelete = async () =>{
@@ -136,7 +135,7 @@ const FarmCard = ({ slug, farmName, location, size, crops, livestock, image,}) =
           {farmName}
         </Typography>
         <Typography variant="subtitle1" sx={{ fontSize: { xs: "0.7rem", md: "1rem" } }}>
-          Location: {location}
+          Location: {displayLocation}
         </Typography>
       </Box>
 
