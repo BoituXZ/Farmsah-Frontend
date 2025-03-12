@@ -22,15 +22,18 @@ const FarmCard = ({ slug, farmName, location, size, crops, livestock, image,}) =
   useEffect(() => {
     const fetchLocationName = async () => {
       if (!location.includes(",")) return; // Already a name, no need to fetch
-      
+    
       const [lat, lng] = location.split(", ").map(parseFloat);
       try {
         const response = await fetch(
           `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
         );
         const data = await response.json();
-        if (data?.display_name) {
-          setDisplayLocation(data.display_name);
+    
+        if (data?.address) {
+          const { road, city, town, village, country } = data.address;
+          const locationName = [road, city || town || village, country].filter(Boolean).join(", ");
+          setDisplayLocation(locationName || "Unknown Location");
         } else {
           setDisplayLocation("Unknown Location");
         }
