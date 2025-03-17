@@ -64,6 +64,13 @@ const PagesLayout = () => {
             sx={{
               flex: isSmallScreen ? "1" : "6",
               overflow: "auto",
+              "&::-webkit-scrollbar": { width: "5px", borderRadius: "10px" },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: "#2c5f2dff",
+              borderRadius: "1px", // Rounded edges
+            },
+            "&::-webkit-scrollbar-track": { backgroundColor: "rgba(0, 0, 0, 0.1)" },
+            "&::-webkit-scrollbar-thumb:hover": { background: "#1e4020" },
               height: "100%",
             }}
           >

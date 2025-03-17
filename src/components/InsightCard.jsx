@@ -5,21 +5,11 @@ const InsightCard = () => {
   return (
     <Box id="insightCardContainer"
     sx={{
-        border: "1px solid rgba(29, 46, 35, 0.24)",
+        border: "solid 1px red",
         height: "320px", 
         maxWidth: {xs:"400px", sm:"300px", md:"600px"},
         display: "flex",
         flexDirection: "column",
-        borderRadius: "9px",
-        justifyContent: "center",
-        background: "rgba(255, 255, 255, 0.2)",
-                boxShadow: "1px 3px 5px rgba(0, 0, 0, 0.2)",
-                transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                "&:hover": {
-                    transform: "scale(1.01)",
-                    boxShadow: "0 12px 40px rgba(0, 0, 0, 0.3)",
-                },
-
 
     }}
     >
@@ -27,11 +17,15 @@ const InsightCard = () => {
         <Box
         id="cardHeader"
         sx={{
+            border: "1px blue solid",
             padding: "0 6px",
-            margin: "3px"
+            margin: "10px 0px"
         }}
         >
-        <Typography variant="h2">
+        <Typography variant="h2"
+        sx={{
+            fontWeight: "300",
+        }}>
             Suggestion Type (Ai or Just information)
         </Typography>
         </Box>
@@ -40,9 +34,10 @@ const InsightCard = () => {
         id="suggestionSubject"
         sx={{
             margin: "3px 9px",
+            border: "solid 1px red",
             padding: "1px",
             width: "300px",
-            marginBottom: "18px"
+            // marginBottom: "18px"
         }}
         >
             <Typography variant="body"
@@ -58,6 +53,8 @@ const InsightCard = () => {
         <Box 
         id="suggestionBody"
         sx={{
+            margin: "2px 2px",
+            border: "solid 1px red",
             padding: "3px",
             height: "200px",
             width: "100%",
@@ -65,7 +62,9 @@ const InsightCard = () => {
             justifySelf: "center",
         }}
         >
-            <Typography variant="body">
+            <Typography variant="body"
+            sx={{fontWeight: "350"}}>
+
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </Typography>
         </Box>

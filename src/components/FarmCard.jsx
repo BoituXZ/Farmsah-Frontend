@@ -1,7 +1,8 @@
 import { Box, Button, Modal, TextField, Typography, IconButton } from "@mui/material";
 import PropTypes from "prop-types";
-import { useState } from "react";
-import { Close, Edit } from "@mui/icons-material";
+import { useEffect, useState } from "react";
+import { Close, Delete, Edit } from "@mui/icons-material";
+import LocationPicker from "./LocationPicker";
 
 // TODO: Fix modal not closing
 const FarmCard = ({ slug, farmName, location, size, crops, livestock, image,}) => {
@@ -13,6 +14,55 @@ const FarmCard = ({ slug, farmName, location, size, crops, livestock, image,}) =
   const [newCrops, setCrops] = useState(crops);
   const [newLivestock, setLivestock] = useState(livestock);
   const [newFarmImage, setFarmImage] = useState(image);
+  const [displayLocation, setDisplayLocation] = useState(location);
+  
+
+  const modalSize =() => isEditing ? "80%" : "auto" ;
+
+  useEffect(() => {
+    const fetchLocationName = async () => {
+      if (!location.includes(",")) return; // Already a name, no need to fetch
+    
+      const [lat, lng] = location.split(", ").map(parseFloat);
+      try {
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+        );
+        const data = await response.json();
+    
+        if (data?.address) {
+          const { road, city, town, village, country } = data.address;
+          const locationName = [road, city || town || village, country].filter(Boolean).join(", ");
+          setDisplayLocation(locationName || "Unknown Location");
+        } else {
+          setDisplayLocation("Unknown Location");
+        }
+      } catch (error) {
+        console.error("Error fetching location name:", error);
+        setDisplayLocation("Unknown Location");
+      }
+    };
+
+    fetchLocationName();
+  }, [location]);
+
+  const handleDelete = async () =>{
+    try {
+        const response = await fetch(`http://localhost:3010/user/farms/${slug}`, {
+        method: "DELETE",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },})
+        
+        if (!response.ok) throw new Error("Failed to update crops");
+        console.log("Crops updated successfully");
+        setOpen(false);
+        window.location.reload
+        
+
+    } catch (error){
+        console.error("Error deleting Crop:", error)
+    }
+}
 
   // Updated handleOpen function with check for open state
   const handleOpen = () => {
@@ -61,6 +111,8 @@ const FarmCard = ({ slug, farmName, location, size, crops, livestock, image,}) =
     }
   };
 
+
+
   return (
     <Box
       id="farmCardContainer"
@@ -69,14 +121,11 @@ const FarmCard = ({ slug, farmName, location, size, crops, livestock, image,}) =
       sx={{
         display: "flex",
         flexDirection: "column",
-        width: { xs: "100%", sm: "100%", md: "90%" },
+        width: { xs: "98%", sm: "98%", md: "90%" },
         padding: "15px",
         border: "1px solid rgba(29, 46, 35, 0.24)",
         height: { xs: "280px", sm: "280px", md: "420px" },
         borderRadius: "9px",
-        margin: { xs: "2px", sm: "2px", md: "0" },
-        background: "rgba(255, 255, 255, 0.2)",
-        boxShadow: "1px 3px 5px rgba(0, 0, 0, 0.2)",
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
         "&:hover": {
           transform: "scale(1.01)",
@@ -89,7 +138,7 @@ const FarmCard = ({ slug, farmName, location, size, crops, livestock, image,}) =
           {farmName}
         </Typography>
         <Typography variant="subtitle1" sx={{ fontSize: { xs: "0.7rem", md: "1rem" } }}>
-          Location: {location}
+          Location: {displayLocation}
         </Typography>
       </Box>
 
@@ -123,8 +172,22 @@ const FarmCard = ({ slug, farmName, location, size, crops, livestock, image,}) =
             position: "absolute",
             top: "50%",
             left: "50%",
+            height: modalSize,
             transform: "translate(-50%, -50%)",
             boxShadow: 24,
+            overflowY: "auto",
+            "&::-webkit-scrollbar": { width: "5px", borderRadius: "10px" },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: "#2c5f2dff",
+              borderRadius: "10px", // Rounded edges
+            },
+            "&::-webkit-scrollbar-track": { backgroundColor: "rgba(0, 0, 0, 0.1)" },
+            "&::-webkit-scrollbar-thumb:hover": { background: "#1e4020" },
+            "&:hover":{
+            "&::-webkit-scrollbar":{width: "5px"},
+
+            },
+            
           }}
         >
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -136,30 +199,51 @@ const FarmCard = ({ slug, farmName, location, size, crops, livestock, image,}) =
               <IconButton onClick={handleClose}>
                 <Close />
               </IconButton>
+              <IconButton onClick={handleDelete}>
+                      <Delete />
+              </IconButton>
             </Box>
           </Box>
 
           <Box
             component="form"
-            sx={{ display: "flex", flexDirection: "column", gap: "20px", marginTop: "20px" }}
+            sx={{ display: "flex", flexDirection: "column", gap: "20px", marginTop: "20px",
+              overflowY: "auto",
+            "&::-webkit-scrollbar": { width: "5px", borderRadius: "10px" },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: "#2c5f2dff",
+              borderRadius: "10px", // Rounded edges
+            },
+            "&::-webkit-scrollbar-track": { backgroundColor: "rgba(0, 0, 0, 0.1)" },
+            "&::-webkit-scrollbar-thumb:hover": { background: "#1e4020" },
+            
+             }}
           >
             {isEditing && (
               <>
-                <TextField label="Farm Image" value={newFarmImage} onChange={(e) => setFarmImage(e.target.value)} />
+                <TextField label="Farm Image" value={newFarmImage} onChange={(e) => setFarmImage(e.target.value)} 
+                  sx={{
+                    marginTop: "5px"
+                  }}
+                  />
                 <TextField
                   label="Farm Name"
                   value={newFarmName}
                   onChange={(e) => setFarmName(e.target.value)}
                 />
+                <Box>
+                              <LocationPicker setLocation={setLocation} />
+                            </Box>
                 <TextField
                   label="Location"
                   value={newLocation}
                   onChange={(e) => setLocation(e.target.value)}
                 />
                 <TextField
-                  label="Size"
+                  label="Size (Acres)"
                   value={newSize}
                   onChange={(e) => setSize(e.target.value)}
+                  type="number"
                 />
                 <TextField
                   label="Crops"

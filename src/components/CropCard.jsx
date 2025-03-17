@@ -75,9 +75,11 @@ const CropCard = ({ id, name, amountPlanted, expectedHarvest, location, aiSugges
             console.log("Crop deleted successfully");
     
             setOpen(false);
-            window.location.reload();  // Reload page after deleting
-        } catch (error) {
-            console.error("Error deleting Crop:", error);
+            window.location.reloadx
+            
+
+        } catch (error){
+            console.error("Error deleting Crop:", error)
         }
     };
     
