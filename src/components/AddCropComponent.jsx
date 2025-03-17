@@ -157,8 +157,8 @@ const AddCropComponent = () => {
             <TextField label="Crop Image 2" value={newCropImage2} onChange={(e) => setCropImage2(e.target.value)} sx={{height: "15px"}} />
             <TextField label="Crop Image 3" value={newCropImage3} onChange={(e) => setCropImage3(e.target.value)} sx={{height: "15px"}} />
             <TextField label="Crop Name" value={newCropName} onChange={(e) => setCropName(e.target.value)} sx={{height: "15px"}} />
-            <TextField label="Size" value={newSize} onChange={(e) => setSize(e.target.value)} sx={{height: "15px"}} />
-            <TextField label="Crops" value={newCrops} onChange={(e) => setCrops(e.target.value)} sx={{height: "15px"}} />
+            <TextField label="Size (Acres)" value={newSize} onChange={(e) => setSize(e.target.value)} sx={{height: "15px"}} type="number"/>
+            <TextField label="Crops" value={newCrops} onChange={(e) => setCrops(e.target.value)} sx={{height: "15px"}}  />
             <TextField label="Past Crops" value={newPastCrops} onChange={(e) => setPastCrops(e.target.value)} sx={{height: "15px"}} />
 
             <Box

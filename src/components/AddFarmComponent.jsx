@@ -149,8 +149,8 @@ const AddComponent = () => {
             </Box>
             <TextField label="Location" value={newLocation} onChange={(e) => setLocation(e.target.value)} />
             {/* Map SHould be heree where location is */}
-            <TextField label="Size" value={newSize} onChange={(e) => setSize(e.target.value)} />
-            <TextField label="Crops" value={newCrops} onChange={(e) => setCrops(e.target.value)} />
+            <TextField label="Size (Acres)" value={newSize} onChange={(e) => setSize(e.target.value)} type="number" />
+            <TextField label="Crops" value={newCrops} onChange={(e) => setCrops(e.target.value)}  />
             <TextField label="Livestock" value={newLivestock} onChange={(e) => setLivestock(e.target.value)} />
             <Button variant="contained" onClick={handleSubmit}
             sx={{

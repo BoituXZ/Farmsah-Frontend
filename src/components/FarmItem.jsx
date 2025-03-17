@@ -1,8 +1,40 @@
 import { Box, Typography } from '@mui/material'
 import PropTypes from "prop-types";
+import { useEffect, useState } from 'react';
 
 
 const FarmItem = ({ farmName, location }) => {
+    const [displayLocation, setDisplayLocation] = useState(location);
+      // const [newLocation, setLocation] = useState(location);
+    
+  
+
+  useEffect(() => {
+      const fetchLocationName = async () => {
+        if (!location.includes(",")) return; // Already a name, no need to fetch
+      
+        const [lat, lng] = location.split(", ").map(parseFloat);
+        try {
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+          );
+          const data = await response.json();
+      
+          if (data?.address) {
+            const { road, city, town, village, country } = data.address;
+            const locationName = [road, city || town || village, country].filter(Boolean).join(", ");
+            setDisplayLocation(locationName || "Unknown Location");
+          } else {
+            setDisplayLocation("Unknown Location");
+          }
+        } catch (error) {
+          console.error("Error fetching location name:", error);
+          setDisplayLocation("Unknown Location");
+        }
+      };
+  
+      fetchLocationName();
+    }, [location]);
   return (
     <Box id="farmItem"
               sx={{
@@ -24,7 +56,7 @@ const FarmItem = ({ farmName, location }) => {
               sx={{fontSize: "0.6rem",
                 color: "#2c5f2dff"
               }}
-              >{location}</Typography>
+              >{displayLocation}</Typography>
             </Box>
   )
 }

@@ -240,9 +240,10 @@ const FarmCard = ({ slug, farmName, location, size, crops, livestock, image,}) =
                   onChange={(e) => setLocation(e.target.value)}
                 />
                 <TextField
-                  label="Size"
+                  label="Size (Acres)"
                   value={newSize}
                   onChange={(e) => setSize(e.target.value)}
+                  type="number"
                 />
                 <TextField
                   label="Crops"
