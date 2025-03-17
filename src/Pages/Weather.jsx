@@ -1,7 +1,10 @@
+import { Box } from "@mui/material"
+import WeatherCard from "../components/WeatherCard"
 
 const Weather = () => {
   return (
-    <Box id="pageContainer"
+    <Box
+     id="pageContainer"
     sx={{
       display: {xs:"flex",sm:"flex", md:"grid"},
       flexDirection: "column",
