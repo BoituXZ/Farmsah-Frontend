@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Typography, List, ListItem, ListItemText, ListItemIcon, IconButton, Drawer,} from '@mui/material';
 import { Menu as MenuIcon, Close as CloseIcon} from '@mui/icons-material';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { useMediaQuery} from '@mui/material';
 import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
@@ -20,8 +20,9 @@ import { InfoRounded, QuestionAnswerOutlined } from '@mui/icons-material';
 const styles = {
   sidebar: {
     width: '100%',
-    height: '100vh',
+    height: {xs: "100vh", sm:"100vh", md:'100%'},
     display: 'flex',
+    padding:"2px 0",
     flexDirection: 'column',
     backDropFilter: 'blur(45px)', // Glassmorphism effect
     backgroundColor: (theme) => theme.palette.background.green,
@@ -40,27 +41,34 @@ const styles = {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    // border: 'solid 1px black'
-  },
-  sidebarFooter: {
-    flex: 1,
-    
+    //  border: 'solid 1px black'
   },
   minimizedSidebar: {
     width: '60px',
   },
   list: {
-    height: '100%',
-    padding: '1px 12px',
-    justifyContent: 'center',
+    // height: '100%',
+    padding: '10px 12px',
+    flex: "4",
+    display: "flex",
+    flexDirection: "column",
+    margin:"1rem 0",
+    gap:"14px",
+    // justifyContent: 'space-evenly',
     // border: 'solid 1px black',
   },
   list2:{
-    height: '100%',
+    // height: '100%',
+    flex:"2",
+    width: "100%",
     padding: '1px 12px',
-    marginTop: '20%',
     color: "black",
+    marginTop:"50px",
+    display: "flex",
+    flexDirection: "column",
+    alignSelf: "end",
     // border: 'solid 1px red',
+    gap: "14px"
   },
   heading: {
     fontFamily: 'Montserrat, sans-serif',
@@ -118,7 +126,6 @@ const Sidebar = () => {
   const isSmallScreen = useMediaQuery('(max-width: 900px)'); // Media query for small screens
 
   const handleToggleDrawer = () => setIsDrawerOpen((prev) => !prev); // Toggle drawer
-  const theme = useTheme();
   const SidebarContent = (
     
     <>
@@ -215,32 +222,7 @@ const Sidebar = () => {
             </Link>
             </List>
         </Box>
-        <Box id="sidebarFooter" sx={styles.sidebarFooter}>
-        <Box
-      sx={{
-        maxWidth: 300,
-        padding: theme.spacing(2),
-        borderRadius: theme.shape.borderRadius,
-        boxShadow: theme.shadows[2],
-        // backgroundColor: theme.palette.background.paper,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: theme.spacing(2),
-      }}
-    >
-      {/* Plan Message */}
-      <Box>
-        <Typography variant="body1" fontWeight="bold" gutterBottom>
-          ✨ Plan about to expire
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Enjoy 10% off when renewing your plan today.
-        </Typography>
-      </Box>
-
-      
-      </Box>
-    </Box>
+        
       </Box>
       
       

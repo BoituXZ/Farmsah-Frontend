@@ -57,15 +57,6 @@ const AddComponent = () => {
   
   
 
-  const resetForm = () => {
-    setFarmName("");
-    setFarmImage("");
-    setLocation("");
-    setSize("");
-    setCrops("");
-    setLivestock("");
-  };
-
   return (
     <Box id="addComponentContainer">
       <Box

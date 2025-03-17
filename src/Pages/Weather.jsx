@@ -1,6 +1,4 @@
-import { Box } from '@mui/material'
 import React from 'react'
-import WeatherCard from '../components/WeatherCard'
 
 const Weather = () => {
   return (

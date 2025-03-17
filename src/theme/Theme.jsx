@@ -3,7 +3,6 @@ import { createTheme } from "@mui/material";
 export const Theme = (mode) => {
   // Ensure mode is a valid string
   if (typeof mode !== "string" || (mode !== "light" && mode !== "dark")) {
-    console.error("Invalid mode passed to Theme:", mode);
     mode = "light"; // Default to light mode if invalid
   }
 

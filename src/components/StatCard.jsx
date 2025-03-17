@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import { Card, Typography, Box } from "@mui/material";
 import GrassIcon from '@mui/icons-material/Grass';
-import { Coronavirus, FoodBank, Money, Rocket, Surfing, Water } from "@mui/icons-material";
+import { Money, Surfing, Water } from "@mui/icons-material";
 
 // Screen size uses a media query to check how big the screen is
-const StatCard = ({ title, value, chartType, chartData, trendType, screenSize }) => {
+const StatCard = ({ title, value, trendType,}) => {
   
 
   const renderIcon = () => {
@@ -158,8 +158,7 @@ StatCard.propTypes = {
   title: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   chartType: PropTypes.oneOf(["bar", "line", "pie"]),
-  chartData: PropTypes.object,
-  trendType: PropTypes.number.isRequired,
+  trendType: PropTypes.string.isRequired,
   screenSize: PropTypes.bool.isRequired,
 };
 
