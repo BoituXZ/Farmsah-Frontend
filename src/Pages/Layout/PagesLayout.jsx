@@ -3,7 +3,8 @@ import { useState, createContext, useContext } from "react";
 import { Theme } from "../../theme/Theme";
 import Header from "../../components/Header";
 import { Outlet, useLocation } from "react-router-dom";
-import Sidebar from "./Sidebar/Sidebar";
+// import Sidebar from "./Sidebar/Sidebar";
+import Sidebars from "../../../sidebar"
 import AddFarmComponent from "../../components/AddFarmComponent";
 
 
@@ -56,7 +57,8 @@ const PagesLayout = () => {
 
             }}
           >
-            <Sidebar />
+            {/* <Sidebar /> */}
+            <Sidebars />
           </Box>
 
           <Divider />
