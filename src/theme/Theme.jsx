@@ -47,7 +47,7 @@ export const Theme = (mode) => {
               white: "#1f1f1f", // Dark gray for dark mode background
               yellow: "#a68c4a", // Muted yellow for dark mode
               beige: "#3d3a32", // Muted beige
-              default: "#121212", // Background for dark mode
+              default: "#1f1f1f", // Background for dark mode
               paper: "#1f1f1f",
               backgroundImage: "url('https://images.pexels.com/photos/1428277/pexels-photo-1428277.jpeg')",
               
