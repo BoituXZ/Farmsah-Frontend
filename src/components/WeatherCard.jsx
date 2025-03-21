@@ -45,11 +45,11 @@ return (
             display: "flex",
             flexDirection: "column",
             gap: "30px",
-            minWidth: { xs: "92%", sm: "98%", md: "85%" },
+            minWidth: { xs: "92%", sm: "98%", md: "68%" },
             width: { xs: "92%", sm: "98%", md: "40%" },
             padding: "12px",
             border: "1px solid rgba(29, 46, 35, 0.24)",
-            height: { xs: "220px", sm: "220px", md: "330px" },
+            height: { xs: "220px", sm: "220px", md: "280px" },
             borderRadius: "15px",
             transition: "transform 0.3s ease, box-shadow 0.3s ease",
             margin: "8px",
@@ -68,7 +68,10 @@ return (
                 justifyContent: "space-between",
             }}
             >
-                <Typography variant="h2">
+                <Typography variant="body"
+                sx={{
+                  fontSize: "1.2rem",
+                }}>
                 Farm Name: {name}
                 </Typography>
                 <CloudCircle

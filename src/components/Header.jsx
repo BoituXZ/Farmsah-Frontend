@@ -14,6 +14,7 @@ const Header = ({ title, mode, toggleMode, screenSize }) => {
         justifyContent: screenSize ? "start":"space-between",
         alignItems: "center",
         width: "100%",
+        maxHeight: "4.1rem",
         padding: "1rem",
         backgroundColor: (theme) => theme.palette.background.paper,
         color: (theme) => theme.palette.text.primary,

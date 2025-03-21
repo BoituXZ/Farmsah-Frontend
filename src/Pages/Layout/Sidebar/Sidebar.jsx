@@ -25,7 +25,8 @@ const styles = {
     padding:"2px 0",
     flexDirection: 'column',
     backDropFilter: 'blur(45px)', // Glassmorphism effect
-    backgroundColor: (theme) => theme.palette.background.green,
+    // border: 'solid 1px black',
+    backgroundColor: (theme) => theme.palette.background.white2,
     
     // backgroundColor: "grey", // Background color for the sidebar f9f9f9
 
@@ -51,6 +52,7 @@ const styles = {
     padding: '10px 12px',
     flex: "4",
     display: "flex",
+    // fontSize: "4rem",
     flexDirection: "column",
     margin:"1rem 0",
     gap:"14px",
@@ -80,26 +82,24 @@ const styles = {
     padding: '9px 10px',
     marginBottom: '16px',
     borderBottom: '1px solid #f7d17b', // Subtle border for the glass
-    color: (theme) => theme.palette.background.white
+    color: (theme) => theme.palette.background.green
   },
   listItem: {
-    fontFamily: 'Montserrat, sans-serif',
     padding: '8px 0',
-    fontWeight: '200',
-    color: (theme) => theme.palette.background.white2,
+    color: (theme) => theme.palette.background.black,
     cursor: 'pointer',
     transition: '40ms',
     '&:hover': {
       color: (theme) => theme.palette.background.white,
     },
     listItemText:{
-      fontSize: "30rem",
       color: "red"
     },
   },
   listItemIcon: {
     color:'rgba(0, 0, 0, 0.56)',
-    minWidth: '35px',
+
+    minWidth: '40px',
     '&:hover': {
       color: '#5a9bd5ff',
     },

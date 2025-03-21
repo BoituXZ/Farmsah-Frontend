@@ -52,6 +52,8 @@ const PagesLayout = () => {
               height: "100%",
               // marginRight: "1px", Play with the sidebar edits
               overflow: "auto",
+              boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.2)",
+
             }}
           >
             <Sidebar />
@@ -64,7 +66,8 @@ const PagesLayout = () => {
             id="restOfPage"
             sx={{
               flex: isSmallScreen ? "1" : "6",
-              overflow: "auto",
+              overflow: "hidden",
+              // overflow: "auto",
               "&::-webkit-scrollbar": { width: "5px", borderRadius: "10px" },
             "&::-webkit-scrollbar-thumb": {
               backgroundColor: "#2c5f2dff",

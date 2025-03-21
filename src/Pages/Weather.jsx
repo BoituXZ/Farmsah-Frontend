@@ -38,9 +38,14 @@ const Weather = () => {
       gap: "12px",
       padding: "1rem",
       height: "100%",
-      backgroundImage: "url('https://images.pexels.com/photos/258149/pexels-photo-258149.jpeg')",
-      backgroundSize: "cover"
+      // background: "url('https://images.pexels.com/photos/6073183/pexels-photo-6073183.jpeg')",
+      // background: "url('https://images.pexels.com/photos/6738360/pexels-photo-6738360.jpeg')",
+      // background: "url('https://images.pexels.com/photos/6738360/pexels-photo-6738360.jpeg')",
+      background: (theme) => theme.palette.background.backgroundImage,
 
+      backdropFilter: "blur(100px)",
+      backgroundSize: "cover",
+      
     }}
     >
       {locations.map((location) => (
