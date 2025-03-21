@@ -3,7 +3,8 @@ import { useState, createContext, useContext } from "react";
 import { Theme } from "../../theme/Theme";
 import Header from "../../components/Header";
 import { Outlet, useLocation } from "react-router-dom";
-import Sidebar from "./Sidebar/Sidebar";
+// import Sidebar from "./Sidebar/Sidebar";
+import Sidebar from "./Sidebar/Sidebar"
 import AddFarmComponent from "../../components/AddFarmComponent";
 
 
@@ -42,6 +43,7 @@ const PagesLayout = () => {
             flexDirection: "row",
             height: "100vh",
             overflow: "none",
+            gap: "2px"
           }}
         >
           {/* Sidebar */}
@@ -52,10 +54,12 @@ const PagesLayout = () => {
               height: "100%",
               // marginRight: "1px", Play with the sidebar edits
               overflow: "auto",
-              boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.2)",
+              // border: "1px solid red",
+              boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.2)",
 
             }}
           >
+            {/* <Sidebar /> */}
             <Sidebar />
           </Box>
 
