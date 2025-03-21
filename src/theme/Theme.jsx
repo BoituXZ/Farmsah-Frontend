@@ -23,6 +23,8 @@ export const Theme = (mode) => {
               beige: "#ede0cf",
               default: "#f9f9f9", // Background for light mode
               paper: "#ffffff",
+              backgroundImage: "url('https://images.pexels.com/photos/6738360/pexels-photo-6738360.jpeg')",
+
             },
             text: {
               primary: "#000000", // Black text for light mode
@@ -33,6 +35,9 @@ export const Theme = (mode) => {
               softBrown: "#a7846c",
               darkGreen: "#355e3b",
             },
+
+
+
           }
         : {
             background: {
@@ -44,6 +49,10 @@ export const Theme = (mode) => {
               beige: "#3d3a32", // Muted beige
               default: "#121212", // Background for dark mode
               paper: "#1f1f1f",
+              backgroundImage: "url('https://images.pexels.com/photos/1428277/pexels-photo-1428277.jpeg')",
+              
+              // backgroundImage: "url('https://images.pexels.com/photos/1417647/pexels-photo-1417647.jpeg')",
+
             },
             text: {
               primary: "rgba(255, 255, 255, 0.81)", // White text for dark mode
