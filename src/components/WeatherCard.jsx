@@ -1,24 +1,59 @@
 import { CloudCircle } from "@mui/icons-material"
 import { Box, Typography } from "@mui/material"
 
-const WeatherCard = () => {
+
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+
+const WeatherCard = ({location, name}) => {
+    const [newName, setName] = useState(name)
+    const [displayLocation, setDisplayLocation] = useState(location);
+
+
+      useEffect(() => {
+        const fetchLocationName = async () => {
+          if (!location.includes(",")) return; // Already a name, no need to fetch
+        
+          const [lat, lng] = location.split(", ").map(parseFloat);
+          try {
+            const response = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+            );
+            const data = await response.json();
+        
+            if (data?.address) {
+              const { road, city, town, village, country } = data.address;
+              const locationName = [road, city || town || village, country].filter(Boolean).join(", ");
+              setDisplayLocation(locationName || "Unknown Location");
+            } else {
+              setDisplayLocation("Unknown Location");
+            }
+          } catch (error) {
+            console.error("Error fetching location name:", error);
+            setDisplayLocation("Unknown Location");
+          }
+        };
+    
+        fetchLocationName();
+      }, [location]);
+    
+
 return (
     <Box
         id="cardContainer"
         sx={{
             display: "flex",
             flexDirection: "column",
+            gap: "30px",
             minWidth: { xs: "92%", sm: "98%", md: "85%" },
             width: { xs: "92%", sm: "98%", md: "40%" },
-            padding: "15px",
+            padding: "12px",
             border: "1px solid rgba(29, 46, 35, 0.24)",
             height: { xs: "220px", sm: "220px", md: "330px" },
             borderRadius: "15px",
             transition: "transform 0.3s ease, box-shadow 0.3s ease",
             margin: "8px",
-        background: "linear-gradient(45deg,rgb(73, 159, 230) 30%, #21CBF3 90%)",
-        backgroundImage: "url('https://images.pexels.com/photos/258149/pexels-photo-258149.jpeg')",
-        backgroundSize: "cover",
+        background: "rgba(255, 255, 255, 0.62)",
         "&:hover": {
           transform: "scale(1.01)",
           boxShadow: "0 12px 40px rgba(0, 0, 0, 0.3)",
@@ -34,7 +69,7 @@ return (
             }}
             >
                 <Typography variant="h2">
-                New York, USA
+                Farm Name: {name}
                 </Typography>
                 <CloudCircle
                 sx={{
@@ -53,6 +88,7 @@ return (
                         justifyContent: "center",
                         alignItems: "center",
                         marginTop: "20px",
+                        // border: "solid 1px red",
                     }}
                 >
                     <Typography variant="h4" sx={{ marginBottom: "10px" }}>
@@ -68,13 +104,18 @@ return (
                         Wind: 10 km/h
                     </Typography>
                     <Typography variant="body2" sx={{ color: "gray" }}>
-                        Location: New York, USA
+                        Location: {displayLocation}
                     </Typography>
                 </Box>
         </Box>
 
     </Box>
   )
+}
+
+WeatherCard.propTypes = {
+    location: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
 }
 
 export default WeatherCard

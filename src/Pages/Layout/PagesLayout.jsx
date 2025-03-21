@@ -50,6 +50,7 @@ const PagesLayout = () => {
             sx={{
               flex: isSmallScreen ? "0 0 6px" : "1",
               height: "100%",
+              // marginRight: "1px", Play with the sidebar edits
               overflow: "auto",
             }}
           >

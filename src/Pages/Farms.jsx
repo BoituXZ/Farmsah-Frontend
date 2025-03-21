@@ -6,7 +6,7 @@ import AddFarmComponent from "../components/AddFarmComponent";
 
 const Farms = () => {
   const [farms, setFarms] = useState([]);
-  const [locationNames, setLocationNames] = useState({});
+  // const [locationNames, setLocationNames] = useState({});
   console.log(farms);
 
   useEffect(() => {
