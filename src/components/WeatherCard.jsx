@@ -165,7 +165,7 @@ const WeatherCard = ({ farmId, locationString, name }) => {
         maxHeight: {md: "280px"},
         borderRadius: "15px",
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
-        background: "rgba(255, 255, 255, 0.62)",
+        background: theme => theme.palette.background.paper,
         padding: "12px",
         border: "1px solid rgba(29, 46, 35, 0.24)",
         "&:hover": {

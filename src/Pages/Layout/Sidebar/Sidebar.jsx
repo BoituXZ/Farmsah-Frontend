@@ -17,7 +17,7 @@ const styles  = {
         flexDirection: "column",
         height: "100%",
         overflow: "auto",
-        boxShadow: "10px 1px 4px rgb(0, 0, 0)",
+        boxShadow: "1px 1px 1px rgb(0, 0, 0)",
         fontFamily: 'Montserrat, sans-serif',
 
     },
