@@ -36,17 +36,20 @@ const Weather = () => {
         boxSizing: 'border-box',
         padding: "1rem",
         gap: '16px', // Spacing between items
+        overflowY: 'auto', // Enable vertical scrolling if needed
 
-        // Responsive Display: Flex column on mobile, Grid on desktop
+        // Responsive Display
         display: { xs: "flex", md: "grid" },
 
         // Flexbox settings (for xs/sm)
         flexDirection: { xs: "column" },
-        alignItems: { xs: "center" },
+        alignItems: { xs: "center" }, // Center column vertically
 
         // Grid settings (for md+)
-        gridTemplateColumns: { md: 'repeat(auto-fit, 380px)' }, // Fit as many 380px columns as possible
-        justifyContent: { md: 'center' }, // Center the grid horizontally
+        gridTemplateColumns: { md: 'repeat(auto-fit, 400px)' }, // Keep fixed width columns
+
+        // --- CHANGE HERE ---
+        justifyContent: { md: 'flex-start' }, // Align grid items to the start (left)
 
         // Background styles
         background: (theme) => theme.palette.background.backgroundImage,
