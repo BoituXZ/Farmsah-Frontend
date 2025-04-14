@@ -31,36 +31,26 @@ const Weather = () => {
     <Box
       id="pageContainer"
       sx={{
-        width: '100%',
-        minHeight: "100vh",
-        boxSizing: 'border-box',
-        padding: "1rem",
-        gap: '16px', // Spacing between items
-        overflowY: 'auto', // Enable vertical scrolling if needed
+      width: '100%',
+      height: '100vh', // Keep viewport height
+      overflowY: 'auto', // Keep scrolling
+      boxSizing: 'border-box',
 
-        // Responsive Display
-        display: { xs: "flex", md: "grid" },
+      // --- ADJUST PADDING/GAP ---
+      padding: "12px", // Example: Reduced padding around the whole page
+      gap: '16px',     // Example: Reduced gap between cards
 
-        // Flexbox settings (for xs/sm)
-        flexDirection: { xs: "column" },
-        alignItems: { xs: "center" }, // Center column vertically
-
-        // Grid settings (for md+)
-        gridTemplateColumns: { md: 'repeat(auto-fit, 400px)' }, // Keep fixed width columns
-
-        // --- CHANGE HERE ---
-        justifyContent: { md: 'flex-start' }, // Align grid items to the start (left)
-
-        // Scrollable for smaller screens
-        maxHeight: { xs: "100vh" }, // Limit height for smaller screens
-
-
-        // Background styles
-        background: (theme) => theme.palette.background.backgroundImage,
-        backdropFilter: "blur(100px)",
-        backgroundSize: "cover",
-        backgroundAttachment: 'fixed',
-      }}
+      // --- Keep other styles the same ---
+      display: { xs: "flex", md: "grid" },
+      flexDirection: { xs: "column" },
+      alignItems: { xs: "center" },
+      gridTemplateColumns: { md: 'repeat(auto-fit, 380px)' },
+      justifyContent: { md: 'flex-start' },
+      background: (theme) => theme.palette.background.backgroundImage,
+      backdropFilter: "blur(100px)",
+      backgroundSize: "cover",
+      backgroundAttachment: 'fixed',
+    }}
     >
       {/* Mapping locations */}
       {locations.map((location) => (
