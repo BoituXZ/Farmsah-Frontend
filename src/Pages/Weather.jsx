@@ -64,10 +64,10 @@ const Weather = () => {
     <Box
       id="pageContainer"
       sx={{
-        display: {xs:"flex",sm:"flex", md:"grid"},
-      flexDirection: "column",
+        display: {xs:"flex",sm:"flex", md:"flex"},
+      flexDirection: {xs:"column", sm:"column", md:"row"},
       gridTemplateColumns: "repeat(2, 1fr)",
-      gap: "12px",
+      flexWrap: "wrap",
       padding: "1rem",
       height: "100%",
       // background: "url('https://images.pexels.com/photos/6073183/pexels-photo-6073183.jpeg')",

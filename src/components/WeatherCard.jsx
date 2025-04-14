@@ -164,12 +164,12 @@ const WeatherCard = ({ farmId, locationString, name }) => {
       sx={{ // <-- YOUR original sx prop
         display: "flex",
         flexDirection: "column",
-        gap: "30px",
-        minWidth: { xs: "92%", sm: "98%", md: "68%" },
-        width: { xs: "92%", sm: "98%", md: "40%" },
+        gap: "20px",
+        minWidth: { xs: "auto", sm: "auto", md: "100px" },
+        width: { xs: "auto", sm: "auto", md: "380px" },
         padding: "12px",
         border: "1px solid rgba(29, 46, 35, 0.24)",
-        height: { xs: "220px", sm: "220px", md: "280px" }, // Might need adjusting if content overflows
+        height: { xs: "auto", sm: "auto", md: "280px" }, // Might need adjusting if content overflows
         borderRadius: "15px",
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
         margin: "8px",
@@ -215,7 +215,7 @@ const WeatherCard = ({ farmId, locationString, name }) => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            marginTop: "20px", // Kept original, adjust if needed for loading/error states
+            marginTop: "0px", // Kept original, adjust if needed for loading/error states
           }}
         >
           {/* --- Conditional Rendering Logic --- */}
