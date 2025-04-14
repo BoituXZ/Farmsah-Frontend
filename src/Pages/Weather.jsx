@@ -51,6 +51,10 @@ const Weather = () => {
         // --- CHANGE HERE ---
         justifyContent: { md: 'flex-start' }, // Align grid items to the start (left)
 
+        // Scrollable for smaller screens
+        maxHeight: { xs: "100vh" }, // Limit height for smaller screens
+
+
         // Background styles
         background: (theme) => theme.palette.background.backgroundImage,
         backdropFilter: "blur(100px)",

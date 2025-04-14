@@ -161,7 +161,8 @@ const WeatherCard = ({ farmId, locationString, name }) => {
         display: "flex",
         flexDirection: "column",
         gap: "20px", // Your internal gap
-        height: { xs: "auto", sm: "auto", md: "280px" },
+        height: { xs: "auto", sm: "auto", },
+        maxHeight: {md: "280px"},
         borderRadius: "15px",
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
         background: "rgba(255, 255, 255, 0.62)",
