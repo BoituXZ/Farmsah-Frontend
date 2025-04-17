@@ -1,96 +1,104 @@
-import { Box, CssBaseline, Divider, ThemeProvider, useMediaQuery } from "@mui/material";
+// src/pages/user/PagesLayout.jsx
+import {
+  Box,
+  CssBaseline,
+  ThemeProvider,
+  useMediaQuery,
+  Drawer,
+} from "@mui/material";
+
 import { useState, createContext, useContext } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+
 import { Theme } from "../../theme/Theme";
 import Header from "../../components/Header";
-import { Outlet, useLocation } from "react-router-dom";
-// import Sidebar from "./Sidebar/Sidebar";
-import Sidebar from "./Sidebar/Sidebar"
-import AddFarmComponent from "../../components/AddFarmComponent";
-
+import Sidebar from "./Sidebar/Sidebar";
 
 const ThemeContext = createContext();
-
 export const useThemeContext = () => useContext(ThemeContext);
+
+const drawerWidth = 240;
 
 const PagesLayout = () => {
   const [mode, setMode] = useState("light");
-  const isSmallScreen = useMediaQuery('(max-width: 900px)'); // Media query for small screens
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const isSmallScreen = useMediaQuery("(max-width: 900px)");
+  const location = useLocation();
 
   const toggleMode = () => {
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
 
-  const location = useLocation();
+  const toggleDrawer = () => {
+    setMobileOpen(!mobileOpen);
+  };
 
   const getTitle = (pathname) => {
-    // I don't want to make the top section of the page everytime, so this function uses the path to determine the title of the page
     const path = pathname.split("/")[2];
-    const pageTitle = path.charAt(0).toUpperCase() + path.slice(1);
-    if (pageTitle === "") {
-      return "Dashboard";
-    }
-    return pageTitle;
+    const pageTitle = path?.charAt(0).toUpperCase() + path?.slice(1);
+    return pageTitle || "Dashboard";
   };
 
   return (
     <ThemeContext.Provider value={{ mode, toggleMode }}>
       <ThemeProvider theme={Theme(mode)}>
         <CssBaseline />
-        <Box
-          id="pageContainer"
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            height: "100vh",
-            overflow: "none",
-            gap: "2px"
-          }}
-        >
+        <Box sx={{ display: "flex", height: "100vh", overflow: "hidden" }}>
           {/* Sidebar */}
-          <Box
-            id="sidebarContainer"
-            sx={{
-              flex: isSmallScreen ? "0 0 6px" : "1",
-              height: "100%",
-              // marginRight: "1px", Play with the sidebar edits
-              overflow: "auto",
-              // border: "1px solid red",
-              boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.2)",
+          {isSmallScreen ? (
+            <Drawer
+              variant="temporary"
+              open={mobileOpen}
+              onClose={toggleDrawer}
+              ModalProps={{ keepMounted: true }}
+              sx={{
+                display: { xs: "block", md: "none" },
+                "& .MuiDrawer-paper": {
+                  width: drawerWidth,
+                  boxSizing: "border-box",
+                },
+              }}
+            >
+              <Sidebar onClose={toggleDrawer} />
+            </Drawer>
+          ) : (
+            <Box
+              sx={{
+                width: drawerWidth,
+                flexShrink: 0,
+                display: { xs: "none", md: "block" },
+              }}
+            >
+              <Sidebar />
+            </Box>
+          )}
 
+          {/* Main content */}
+          <Box
+            component="main"
+            sx={{
+              flexGrow: 1,
+              height: "100%",
+              overflowY: "auto",
+              "&::-webkit-scrollbar": { width: "5px" },
+              "&::-webkit-scrollbar-thumb": {
+                backgroundColor: "#2c5f2dff",
+              },
+              "&::-webkit-scrollbar-track": {
+                backgroundColor: "rgba(0, 0, 0, 0.1)",
+              },
+              "&::-webkit-scrollbar-thumb:hover": {
+                background: "#1e4020",
+              },
             }}
           >
-            {/* <Sidebar /> */}
-            <Sidebar />
-          </Box>
-
-          <Divider />
-
-          {/* Main Content */}
-          <Box
-            id="restOfPage"
-            sx={{
-              flex: isSmallScreen ? "1" : "6",
-              overflow: "hidden",
-              // overflow: "auto",
-              "&::-webkit-scrollbar": { width: "5px", borderRadius: "10px" },
-            "&::-webkit-scrollbar-thumb": {
-              backgroundColor: "#2c5f2dff",
-              borderRadius: "1px", // Rounded edges
-            },
-            "&::-webkit-scrollbar-track": { backgroundColor: "rgba(0, 0, 0, 0.1)" },
-            "&::-webkit-scrollbar-thumb:hover": { background: "#1e4020" },
-              height: "100%",
-            }}
-          >
-            {/* Header with toggle */}
-            <Header title={getTitle(location.pathname)} mode={mode} toggleMode={toggleMode} screenSize={isSmallScreen} />
-
-            {/* {location.pathname !== "/user/" && (
-                    <>
-                    <AddFarmComponent />
-                    </>
-                  )} */}
-            {/* Outlet for rendering page content */}
+            <Header
+              title={getTitle(location.pathname)}
+              mode={mode}
+              toggleMode={toggleMode}
+              screenSize={isSmallScreen}
+              onSidebarToggle={toggleDrawer}
+            />
             <Outlet />
           </Box>
         </Box>

@@ -2,16 +2,16 @@
 import { Box, Typography, IconButton } from "@mui/material";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import MenuIcon from "@mui/icons-material/Menu";
 import PropTypes from "prop-types";
 
-const Header = ({ title, mode, toggleMode, screenSize }) => {
-
+const Header = ({ title, mode, toggleMode, screenSize, onSidebarToggle }) => {
   return (
     <Box
       id="pageHeader"
       sx={{
         display: "flex",
-        justifyContent: screenSize ? "start":"space-between",
+        justifyContent: screenSize ? "start" : "space-between",
         alignItems: "center",
         width: "100%",
         maxHeight: "4.1rem",
@@ -20,8 +20,16 @@ const Header = ({ title, mode, toggleMode, screenSize }) => {
         color: (theme) => theme.palette.text.primary,
         borderBottom: "1px solid",
         borderColor: (theme) => theme.palette.divider,
+        gap: screenSize ? "1rem" : 0,
       }}
     >
+      {/* Hamburger menu (small screens only) */}
+      {screenSize && (
+        <IconButton onClick={onSidebarToggle} color="inherit">
+          <MenuIcon />
+        </IconButton>
+      )}
+
       {/* Dynamic Page Title */}
       <Typography
         variant="h1"
@@ -42,13 +50,12 @@ const Header = ({ title, mode, toggleMode, screenSize }) => {
   );
 };
 
-
-
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   mode: PropTypes.oneOf(["light", "dark"]).isRequired,
   toggleMode: PropTypes.func.isRequired,
   screenSize: PropTypes.bool.isRequired,
+  onSidebarToggle: PropTypes.func.isRequired,
 };
 
 export default Header;
