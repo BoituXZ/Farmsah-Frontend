@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material"
-
-
-const InsightCard = () => {
+import PropTypes, { string } from "prop-types"
+// Suggestion type can be Ai or Insight, like weather, suggestion subject narrows down the type of suggestion to be done, 
+const InsightCard = (suggestionType, suggestionSubject, suggestionBody) => {
   return (
     <Box id="insightCardContainer"
     sx={{
@@ -78,6 +78,13 @@ const InsightCard = () => {
         </Box>
     </Box>
   )
+}
+
+InsightCard.propTypes = {
+    suggestionType: PropTypes.string.isRequired,
+    suggestionSubject: PropTypes.string.isRequired,
+    suggestionBody: PropTypes.string.isRequired
+
 }
 
 export default InsightCard
