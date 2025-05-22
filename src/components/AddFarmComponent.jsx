@@ -30,7 +30,6 @@ const AddComponent = () => {
       location: newLocation,
       locationName: newLocationName,
       size: newSize,
-      cropsId: newCrops ? Number(newCrops) : null,   // Convert to number or null
       livestockId: newLivestock ? Number(newLivestock) : null,  // Convert to number or null
       imageUrl: newFarmImage,
     };
@@ -95,7 +94,7 @@ const AddComponent = () => {
           sx={{
             backgroundColor: (theme) => theme.palette.background.white,
             width: { xs: "400px", sm: "700px", md: "800px" },
-            height: "90%",
+            height: "80%",
             padding: "20px",
             borderRadius: "10px",
             position: "absolute",
@@ -103,7 +102,7 @@ const AddComponent = () => {
             left: "50%",
             transform: "translate(-50%, -50%)",
             boxShadow: 24,
-            overflowY: "scroll",
+            // overflowY: "scroll",
             "&::-webkit-scrollbar": { width: "5px", borderRadius: "10px" },
             "&::-webkit-scrollbar-thumb": {
               backgroundColor: "#2c5f2dff",
@@ -141,7 +140,6 @@ const AddComponent = () => {
             <TextField label="Location" value={newLocation} onChange={(e) => setLocation(e.target.value)} />
             {/* Map SHould be heree where location is */}
             <TextField label="Size (Acres)" value={newSize} onChange={(e) => setSize(e.target.value)} type="number" />
-            <TextField label="Crops" value={newCrops} onChange={(e) => setCrops(e.target.value)}  />
             <TextField label="Livestock" value={newLivestock} onChange={(e) => setLivestock(e.target.value)} />
             <Button variant="contained" onClick={handleSubmit}
             sx={{

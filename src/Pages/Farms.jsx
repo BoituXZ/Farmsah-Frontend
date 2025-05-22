@@ -7,7 +7,6 @@ import AddFarmComponent from "../components/AddFarmComponent";
 const Farms = () => {
   const [farms, setFarms] = useState([]);
   // const [locationNames, setLocationNames] = useState({});
-  console.log(farms);
 
   useEffect(() => {
     const fetchFarms = async () => {
@@ -22,6 +21,7 @@ const Farms = () => {
 
         const data = await response.json();
         setFarms(data); // Update state with fetched farms
+        console.log("Fetched farms:", data);
       } catch (error) {
         console.error("Error fetching farms:", error);
       }
@@ -63,7 +63,7 @@ const Farms = () => {
             location={farm.location}
             size={`${farm.size} acres`}
             livestock={farm.livestock || "No livestock"}
-            crops={farm.crops || "No crops"}
+            crops={farm.crops}
           />
         ))}
       </Box>
@@ -90,7 +90,8 @@ const Farms = () => {
         <Box id="sideContentBody" sx={{ display: "flex", flexDirection: "column", padding: "2px", gap: "5px", overflowY: "auto" }}>
           {farms.map((farm) => (
             <FarmItem key={farm.id} farmName={farm.name} location={farm.location} />
-          ))}
+          ))
+          }
         </Box>
       </Box>
     </Box>
