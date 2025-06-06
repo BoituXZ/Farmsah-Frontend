@@ -1,11 +1,19 @@
 import { Box, Button, Modal, TextField, Typography, IconButton, MenuItem, Select, InputLabel } from "@mui/material";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { Close, Delete, Edit} from "@mui/icons-material";
+import { Close, Delete, Edit, Image} from "@mui/icons-material";
 
-// Fix the ID
+{/* <TODO>
+    1. Fix the 3 Images to 1 - Removed the db rows for image 2 and 3
+    2. Change title from crops to crop name - Removed the Redudnacy
+    4. Amount Planted
+    5. Remove Ai suggestions from db -done
+    6. Remove expected harvest
+    7. Remove recommended pesticide
+    8. Refactor details - Done
+</TODO> */}
 
-const CropCard = ({ id, name, amountPlanted, expectedHarvest, location, aiSuggestions, recommendedPesticide, image, image2, image3 }) => {
+const CropCard = ({ id, name, amountPlanted, expectedHarvest, location, aiSuggestions, recommendedPesticide, image}) => {
     const [open, setOpen] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -26,15 +34,12 @@ const CropCard = ({ id, name, amountPlanted, expectedHarvest, location, aiSugges
     const [newLocation, setLocation] = useState(location);
     const [newAmountPlanted, setAmountPlanted] = useState(amountPlanted);
     const [newCropImage, setCropImage] = useState(image);
-    const [newCropImage2, setCropImage2] = useState(image2);
-    const [newCropImage3, setCropImage3] = useState(image3);
     const [newExpectedHarvest, setExpectedHarvest] = useState(expectedHarvest);
     const [newAiSuggestions, setAiSuggestions] = useState(aiSuggestions);
     const [newPesticide, setPesticide] = useState(recommendedPesticide);
     const [availableFarms, setAvailableFarms] = useState([]); // Store farms
     const [selectedFarm, setSelectedFarm] = useState(""); // Store selected farm
     
-
 
     const handleEditClick = () => setIsEditing(true);
     const handleSubmit = async () => {
@@ -47,8 +52,6 @@ const CropCard = ({ id, name, amountPlanted, expectedHarvest, location, aiSugges
                     name: newCropName,
                     location: newLocation,
                     imageUrl: newCropImage,
-                    imageUrl2: newCropImage2,
-                    imageUrl3: newCropImage3,
                 }),
             });
     
@@ -75,7 +78,7 @@ const CropCard = ({ id, name, amountPlanted, expectedHarvest, location, aiSugges
             console.log("Crop deleted successfully");
     
             setOpen(false);
-            window.location.reloadx
+            window.location.reload
             
 
         } catch (error){
@@ -141,130 +144,150 @@ const CropCard = ({ id, name, amountPlanted, expectedHarvest, location, aiSugges
                 </Typography>
             </Box>
 
-            <Box id="cardImage" sx={{ maxHeight: { xs: "100px", md: "500px" }, overflow: "hidden", flex: "3",
-                }}>
-                <Box id="imagesCarousel" sx={{ display: "flex", flexDirection: "row", gap: "2px" }}>
-                    {[newCropImage, newCropImage2, newCropImage3].map((img, index) => (
-                        <Box key={index} id={`image${index + 1}`} sx={{ flex: "1" }}>
-                            <img
-                                src={img}
-                                alt={`Crop ${index + 1}`}
-                                style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    objectFit: "cover",
-                                }}
-                            />
-                        </Box>
-                    ))}
-                </Box>
+            <Box id="cardImage" sx={{flex: 4}}>
+                    <Box id="cropImage" sx={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center", height: {xs:"128px", md:"200px"}, boxSizing:"border-box" }}>
+                        <img
+                            src={newCropImage}
+                            alt={newCropName}
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                                objectFit: "cover",
+                                borderRadius: "4px",
+                            }}
+                        />
+                    </Box>
             </Box>
 
-            <Box id="cardDetails" sx={{ padding: "1px",
+            <Box
+      id="cardDetails"
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        gap: { xs: "8px", md: "10px" },
+        padding: "8px",
+        flex: 3
+      }}
+    >
+      {/* Left Section */}
+      <Box
+        id="leftCardDetails"
+        sx={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          padding: {md:"3px"},
 
-            display: "flex",
-            flexDirection: "row",
-            flex: "5",
-            gap: {xs:"8px",md:"10px"},
-                 }}>
-                <Box id="leftCardDetails"
-                sx={{
-                    flex: "1",
-                    width: "100%",
-                    padding: "2px",
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between"
-                }}
-                >
-                    <Box sx={{
-                        flex: "1",
-                        height: "100%",
-                        
-                    }}>
-                    <Typography variant="h2"
-                    sx={{ fontSize: "0.9rem", fontWeight: "600" }}
-                    >Crops:</Typography>
-                    <Typography variant="body2" sx={{ fontSize: "0.8rem", marginLeft: "10px", textAlign: "left", fontWeight: "600", color: "green" }}>
-                        {name}
-                    </Typography>
-                </Box>
-                <Box sx={{
-                    flex: "1",
-                    height: "100%",
-                    
-                }}>
-                    <Typography variant="h2"
-                    sx={{ fontSize: "0.9rem", fontWeight: "600" }}
-                    >PastCrops:</Typography>
-                    <Typography variant="body2" sx={{ fontSize: "0.8rem", marginLeft: "10px", textAlign: "left", fontWeight: "600", color: "green" }}>
-                        Temp
-                    </Typography>
-                </Box>
-                <Box sx={{
-                    flex: "1",
-                    height: "100%",
-                    
-                }}>
-                    <Typography variant="h2"
-                    sx={{ fontSize: "0.9rem", fontWeight: "600" }}
-                    >Recommended Pesticide:</Typography>
-                    <Typography variant="body2" sx={{ fontSize: "0.8rem", marginLeft: "10px", textAlign: "left", fontWeight: "600", color: "green" }}>
-                        {recommendedPesticide}
-                    </Typography>
-                </Box>
-                </Box>
-                <Box id="rightCardDetails"
-                sx={{
-                    flex: "1",
-                    width: "100%",
-                    padding: "2px",
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between"
+        }}
+      >
+        <Box>
+          <Typography
+            variant="h2"
+            sx={{ fontSize: "0.9rem", fontWeight: 600 }}
+          >
+            Past Crops:
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              fontSize: "0.8rem",
+              marginLeft: "10px",
+              textAlign: "left",
+              fontWeight: 600,
+              color: "green",
+            }}
+          >
+            Temp
+          </Typography>
+        </Box>
 
-                }}
-                >
-                    <Box sx={{
-                        flex: "1",
-                        height: "100%",
+        <Box>
+          <Typography
+            variant="h2"
+            sx={{ fontSize: "0.9rem", fontWeight: 600 }}
+          >
+            Recommended Pesticide:
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              fontSize: "0.8rem",
+              marginLeft: "10px",
+              textAlign: "left",
+              fontWeight: 600,
+              color: "green",
+            }}
+          >
+            {recommendedPesticide}
+          </Typography>
+        </Box>
+      </Box>
 
-                    }}>
-                    <Typography variant="h2"
-                    sx={{ fontSize: "0.9rem", fontWeight: "600" }}
-                    >Amount Planted:</Typography>
-                    <Typography variant="body2" sx={{ fontSize: "0.8rem", marginLeft: "10px", textAlign: "left", fontWeight: "600", color: "green" }}>
-                        {amountPlanted}
-                    </Typography>
-                </Box>
-                <Box sx={{
-                    flex: "1",
-                    height: "100%",
+      {/* Divider */}
+      <Box
+        sx={{
+          width: "2px",
+          backgroundColor: "#ccc",
+          marginX: "5px",
+        }}
+      />
 
-                }}>
-                    <Typography variant="h2"
-                    sx={{ fontSize: "0.9rem", fontWeight: "600" }}
-                    >Expected Harvest:</Typography>
-                    <Typography variant="body2" sx={{ fontSize: "0.8rem", marginLeft: "10px", textAlign: "left", fontWeight: "600", color: "green" }}>
-                        {expectedHarvest}
-                    </Typography>
-                </Box>
-                <Box sx={{
-                    flex: "1",
-                    height: "100%",
+      {/* Right Section */}
+      <Box
+        id="rightCardDetails"
+        sx={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          padding: {md:"3px"},
 
-                }}>
-                    <Typography variant="h2"
-                    sx={{ fontSize: "0.9rem", fontWeight: "600" }}
-                    >AI Suggestions:</Typography>
-                    <Typography variant="body2" sx={{ fontSize: "0.8rem", marginLeft: "10px", textAlign: "left", fontWeight: "600", color: "green" }}>
-                        {aiSuggestions}
-                    </Typography>
-                </Box>
-                </Box>
-            </Box>
+        }}
+      >
+        <Box>
+          <Typography
+            variant="h2"
+            sx={{ fontSize: "0.9rem", fontWeight: 600 }}
+          >
+            Amount Planted:
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              fontSize: "0.8rem",
+              marginLeft: "10px",
+              textAlign: "left",
+              fontWeight: 600,
+              color: "green",
+            }}
+          >
+            {amountPlanted}
+          </Typography>
+        </Box>
+
+        <Box>
+          <Typography
+            variant="h2"
+            sx={{ fontSize: "0.9rem", fontWeight: 600 }}
+          >
+            Expected Harvest:
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              fontSize: "0.8rem",
+              marginLeft: "10px",
+              textAlign: "left",
+              fontWeight: 600,
+              color: "green",
+            }}
+          >
+            {expectedHarvest}
+          </Typography>
+        </Box>
+      </Box>
+    </Box>
 
             <Modal open={open} onClose={handleClose} aria-labelledby="Crop Details" aria-describedby="Edit Crop details">
                 <Box
@@ -299,8 +322,6 @@ const CropCard = ({ id, name, amountPlanted, expectedHarvest, location, aiSugges
                         {isEditing ? (
                             <>  
                                 <TextField label= "Crop Image 1" value={newCropImage} onChange={(e) => {setCropImage(e.target.value)}} />
-                                <TextField label= "Crop Image 2" value={newCropImage} onChange={(e) => {setCropImage2(e.target.value)}} />
-                                <TextField label= "Crop Image 3" value={newCropImage} onChange={(e) => {setCropImage3(e.target.value)}} />
                                 <TextField label="Crop Name" value={newCropName} onChange={(e) => setCropName(e.target.value)} />
                                 <Box>
             <InputLabel id="farm-select-label">Location</InputLabel>

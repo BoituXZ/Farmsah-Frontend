@@ -1,2 +1,1 @@
-Make it refresh when deleteing happens
-Fix Image not showing up
+Edited the reload on addcropcomponent close
