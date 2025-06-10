@@ -45,10 +45,11 @@ function App() {
 
           {/* Public Landing Routes */}
           <Route path="/" element={<Layout />}>
-            <Route index element={<LandingPage />} />
-            <Route path="about" element={<AboutUs />} />
-            <Route path="contact" element={<ContactUs />} />
-            <Route path="authentication" element={<Authentication />} />
+            <Route index element={<Home />} />
+            {/* <Route index element={<LandingPage />} /> */}
+            {/* <Route path="about" element={<AboutUs />} /> */}
+            {/* <Route path="contact" element={<ContactUs />} /> */}
+            {/* <Route path="authentication" element={<Authentication />} /> */}
           </Route>
 
           {/* Catch-all Route */}
