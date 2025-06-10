@@ -1,37 +1,33 @@
-import { Box, Typography } from '@mui/material'
+// src/components/CropItem.jsx
+import { Box, Typography, Paper } from '@mui/material';
 import PropTypes from "prop-types";
 
-
-const CropItem = ({ cropName, yields }) => {
+const CropItem = ({ cropName, location }) => { // Assuming location is more useful than yields here
   return (
-    <Box id="CropItem"
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                
-                
-                padding: "5px",
-                backgroundColor: "rgba(101, 95, 95, 0.2)",
-                borderRadius: "5px",
-                boxShadow: "0 2px 2px rgba(0, 0, 0, 0.2)",
-              }}
-            >
-              <Typography variant='h1'
-              sx={{fontSize: "0.8rem"}}
-              >{cropName}</Typography>
-              <Typography variant='subtitle1'
-              sx={{fontSize: "0.6rem",
-                color: "#2c5f2dff"
-              }}
-              >{yields}</Typography>
-            </Box>
-  )
-}
+    <Paper
+      elevation={2}
+      sx={{
+        display: "flex", flexDirection: "row", justifyContent: "space-between",
+        alignItems: "center", p: 1.5,
+        borderRadius: '8px',
+        // Subtle glass effect for list items
+        background: (theme) => theme.palette.mode === 'light' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.1)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+      }}
+    >
+      <Typography variant='subtitle1' sx={{ fontWeight: 'bold' }}>
+        {cropName}
+      </Typography>
+      <Typography variant='body2' sx={{ color: "text.secondary", textAlign: 'right', flexShrink: 0, ml: 1 }}>
+        {location || 'N/A'}
+      </Typography>
+    </Paper>
+  );
+};
 
 CropItem.propTypes = {
   cropName: PropTypes.string.isRequired,
-  yields: PropTypes.string.isRequired
-}
-export default CropItem
+  location: PropTypes.string // Changed from yields to location
+};
+
+export default CropItem;
