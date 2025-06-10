@@ -7,15 +7,13 @@ import { useLocation } from "react-router-dom";
 const AddCropComponent = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  // const handleClose = () => setOpen(false);
 
   const [newCropName, setCropName] = useState("");
   const [newSize, setSize] = useState("");
   const [newCrops, setCrops] = useState("");
   const [newPastCrops, setPastCrops] = useState("");
   const [newCropImage, setCropImage] = useState("");
-  const [newCropImage2, setCropImage2] = useState("");
-  const [newCropImage3, setCropImage3] = useState("");
 
   const [availableFarms, setAvailableFarms] = useState([]); // Store farms
   const [selectedFarm, setSelectedFarm] = useState(""); // Store selected farm
@@ -23,6 +21,7 @@ const AddCropComponent = () => {
   const { pathname } = useLocation();
   const headerTitle = pathname.split("/").filter(Boolean).pop();
   const modalTitle = headerTitle ? headerTitle.charAt(0).toUpperCase() + headerTitle.slice(1) : "Details";
+
 
   // Fetch farms when the modal opens
   useEffect(() => {
@@ -53,8 +52,6 @@ const AddCropComponent = () => {
       farmId: selectedFarm ? Number(selectedFarm) : null,
       name: newCropName,
       cropImage: newCropImage,
-      cropImage2: newCropImage2,
-      cropImage3: newCropImage3,
       amountPlanted: Number(newSize) || 0, // Ensure number
       expectedHarvest: Number(newCrops) || 0, // Use `newCrops` for expectedHarvest?
       aiSuggestions: newPastCrops, // Assuming past crops could be AI suggestions?
@@ -79,6 +76,13 @@ const AddCropComponent = () => {
       console.error("Error adding crop:", error);
     }
   };
+
+  const handleClose = () => {
+        setOpen(false);
+        setIsEditing(false);
+        window.location.reload(); // Reload page after editing
+    };
+
 
   return (
     <Box id="addComponentContainer">
@@ -153,8 +157,6 @@ const AddCropComponent = () => {
             sx={{ display: "flex", flexDirection: "column", gap: "49px"}}
           >
             <TextField label="Crop Image" value={newCropImage} onChange={(e) => setCropImage(e.target.value)} sx={{height: "15px"}} />
-            <TextField label="Crop Image 2" value={newCropImage2} onChange={(e) => setCropImage2(e.target.value)} sx={{height: "15px"}} />
-            <TextField label="Crop Image 3" value={newCropImage3} onChange={(e) => setCropImage3(e.target.value)} sx={{height: "15px"}} />
             <TextField label="Crop Name" value={newCropName} onChange={(e) => setCropName(e.target.value)} sx={{height: "15px"}} />
             <TextField label="Size (Acres)" value={newSize} onChange={(e) => setSize(e.target.value)} sx={{height: "15px"}} type="number"/>
             <TextField label="Crops" value={newCrops} onChange={(e) => setCrops(e.target.value)} sx={{height: "15px"}}  />
