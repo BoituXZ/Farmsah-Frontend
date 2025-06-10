@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import "./App.css";
 
@@ -28,6 +28,9 @@ function App() {
         <Box sx={{backgroundColor: "white", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center"}}></Box>
       }>
         <Routes>
+          {/* Redirect "/" to "/user/" */}
+          <Route path="/" element={<Navigate to="/user/" replace />} />
+
           {/* User Routes (No Protection) */}
           <Route
             path="/user/"
@@ -44,7 +47,7 @@ function App() {
           </Route>
 
           {/* Public Landing Routes */}
-          <Route path="/" element={<Layout />}>
+          <Route path="/something" element={<Layout />}>
             <Route index element={<Home />} />
             {/* <Route index element={<LandingPage />} /> */}
             {/* <Route path="about" element={<AboutUs />} /> */}
