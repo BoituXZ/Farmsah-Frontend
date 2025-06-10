@@ -27,9 +27,17 @@ const MarketPriceDashboard = () => {
                 p: 2, mb: 3,
                 background: (theme) => theme.palette.mode === 'light' ? 'rgba(255, 255, 255, 0.4)' : 'rgba(31, 31, 31, 0.4)',
                 backdropFilter: 'blur(15px)', borderRadius: '16px', border: '1px solid rgba(255, 255, 255, 0.2)',
+                
             }}>
                 <Typography variant="subtitle2" sx={{mb: 1, color: 'text.primary'}}>My Watchlist:</Typography>
-                <ToggleButtonGroup value={watchlist} onChange={handleWatchlistChange} aria-label="commodity watchlist">
+                <ToggleButtonGroup value={watchlist} onChange={handleWatchlistChange} aria-label="commodity watchlist"
+                sx={{
+                display: 'flex',
+                overflowX: "auto",
+                WebkitOverflowScrolling: "touch", // Enables smooth scrolling on iOS
+
+                }}
+                >
                     {commoditiesData.map(c => (
                         <ToggleButton key={c.id} value={c.id} aria-label={c.name}>{c.name.split(' ')[0]}</ToggleButton>
                     ))}
