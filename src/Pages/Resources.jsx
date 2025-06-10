@@ -1,30 +1,36 @@
 // src/pages/user/Resources.jsx
 import { useState } from 'react';
-import { Box, Container, Typography, Grid, Tabs, Tab } from "@mui/material";
+import { Box, Container, Typography, Grid, Tabs, Tab, useTheme, Paper } from "@mui/material";
 import { resourcesData, resourceCategories } from "../data/mockResourceData";
 import ResourceCard from "../components/resources/ResourceCard";
 import FeaturedResource from '../components/resources/FeaturedResource';
 
 const Resources = () => {
+  // --- ALL LOGIC PRESERVED ---
   const [filter, setFilter] = useState('All');
+  const theme = useTheme();
 
   const handleFilterChange = (event, newValue) => {
     setFilter(newValue);
   };
   
-  // Find the single featured resource from our data
   const featuredResource = resourcesData.find(res => res.featured);
   
-  // Filter the list to display based on the selected tab
   const filteredResources = resourcesData.filter(resource => {
-    if (filter === 'All') return !resource.featured; // Show all but the featured one
+    if (filter === 'All') return !resource.featured;
     return resource.category === filter && !resource.featured;
   });
 
   return (
-    <Box sx={{ p: { xs: 1, sm: 2, md: 3 }, backgroundColor: 'background.default', flexGrow: 1 }}>
+    // --- STYLING APPLIED TO THE PAGE CONTAINER ---
+    <Box sx={{
+        width: '100%', minHeight: '100vh', boxSizing: 'border-box',
+        p: { xs: 2, md: 3 },
+        background: theme.palette.background.backgroundImage,
+        backgroundSize: "cover", backgroundAttachment: 'fixed',
+      }}
+    >
       <Container maxWidth="lg">
-        {/* Page Title using theme typography */}
         <Typography variant="h2" component="h1" sx={{ typography: 'h1', color: 'text.primary', mb: 2 }}>
           Knowledge Hub & Resources
         </Typography>
@@ -32,11 +38,19 @@ const Resources = () => {
           Stay informed with the latest market analysis, best practices, and technological advancements.
         </Typography>
 
-        {/* Featured Resource Component */}
         <FeaturedResource resource={featuredResource} />
 
-        {/* Filter Tabs */}
-        <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 3 }}>
+        {/* --- STYLING APPLIED TO TABS WRAPPER --- */}
+        <Paper
+          elevation={4}
+          sx={{
+              mb: 4,
+              background: (theme) => theme.palette.mode === 'light' ? 'rgba(255, 255, 255, 0.4)' : 'rgba(31, 31, 31, 0.4)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: '12px',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+          }}
+        >
           <Tabs
             value={filter}
             onChange={handleFilterChange}
@@ -48,9 +62,8 @@ const Resources = () => {
                <Tab key={category} label={category} value={category} />
              ))}
           </Tabs>
-        </Box>
+        </Paper>
         
-        {/* Grid of Resource Cards */}
         <Grid container spacing={4}>
           {filteredResources.map((resource) => (
             <Grid item key={resource.id} xs={12} sm={6} md={4}>

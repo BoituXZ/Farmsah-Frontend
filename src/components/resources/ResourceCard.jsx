@@ -1,31 +1,38 @@
 // src/components/resources/ResourceCard.jsx
 import { Card, CardContent, CardMedia, Typography, Box, Chip, CardActionArea, useTheme } from "@mui/material";
+
+// --- ALL ICONS AND MAPS PRESERVED ---
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import SchoolIcon from '@mui/icons-material/School';
 import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
 import EventIcon from '@mui/icons-material/Event';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 
-// Map string identifiers to actual MUI Icon components
 const iconMap = {
-  Newspaper: NewspaperIcon,
-  School: SchoolIcon,
-  PrecisionManufacturing: PrecisionManufacturingIcon,
-  Event: EventIcon,
-  Analytics: AnalyticsIcon,
+  Newspaper: NewspaperIcon, School: SchoolIcon, PrecisionManufacturing: PrecisionManufacturingIcon,
+  Event: EventIcon, Analytics: AnalyticsIcon,
 };
 
 const ResourceCard = ({ resource }) => {
-  const theme = useTheme(); // Access the current theme
+  // --- ALL LOGIC PRESERVED ---
+  const theme = useTheme();
   const IconComponent = iconMap[resource.icon];
 
   return (
+    // --- STYLING APPLIED DIRECTLY TO THE CARD COMPONENT ---
     <Card 
       sx={{ 
         height: '100%', 
         display: 'flex', 
         flexDirection: 'column',
-        backgroundColor: theme.palette.background.paper, // Use theme paper color
+        // Glass morphism styles
+        background: (theme) => theme.palette.mode === 'light' ? 'rgba(255, 255, 255, 0.4)' : 'rgba(31, 31, 31, 0.4)',
+        backdropFilter: 'blur(15px)',
+        borderRadius: '16px',
+        border: '1px solid rgba(255, 255, 255, 0.2)',
+        color: 'text.primary',
+
+        // Original hover effect preserved
         transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
         '&:hover': {
           transform: 'translateY(-4px)',
@@ -33,6 +40,7 @@ const ResourceCard = ({ resource }) => {
         }
       }}
     >
+      {/* The entire internal structure is preserved exactly */}
       <CardActionArea>
         <CardMedia
           component="img"
@@ -46,7 +54,7 @@ const ResourceCard = ({ resource }) => {
                icon={IconComponent && <IconComponent />} 
                label={resource.category} 
                size="small"
-               sx={{ backgroundColor: theme.palette.accent.darkGreen, color: theme.palette.background.paper }} // Style using your theme
+               sx={{ backgroundColor: theme.palette.accent.darkGreen, color: theme.palette.background.paper }}
             />
             <Typography variant="caption" color="text.secondary">
                 {resource.date}

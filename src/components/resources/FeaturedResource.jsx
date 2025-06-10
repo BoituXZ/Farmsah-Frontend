@@ -3,6 +3,7 @@ import { Paper, Typography, Box, Button, Grid, useTheme } from "@mui/material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const FeaturedResource = ({ resource }) => {
+    // --- ALL LOGIC PRESERVED ---
     const theme = useTheme();
     if (!resource) return null;
 
@@ -16,19 +17,21 @@ const FeaturedResource = ({ resource }) => {
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
                 backgroundImage: `url(${resource.image})`,
+                borderRadius: '16px', // Rounded corners for the container
+                overflow: 'hidden' // Ensures overlay effect respects border radius
             }}
         >
-            {/* Overlay to ensure text readability, using a theme-aware color */}
+            {/* --- STYLING APPLIED TO THE OVERLAY BOX --- */}
             <Box
                 sx={{
                     position: 'absolute',
-                    top: 0,
-                    bottom: 0,
-                    right: 0,
-                    left: 0,
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    top: 0, bottom: 0, right: 0, left: 0,
+                    // Applying a semi-transparent background and a backdrop filter for the glass effect
+                    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                    backdropFilter: 'blur(4px)',
                 }}
             />
+            {/* The rest of your component's internal structure is preserved */}
             <Grid container>
                 <Grid item md={6}>
                     <Box

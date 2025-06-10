@@ -1,28 +1,47 @@
 // src/pages/Market.jsx
-import { Box, Divider, Stack, Typography } from "@mui/material";
+import { Box, Divider, Stack, Typography, useTheme } from "@mui/material";
 import MarketPriceDashboard from "../components/market/MarketPriceDashboard";
 import TradingModule from "../components/market/TradingModule";
 
 const Market = () => {
+  const theme = useTheme(); // Hook to access the theme for the background image
+
   return (
-    <Box sx={{p: {xs: 1, sm: 2, md: 3}, backgroundColor: 'grey.100' }}>
-        <Typography variant="h2" component="h1" sx={{ fontWeight: 'bold', mb: 2 }}>
-          Farmer's Digital Marketplace
-        </Typography>
+    // --- STYLING CHANGE APPLIED HERE ---
+    <Box
+      sx={{
+        width: '100%',
+        minHeight: '100vh',
+        boxSizing: 'border-box',
+        p: { xs: 2, md: 3 }, // Standardized padding for consistency
+        // Use the theme's background image for the glass effect
+        background: theme.palette.background.backgroundImage,
+        backgroundSize: "cover",
+        backgroundAttachment: 'fixed',
+        color: 'text.primary', // Ensures text color adapts to the theme
+      }}
+    >
+      <Typography variant="h2" component="h1" sx={{ fontWeight: 'bold', mb: 2 }}>
+        Farmer's Digital Marketplace
+      </Typography>
 
-        <Stack spacing={4}>
-            {/* Top Section: Price Dashboard */}
-            <Box>
-                <MarketPriceDashboard />
-            </Box>
+      {/* The Stack layout is preserved */}
+      <Stack spacing={4}>
+        <Box>
+          <MarketPriceDashboard />
+        </Box>
 
-            <Divider sx={{ my: 4 }}/>
+        {/* --- STYLING CHANGE: The Divider is made theme-aware --- */}
+        <Divider sx={{
+          my: 4,
+          borderColor: 'rgba(255, 255, 255, 0.2)', // A subtle divider that works on any background
+          borderBottomWidth: 'thin'
+        }}/>
 
-            {/* Bottom Section: Trading Module */}
-            <Box>
-                <TradingModule />
-            </Box>
-        </Stack>
+        <Box>
+          <TradingModule />
+        </Box>
+      </Stack>
     </Box>
   );
 };

@@ -1,189 +1,123 @@
-import { Box, List, ListItem, ListItemText, Typography, useMediaQuery } from "@mui/material"
-import { Link } from "react-router-dom"
+// src/components/Sidebar/Sidebar.jsx
+import {
+    Box,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
+    Typography,
+    Divider,
+    useTheme, // Import the useTheme hook
+} from "@mui/material";
+import { Link, useLocation } from "react-router-dom";
+// Icons
 import HomeIcon from '@mui/icons-material/Home';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
-import MapIcon from '@mui/icons-material/Map';
+import GrassIcon from '@mui/icons-material/Grass';
 import InsightsIcon from '@mui/icons-material/Insights';
 import CloudIcon from '@mui/icons-material/Cloud';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import BookIcon from '@mui/icons-material/Book';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { BorderBottom, InfoRounded, QuestionAnswerOutlined } from '@mui/icons-material';
-import { useState } from "react";
+import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
+import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
 
-const styles  = {
-    sidebar:{
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-        overflow: "auto",
-        boxShadow: "1px 1px 1px rgb(0, 0, 0)",
-        fontFamily: 'Montserrat, sans-serif',
+// --- Data arrays are preserved from the previous refactor ---
+const mainLinks = [
+    { text: "Dashboard", icon: <HomeIcon />, path: "/user/" },
+    { text: "Farms", icon: <AgricultureIcon />, path: "/user/farms" },
+    { text: "Crops", icon: <GrassIcon />, path: "/user/crops" },
+    { text: "Insights", icon: <InsightsIcon />, path: "/user/insights" },
+    { text: "Weather", icon: <CloudIcon />, path: "/user/weather" },
+    { text: "Market", icon: <StorefrontIcon />, path: "/user/market" },
+    { text: "Resources", icon: <BookIcon />, path: "/user/resources" },
+];
+const secondaryLinks = [
+    { text: "Settings", icon: <SettingsIcon />, path: "/user/settings" },
+    { text: "About", icon: <InfoRoundedIcon />, path: "/user/contact" },
+    { text: "Feedback", icon: <QuestionAnswerOutlinedIcon />, path: "/user/feedback" },
+];
 
-    },
-    header:{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "4.4rem",
-        color: (theme) => theme.palette.background.green,
-        borderBottom: "1px solid  #f7d17b",
-        // fontFamily: (theme) => theme.typography.fontFamily.h1,
-        // fontFamily: 'Montserrat, sans-serif',
+const Sidebar = ({ onClose }) => {
+    const location = useLocation();
+    const theme = useTheme(); // Use the theme hook to get current theme properties
 
-        // border: "solid 1px red"
-    },
-    headerItem:{
-        fontSize: "2rem",
-        fontFamily: 'Montserrat, sans-serif',
+    // Reusable NavLink component is preserved
+    const NavLink = ({ item }) => (
+        <ListItem disablePadding>
+            <ListItemButton
+                component={Link}
+                to={item.path}
+                onClick={onClose}
+                selected={location.pathname === item.path}
+                sx={{
+                    borderRadius: '8px',
+                    color: 'text.primary',
+                    '&.Mui-selected': {
+                        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                        '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.25)' }
+                    },
+                    '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.1)' }
+                }}
+            >
+                <ListItemIcon sx={{ color: 'inherit', minWidth: '40px' }}>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.text} primaryTypographyProps={{ sx: { fontFamily: 'Montserrat, sans-serif' } }} />
+            </ListItemButton>
+        </ListItem>
+    );
 
-    },
-    sidebarListBox:{
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-        padding: "20px 0",
-        fontFamily: 'Montserrat, sans-serif',
-
-    },
-    sidebarList:{
-        display: "flex",
-        flexDirection: "column",
-        gap: "1rem",
-        fontFamily: 'Montserrat, sans-serif',
-
-    },
-    sidebarItem:{
-        display: "flex",
-        justifyContent: "space-evenly",
-        alignItems: "center",
-        width: "90%",
-        gap: "1rem",
-        paddingRight: "12px",
-        textDecoration: "none",
-        fontFamily: 'Montserrat, sans-serif',
-
-
-    },
-    sidebarItemText:{
-        fontFamily: 'Montserrat, sans-serif',
-
-
-    },
-    sidebarIcon:{
-        fontSize: "1.8rem",
-    }
-}
-
-const Sidebar = () => {
-    const [isCollapsed] = useState(false);
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-    const isSmallScreen = useMediaQuery('(max-width: 900px)');
-  
-    const handleToggleDrawer = () => setIsDrawerOpen((prev) => !prev);
-    
     return (
-        <Box id='sidebar' sx={styles.sidebar}>
-            <Box id='sidebarHeader' sx={styles.header}>
-                <Typography sx={styles.headerItem}>Farmsah</Typography>
+        // === STYLING APPLIED HERE ===
+        // Glass morphism is now applied directly to the sidebar's root Box
+        // This ensures it looks correct regardless of its parent container
+        <Box
+            sx={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                // Applying the glass effect directly
+                background: theme.palette.mode === 'light' 
+                    ? 'rgba(255, 255, 255, 0.4)' 
+                    : 'rgba(31, 31, 31, 0.4)',
+                backdropFilter: 'blur(15px)',
+            }}
+        >
+            <Box
+                sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: 'center',
+                    p: 2,
+                    height: '64px', // Standard MUI header height
+                }}
+            >
+                <Typography variant="h1" sx={{ color: 'text.primary', fontFamily: 'Montserrat, sans-serif' }}>
+                    Farmsah
+                </Typography>
             </Box>
-            <Box id='sidebarContent' sx={styles.sidebarListBox}>
-                <List sx={styles.sidebarList}>
+            
+            <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.2)' }} />
 
-                    <Box component={Link} to="/user/" sx={{ textDecoration: "none", color: "inherit" }}>
-                        <ListItem>
-                            <Box id='sidebarItem' sx={styles.sidebarItem}>
-                                <ListItemText sx={styles.sidebarItemText} primaryTypographyProps={{ sx: { fontFamily: 'Montserrat, sans-serif' } }}>Home</ListItemText>
-                                <HomeIcon sx={styles.sidebarIcon} />
-                            </Box>
-                        </ListItem>
-                    </Box>
+            <Box sx={{ flexGrow: 1, overflowY: 'auto', p: 2 }}>
+                <List sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                    {mainLinks.map((item) => (
+                        <NavLink key={item.text} item={item} />
+                    ))}
+                </List>
+            </Box>
 
-                    <Box component={Link} to="/user/farms" sx={{ textDecoration: "none", color: "inherit" }}>
-                        <ListItem>
-                            <Box id='sidebarItem' sx={styles.sidebarItem}> 
-                                <ListItemText sx={styles.sidebarItemText} primaryTypographyProps={{ sx: { fontFamily: 'Montserrat, sans-serif' } }}>Farms</ListItemText>
-                                <AgricultureIcon sx={styles.sidebarIcon} />
-                            </Box>
-                        </ListItem>
-                    </Box>
-
-                    <Box component={Link} to="/user/crops" sx={{ textDecoration: "none", color: "inherit" }}>
-                        <ListItem>
-                            <Box id='sidebarItem' sx={styles.sidebarItem}>
-                                <ListItemText sx={styles.sidebarItemText} primaryTypographyProps={{ sx: { fontFamily: 'Montserrat, sans-serif' } }}>Crops</ListItemText>
-                                <MapIcon sx={styles.sidebarIcon} />
-                            </Box>
-                        </ListItem>
-                    </Box>
-
-                    <Box component={Link} to="/user/insights" sx={{ textDecoration: "none", color: "inherit" }}>
-                        <ListItem>
-                            <Box id='sidebarItem' sx={styles.sidebarItem}>
-                                <ListItemText sx={styles.sidebarItemText} primaryTypographyProps={{ sx: { fontFamily: 'Montserrat, sans-serif' } }}>Insights</ListItemText>
-                                <InsightsIcon sx={styles.sidebarIcon} />
-                            </Box>
-                        </ListItem>
-                    </Box>
-
-                    <Box component={Link} to="/user/weather" sx={{ textDecoration: "none", color: "inherit" }}>
-                        <ListItem>
-                            <Box id='sidebarItem' sx={styles.sidebarItem}>
-                                <ListItemText sx={styles.sidebarItemText} primaryTypographyProps={{ sx: { fontFamily: 'Montserrat, sans-serif' } }}>Weather</ListItemText>
-                                <CloudIcon sx={styles.sidebarIcon} />
-                            </Box>
-                        </ListItem>
-                    </Box>
-
-                    <Box component={Link} to="/user/market" sx={{ textDecoration: "none", color: "inherit" }}>
-                        <ListItem>
-                            <Box id='sidebarItem' sx={styles.sidebarItem}>
-                                <ListItemText sx={styles.sidebarItemText} primaryTypographyProps={{ sx: { fontFamily: 'Montserrat, sans-serif' } }}>Market</ListItemText>
-                                <StorefrontIcon sx={styles.sidebarIcon} />
-                            </Box>
-                        </ListItem>
-                    </Box>
-
-                    <Box component={Link} to="/user/resources" sx={{ textDecoration: "none", color: "inherit" }}>
-                        <ListItem>
-                            <Box id='sidebarItem' sx={styles.sidebarItem}>
-                                <ListItemText sx={styles.sidebarItemText} primaryTypographyProps={{ sx: { fontFamily: 'Montserrat, sans-serif' } }}>Resources</ListItemText>
-                                <BookIcon sx={styles.sidebarIcon} />
-                            </Box>
-                        </ListItem>
-                    </Box>
-
-                    <Box component={Link} to="/user/settings" sx={{ textDecoration: "none", color: "inherit" }}>
-                        <ListItem>
-                            <Box id='sidebarItem' sx={styles.sidebarItem}>
-                                <ListItemText sx={styles.sidebarItemText} primaryTypographyProps={{ sx: { fontFamily: 'Montserrat, sans-serif' } }}>Settings</ListItemText>
-                                <SettingsIcon sx={styles.sidebarIcon} />
-                            </Box>
-                        </ListItem>
-                    </Box>
-
-                    <Box component={Link} to="/user/Contact" sx={{ textDecoration: "none", color: "inherit" }}>
-                        <ListItem>
-                            <Box id='sidebarItem' sx={styles.sidebarItem}>
-                                <ListItemText sx={styles.sidebarItemText} primaryTypographyProps={{ sx: { fontFamily: 'Montserrat, sans-serif' } }}>About</ListItemText>
-                                <InfoRounded sx={styles.sidebarIcon} />
-                            </Box>
-                        </ListItem>
-                    </Box>
-
-                    <Box component={Link} to="/user/Feedback" sx={{ textDecoration: "none", color: "inherit" }}>
-                        <ListItem>
-                            <Box id='sidebarItem' sx={styles.sidebarItem}>
-                                <ListItemText sx={styles.sidebarItemText} primaryTypographyProps={{ sx: { fontFamily: 'Montserrat, sans-serif' } }}>Feedback</ListItemText>
-                                <QuestionAnswerOutlined sx={styles.sidebarIcon} />
-                            </Box>
-                        </ListItem>
-                    </Box>
-
+            <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.2)' }} />
+            
+            <Box sx={{ p: 2 }}>
+                <List sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                    {secondaryLinks.map((item) => (
+                        <NavLink key={item.text} item={item} />
+                    ))}
                 </List>
             </Box>
         </Box>
     );
-}
+};
 
 export default Sidebar;
