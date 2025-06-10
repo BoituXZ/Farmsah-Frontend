@@ -73,7 +73,7 @@ const Insights = () => {
           id="insightPageContainer"
           sx={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", 
+            gridTemplateColumns: "repeat(auto-fit, minmax(auto, 1fr))", 
             gap: "24px",
           }}
         >
