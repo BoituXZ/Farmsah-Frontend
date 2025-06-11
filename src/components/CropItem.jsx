@@ -10,7 +10,7 @@ const CropItem = ({ cropName, location }) => { // Assuming location is more usef
         display: "flex", flexDirection: "row", justifyContent: "space-between",
         alignItems: "center", p: 1.5,
         borderRadius: '8px',
-        height: '40px',
+        height: '10px',
         // Subtle glass effect for list items
         background: (theme) => theme.palette.mode === 'light' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.1)',
         border: '1px solid rgba(255, 255, 255, 0.1)',
