@@ -186,7 +186,7 @@ const CropCard = ({ id, name, amountPlanted, expectedHarvest, location, aiSugges
                                         )}
                                     </Select>
                                 </FormControl>
-                                <TextField label="Crops" value={newCropName} onChange={(e) => setCropName(e.target.value)} />
+                                <TextField label="Crops (Acres)" value={newCropName} onChange={(e) => setCropName(e.target.value)} />
                                 <TextField label="Amount Planted" value={newAmountPlanted} onChange={(e) => setAmountPlanted(e.target.value)} />
                                 <Button
                                     variant="contained"
