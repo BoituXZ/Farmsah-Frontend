@@ -165,7 +165,7 @@ export const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`$https://farmsah-backend-cqg6h6c4afbbe6cz.southafricanorth-01.azurewebsites.net/login`, {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
