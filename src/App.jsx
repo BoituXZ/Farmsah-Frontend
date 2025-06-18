@@ -1,7 +1,8 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import "./App.css";
 
+import ProtectedRoute from "./components/ProtectedRoute"; // Import the ProtectedRoute
 import { Box } from "@mui/material";
 
 // Lazy-loaded components
@@ -21,6 +22,7 @@ const Resources = lazy(() => import("./Pages/Resources"));
 const Settings = lazy(() => import("./Pages/Settings"));
 const NotFound = lazy(() => import("./Pages/NotFound"));
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -28,13 +30,10 @@ function App() {
         <Box sx={{backgroundColor: "white", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center"}}></Box>
       }>
         <Routes>
-          {/* Redirect "/" to "/user/" */}
-          <Route path="/" element={<Navigate to="/user/" replace />} />
-
-          {/* User Routes (No Protection) */}
+          {/* Protected User Routes */}
           <Route
-            path="/user/"
-            element={<PagesLayout />}
+            path="/user/" 
+            element={<ProtectedRoute element={<PagesLayout/>}/>}  // Protect PagesLayout
           >
             <Route index path="" element={<Home />} />
             <Route path="farms" element={<Farms />} />
@@ -47,12 +46,11 @@ function App() {
           </Route>
 
           {/* Public Landing Routes */}
-          <Route path="/something" element={<Layout />}>
-            <Route index element={<Home />} />
-            {/* <Route index element={<LandingPage />} /> */}
-            {/* <Route path="about" element={<AboutUs />} /> */}
-            {/* <Route path="contact" element={<ContactUs />} /> */}
-            {/* <Route path="authentication" element={<Authentication />} /> */}
+          <Route path="/" element={<Layout />}>
+            <Route index element={<LandingPage />} />
+            <Route path="about" element={<AboutUs />} />
+            <Route path="contact" element={<ContactUs />} />
+            <Route path="authentication" element={<Authentication />} />
           </Route>
 
           {/* Catch-all Route */}
