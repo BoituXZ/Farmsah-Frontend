@@ -87,7 +87,7 @@ export const SignupForm = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:3010/signup", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -165,7 +165,7 @@ export const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:3010/login", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

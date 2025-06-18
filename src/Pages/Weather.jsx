@@ -291,7 +291,7 @@ const Weather = () => {
     setIsLoading(true); setError(null);
     const fetchLocations = async () => {
       try {
-        const response = await fetch("http://localhost:3010/user/weather/location", { credentials: "include" });
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/weather/location`, { credentials: "include" });
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.message || `Failed to fetch locations (${response.status})`);
