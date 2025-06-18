@@ -165,7 +165,7 @@ export const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}`, {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
