@@ -12,7 +12,7 @@ const Farms = () => {
   useEffect(() => {
     const fetchFarms = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/login/user/farms`, { credentials: "include" });
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/farms`, { credentials: "include" });
         if (!response.ok) { throw new Error("Failed to fetch farms"); }
         setFarms(await response.json());
       } catch (error) {

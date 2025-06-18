@@ -33,8 +33,49 @@ const CropCard = ({ id, name, amountPlanted, expectedHarvest, location, aiSugges
     const handleOpen = () => { if (!open) { setOpen(true); } };
     const handleClose = () => { setOpen(false); setIsEditing(false); window.location.reload(); };
     const handleEditClick = () => setIsEditing(true);
-    const handleSubmit = async () => { /* ORIGINAL LOGIC PRESERVED */ };
-    const handleDelete = async () => { /* ORIGINAL LOGIC PRESERVED */ };
+    const handleSubmit = async () => {
+        const cropData = {
+            name: newCropName,
+            amountPlanted: newAmountPlanted,
+            expectedHarvest: newExpectedHarvest,
+            cropImage: newCropImage,
+        };
+        try {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/crops/${id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify(cropData),
+            });
+            if (!response.ok) {
+                throw new Error(`Failed to update crop: ${await response.text()}`);
+            }
+            console.log("Crop updated successfully!");
+            setOpen(false);
+            setIsEditing(false);
+            window.location.reload();
+        } catch (error) {
+            console.error("Error updating crop:", error);
+        }
+    };
+
+    const handleDelete = async () => {
+        if (!window.confirm("Are you sure you want to delete this crop? This action cannot be undone.")) return;
+        try {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/crops/${id}`, {
+                method: "DELETE",
+                credentials: "include",
+            });
+            if (!response.ok) {
+                throw new Error(`Failed to delete crop: ${await response.text()}`);
+            }
+            console.log("Crop deleted successfully!");
+            setOpen(false);
+            window.location.reload();
+        } catch (error) {
+            console.error("Error deleting crop:", error);
+        }
+    };
 
     useEffect(() => {
         if (open) { /* ORIGINAL LOGIC PRESERVED */ }

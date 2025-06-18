@@ -35,10 +35,54 @@ const FarmCard = ({ slug, farmName, location, size, crops, livestock, image }) =
         fetchLocationName();
     }, [location]);
 
-    const handleDelete = async () => { /* Original delete logic here */ };
+    const handleDelete = async () => {
+        if (!window.confirm("Are you sure you want to delete this farm? This action cannot be undone.")) return;
+        try {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/farms/${slug}`, {
+                method: "DELETE",
+                credentials: "include",
+            });
+            if (!response.ok) {
+                throw new Error(`Failed to delete farm: ${await response.text()}`);
+            }
+            console.log("Farm deleted successfully!");
+            setOpen(false);
+            window.location.reload();
+        } catch (error) {
+            console.error("Error deleting farm:", error);
+        }
+    };
+
     const handleOpen = () => setOpen(true);
     const handleClose = () => { setOpen(false); setIsEditing(false); };
-    const handleSubmit = async () => { /* Original submit logic here */ };
+    const handleSubmit = async () => {
+        const farmData = {
+            name: newFarmName,
+            location: newLocation,
+            size: newSize,
+            cropsId: null, // You can add a crops selector if needed
+            livestockId: newLivestock ? Number(newLivestock) : null,
+            imageUrl: newFarmImage,
+            coordinates: newLocation, // If you want to send coordinates as well
+        };
+        try {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/farms/${slug}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify(farmData),
+            });
+            if (!response.ok) {
+                throw new Error(`Failed to update farm: ${await response.text()}`);
+            }
+            console.log("Farm updated successfully!");
+            setOpen(false);
+            setIsEditing(false);
+            window.location.reload();
+        } catch (error) {
+            console.error("Error updating farm:", error);
+        }
+    };
 
     return (
         <>
