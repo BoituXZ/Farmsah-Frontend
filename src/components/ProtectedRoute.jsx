@@ -12,7 +12,7 @@ const ProtectedRoute = ({ element }) => {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const response = await fetch(`{import.meta.env.VITE_BACKEND_URL}user/`, {
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user`, {
                     method: "GET",
                     credentials: "include", // Ensure session cookie is sent
                 });
